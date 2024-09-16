@@ -3,23 +3,68 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Stylish Static Homepage</title>
+  <title>Portfolio Page</title>
 </head>
-<body style="margin: 0; padding: 0; height: 100vh; display: flex; justify-content: center; align-items: center; background: linear-gradient(135deg, #FF5F6D, #FFC371); font-family: 'Arial', sans-serif;">
-  <div style="text-align: center;">
-    <p style="font-size: 4rem; font-weight: bold; color: white; text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); margin: 0; transform: scale(1); transition: transform 0.3s ease-in-out;">
-      Hello world
+<body style="margin: 0; padding: 0; background: linear-gradient(135deg, #FF5F6D, #FFC371); font-family: 'Arial', sans-serif; color: white;">
+
+  <!-- Hero Section -->
+  <section style="height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center;">
+    <p style="font-size: 4rem; font-weight: bold; text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); margin: 0; transform: scale(1); transition: transform 0.3s ease-in-out;">
+      Hello, I'm [Your Name]
     </p>
-  </div>
+    <p style="font-size: 1.5rem; margin-top: 10px;">A passionate developer creating cool things for the web.</p>
+  </section>
+
+  <!-- About Me Section -->
+  <section style="padding: 5rem 2rem; text-align: center; background: #fff; color: #333;">
+    <h2 style="font-size: 3rem; margin-bottom: 20px;">About Me</h2>
+    <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">
+      I'm a web developer with a love for clean design and efficient code. I enjoy bringing ideas to life in the browser and continuously learning new technologies to stay at the cutting edge of the web development world.
+    </p>
+  </section>
+
+  <!-- Projects Section -->
+  <section style="padding: 5rem 2rem; text-align: center;">
+    <h2 style="font-size: 3rem; margin-bottom: 20px;">Projects</h2>
+    <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+      <!-- Project 1 -->
+      <div style="background: #fff; color: #333; padding: 20px; width: 300px; margin: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease;">
+        <h3 style="font-size: 1.8rem; margin-bottom: 10px;">Project 1</h3>
+        <p style="font-size: 1rem;">A cool web application built with [Technology].</p>
+      </div>
+      <!-- Project 2 -->
+      <div style="background: #fff; color: #333; padding: 20px; width: 300px; margin: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease;">
+        <h3 style="font-size: 1.8rem; margin-bottom: 10px;">Project 2</h3>
+        <p style="font-size: 1rem;">Another exciting project using [Technology].</p>
+      </div>
+      <!-- Project 3 -->
+      <div style="background: #fff; color: #333; padding: 20px; width: 300px; margin: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); transition: transform 0.3s ease;">
+        <h3 style="font-size: 1.8rem; margin-bottom: 10px;">Project 3</h3>
+        <p style="font-size: 1rem;">Yet another awesome project built with [Technology].</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section style="padding: 5rem 2rem; text-align: center; background: #333; color: white;">
+    <h2 style="font-size: 3rem; margin-bottom: 20px;">Contact</h2>
+    <p style="font-size: 1.2rem;">Feel free to reach out if you'd like to work together or just want to say hi!</p>
+    <a href="mailto:youremail@example.com" style="display: inline-block; padding: 15px 30px; background-color: #FF5F6D; color: white; font-size: 1.2rem; margin-top: 20px; border-radius: 5px; text-decoration: none; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);">
+      Get In Touch
+    </a>
+  </section>
 
   <script>
-    const text = document.querySelector('p');
-    text.addEventListener('mouseover', () => {
-      text.style.transform = 'scale(1.1)';
-    });
-    text.addEventListener('mouseout', () => {
-      text.style.transform = 'scale(1)';
+    const projectCards = document.querySelectorAll('div[style*="padding: 20px"]');
+    projectCards.forEach(card => {
+      card.addEventListener('mouseover', () => {
+        card.style.transform = 'scale(1.05)';
+      });
+      card.addEventListener('mouseout', () => {
+        card.style.transform = 'scale(1)';
+      });
     });
   </script>
+
 </body>
 </html>
