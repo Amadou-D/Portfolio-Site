@@ -4,71 +4,186 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Portfolio Page</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      background: linear-gradient(135deg, #FF5F6D, #FFC371);
+      font-family: 'Arial', sans-serif;
+      color: white;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    .hero-text {
+      font-size: 4rem;
+      font-weight: bold;
+      text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+      margin: 0;
+      transform: scale(1);
+      transition: transform 0.3s ease-in-out;
+    }
+
+    .hero-subtext {
+      font-size: 1.5rem;
+      margin-top: 10px;
+    }
+
+    /* About Me Section */
+    .about-section {
+      padding: 5rem 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, #FF5F6D, #FFC371);
+      color: white;
+    }
+
+    .about-section h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .about-section p {
+      font-size: 1.2rem;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* Projects Section */
+    .projects-section {
+      padding: 5rem 2rem;
+      text-align: center;
+      background: linear-gradient(135deg, #1E3C72, #2A5298);
+      color: white;
+    }
+
+    .projects-section h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .project-card {
+      background: rgba(255, 255, 255, 0.1);
+      color: white;
+      padding: 20px;
+      width: 300px;
+      margin: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+      transition: transform 0.3s ease, background 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: scale(1.05);
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Contact Section */
+    .contact-section {
+      padding: 5rem 2rem;
+      text-align: center;
+      background: #333;
+      color: white;
+    }
+
+    .contact-section h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .contact-section p {
+      font-size: 1.2rem;
+    }
+
+    .contact-btn {
+      display: inline-block;
+      padding: 15px 30px;
+      background-color: #FF5F6D;
+      color: white;
+      font-size: 1.2rem;
+      margin-top: 20px;
+      border-radius: 5px;
+      text-decoration: none;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s ease, transform 0.3s ease;
+    }
+
+    .contact-btn:hover {
+      background-color: #FFC371;
+      transform: translateY(-3px);
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    body {
+      animation: fadeIn 1s ease-in-out;
+    }
+
+  </style>
 </head>
-<body style="margin: 0; padding: 0; background: linear-gradient(135deg, #FF5F6D, #FFC371); font-family: 'Arial', sans-serif; color: white;">
+<body>
 
   <!-- Hero Section -->
-  <section style="height: 100vh; display: flex; justify-content: center; align-items: center; flex-direction: column; text-align: center;">
-    <p style="font-size: 4rem; font-weight: bold; text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2); margin: 0; transform: scale(1); transition: transform 0.3s ease-in-out;">
+  <section class="hero-section">
+    <p class="hero-text">
       Hello, I'm Amadou
     </p>
-    <p style="font-size: 1.5rem; margin-top: 10px;">A passionate developer creating cool things for the web.</p>
+    <p class="hero-subtext">A passionate developer creating cool things for the web.</p>
   </section>
 
   <!-- About Me Section -->
-  <section style="padding: 5rem 2rem; text-align: center; background: #fff; color: #333;">
-    <h2 style="font-size: 3rem; margin-bottom: 20px;">About Me</h2>
-    <p style="font-size: 1.2rem; max-width: 700px; margin: 0 auto;">
+  <section class="about-section">
+    <h2>About Me</h2>
+    <p>
       I'm a web developer with a love for clean design and efficient code. I enjoy bringing ideas to life in the browser and continuously learning new technologies to stay at the cutting edge of the web development world.
     </p>
   </section>
 
-<!-- Projects Section -->
-<section style="padding: 5rem 2rem; text-align: center; background: linear-gradient(135deg, #1E3C72, #2A5298); color: white;">
-  <h2 style="font-size: 3rem; margin-bottom: 20px;">Projects</h2>
-  <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
-    <!-- Project 1: Khazad Tech -->
-    <a href="https://webdev2-final-project-dmnhll18t-amadou-diallos-projects.vercel.app/sign-in" target="_blank" style="text-decoration: none; color: inherit;">
-      <div style="background: rgba(255, 255, 255, 0.1); color: white; padding: 20px; width: 300px; margin: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); transition: transform 0.3s ease, background 0.3s ease;">
-        <h3 style="font-size: 1.8rem; margin-bottom: 10px;">Khazad Tech</h3>
-        <p style="font-size: 1rem;">An example e-commerce site with backend, product pages, and more. Built with React, Node.js, and MongoDB.</p>
+  <!-- Projects Section -->
+  <section class="projects-section">
+    <h2>Projects</h2>
+    <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+      <!-- Project 1: Khazad Tech -->
+      <a href="https://webdev2-final-project-dmnhll18t-amadou-diallos-projects.vercel.app/sign-in" target="_blank" style="text-decoration: none; color: inherit;">
+        <div class="project-card">
+          <h3>Khazad Tech</h3>
+          <p>An example e-commerce site with backend, product pages, and more. Built with React, Node.js, and MongoDB.</p>
+        </div>
+      </a>
+      <!-- Project 2: 5 Oceans Immigration -->
+      <a href="https://5-oceans-immigration-git-amadou-amadou-diallos-projects.vercel.app/homepage" target="_blank" style="text-decoration: none; color: inherit;">
+        <div class="project-card">
+          <h3>5 Oceans Immigration</h3>
+          <p>An immigration consultancy site developed for a client. Built with Next JS, Tailwind CSS, MongoDB and Firebase</p>
+        </div>
+      </a>
+      <!-- Project 3 -->
+      <div class="project-card">
+        <h3>Project 3</h3>
+        <p>Yet another awesome project built with [Technology].</p>
       </div>
-    </a>
-    <!-- Project 2: 5 Oceans Immigration -->
-    <a href="https://5-oceans-immigration-git-amadou-amadou-diallos-projects.vercel.app/homepage" target="_blank" style="text-decoration: none; color: inherit;">
-      <div style="background: rgba(255, 255, 255, 0.1); color: white; padding: 20px; width: 300px; margin: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); transition: transform 0.3s ease, background 0.3s ease;">
-        <h3 style="font-size: 1.8rem; margin-bottom: 10px;">5 Oceans Immigration</h3>
-        <p style="font-size: 1rem;">An immigration consultancy site developed for a client. Built with Next JS, Tailwind CSS, MongoDB and Firebase</p>
-      </div>
-    </a>
-    <!-- Project 3 -->
-    <div style="background: rgba(255, 255, 255, 0.1); color: white; padding: 20px; width: 300px; margin: 20px; border-radius: 10px; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4); transition: transform 0.3s ease, background 0.3s ease;">
-      <h3 style="font-size: 1.8rem; margin-bottom: 10px;">Project 3</h3>
-      <p style="font-size: 1rem;">Yet another awesome project built with [Technology].</p>
     </div>
-  </div>
-</section>
-  
+  </section>
+
   <!-- Contact Section -->
-  <section style="padding: 5rem 2rem; text-align: center; background: #333; color: white;">
-    <h2 style="font-size: 3rem; margin-bottom: 20px;">Contact</h2>
-    <p style="font-size: 1.2rem;">Feel free to reach out if you'd like to work together or just want to say hi!</p>
-    <a href="amadouamos@hotmail.com" style="display: inline-block; padding: 15px 30px; background-color: #FF5F6D; color: white; font-size: 1.2rem; margin-top: 20px; border-radius: 5px; text-decoration: none; box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);">
+  <section class="contact-section">
+    <h2>Contact</h2>
+    <p>Feel free to reach out if you'd like to work together or just want to say hi!</p>
+    <a href="mailto:amadouamos@hotmail.com" class="contact-btn">
       Get In Touch
     </a>
   </section>
-
-  <script>
-    const projectCards = document.querySelectorAll('div[style*="padding: 20px"]');
-    projectCards.forEach(card => {
-      card.addEventListener('mouseover', () => {
-        card.style.transform = 'scale(1.05)';
-      });
-      card.addEventListener('mouseout', () => {
-        card.style.transform = 'scale(1)';
-      });
-    });
-  </script>
 
 </body>
 </html>
