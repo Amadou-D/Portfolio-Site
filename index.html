@@ -9,10 +9,33 @@
     body {
       margin: 0;
       padding: 0;
-      background: #f5f5f5; 
+      background: #f5f5f5;
       font-family: 'Roboto', sans-serif;
-      color: #333; 
+      color: #333;
+      scroll-behavior: smooth; /* Enables smooth scrolling */
       animation: fadeIn 1s ease-in-out;
+    }
+
+    /* Sticky Navigation Bar */
+    nav {
+      position: sticky;
+      top: 0;
+      background-color: #333;
+      padding: 15px;
+      text-align: center;
+      z-index: 1000;
+    }
+
+    nav a {
+      color: white;
+      margin: 0 15px;
+      text-decoration: none;
+      font-size: 1.2rem;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #ff7e5f;
     }
 
     /* Hero Section */
@@ -23,7 +46,8 @@
       align-items: center;
       flex-direction: column;
       text-align: center;
-      background: linear-gradient(135deg, #ff7e5f, #feb47b); 
+      background: linear-gradient(135deg, #1e3c72, #2a5298);
+      color: white;
       animation: slideIn 1s ease-in-out;
     }
 
@@ -51,8 +75,8 @@
     .about-section {
       padding: 5rem 2rem;
       text-align: center;
-      background-color: #b9e3c6; 
-      color: #333; 
+      background: linear-gradient(135deg, #f3e7e9, #e3fdf5);
+      color: #333;
       transition: background-color 0.3s ease;
     }
 
@@ -75,13 +99,13 @@
     .projects-section {
       padding: 5rem 2rem;
       text-align: center;
-      background-color: #f0f4f7; 
-      color: #333; 
+      background: #eaeef3;
+      color: #333;
       transition: background-color 0.3s ease;
     }
 
     .projects-section:hover {
-      background-color: #e0e7ec;
+      background-color: #d0d6dd;
     }
 
     .projects-section h2 {
@@ -90,32 +114,33 @@
     }
 
     .project-card {
-      background: rgba(255, 255, 255, 0.8); 
-      color: #333; 
+      background: rgba(255, 255, 255, 0.8);
+      color: #333;
       padding: 20px;
       width: 300px;
       margin: 20px;
       border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); 
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       transition: transform 0.3s ease, background 0.3s ease;
     }
 
     .project-card:hover {
       transform: scale(1.05);
-      background: rgba(255, 255, 255, 0.9); 
+      background: rgba(255, 255, 255, 0.9);
     }
 
     /* Contact Section */
     .contact-section {
       padding: 5rem 2rem;
       text-align: center;
-      background-color: #333; 
+      background-color: #333;
+      background: linear-gradient(135deg, #232526, #414345);
       color: white;
       transition: background-color 0.3s ease;
     }
 
     .contact-section:hover {
-      background-color: #444;
+      background-color: #555;
     }
 
     .contact-section h2 {
@@ -130,7 +155,7 @@
     .contact-btn {
       display: inline-block;
       padding: 15px 30px;
-      background-color: #ff7e5f; 
+      background-color: #ff7e5f;
       color: white;
       font-size: 1.2rem;
       margin-top: 20px;
@@ -141,7 +166,7 @@
     }
 
     .contact-btn:hover {
-      background-color: #e65c5e; 
+      background-color: #e65c5e;
       transform: translateY(-3px);
     }
 
@@ -159,38 +184,42 @@
 </head>
 <body>
 
+  <!-- Navigation Bar -->
+  <nav>
+    <a href="#hero">Home</a>
+    <a href="#about">Skills</a>
+    <a href="#projects">Projects</a>
+    <a href="#contact">Contact</a>
+  </nav>
+
   <!-- Hero Section -->
-  <section class="hero-section">
-    <p class="hero-text">
-      Hello, I'm Amadou
-    </p>
+  <section id="hero" class="hero-section">
+    <p class="hero-text">Hello, I'm Amadou</p>
     <p class="hero-subtext">A passionate developer creating cool things for the web.</p>
   </section>
 
   <!-- About Me Section -->
-  <section class="about-section">
-    <h2>About Me</h2>
-    <p>
-      I'm a web developer with a love for clean design and efficient code. I enjoy bringing ideas to life in the browser and continuously learning new technologies to stay at the cutting edge of the web development world.
-    </p>
+  <section id="about" class="about-section">
+    <h2>Skills</h2>
+    <p></p>
   </section>
 
   <!-- Projects Section -->
-  <section class="projects-section">
+  <section id="projects" class="projects-section">
     <h2>Projects</h2>
     <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
-      <!-- Project 1: Khazad Tech -->
+      <!-- Project 1 -->
       <a href="https://webdev2-final-project-dmnhll18t-amadou-diallos-projects.vercel.app/sign-in" target="_blank" style="text-decoration: none; color: inherit;">
         <div class="project-card">
           <h3>Khazad Tech</h3>
-          <p>An example e-commerce site with backend, product pages, and more. Built with React, Node.js, and MongoDB.</p>
+          <p>An e-commerce site built with React, Node.js, and MongoDB.</p>
         </div>
       </a>
-      <!-- Project 2: 5 Oceans Immigration -->
+      <!-- Project 2 -->
       <a href="https://5-oceans-immigration-git-amadou-amadou-diallos-projects.vercel.app/homepage" target="_blank" style="text-decoration: none; color: inherit;">
         <div class="project-card">
           <h3>5 Oceans Immigration</h3>
-          <p>An immigration consultancy site developed for a client. Built with Next JS, Tailwind CSS, MongoDB and Firebase</p>
+          <p>An immigration consultancy site built with Next JS, Tailwind CSS, and Firebase.</p>
         </div>
       </a>
       <!-- Project 3 -->
@@ -202,15 +231,11 @@
   </section>
 
   <!-- Contact Section -->
-  <section class="contact-section">
+  <section id="contact" class="contact-section">
     <h2>Contact</h2>
     <p>Feel free to reach out if you'd like to work together or just want to say hi!</p>
-    <a href="mailto:amadouamos@hotmail.com" class="contact-btn">
-      Email
-    </a>
-    <a href="https://www.linkedin.com/in/amadou-diallo-7b2326330" class="contact-btn">
-      LinkedIn
-    </a>
+    <a href="mailto:amadouamos@hotmail.com" class="contact-btn">Email</a>
+    <a href="https://www.linkedin.com/in/amadou-diallo-7b2326330" class="contact-btn">LinkedIn</a>
   </section>
 
 </body>
