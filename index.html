@@ -12,7 +12,7 @@
       background: #f5f5f5;
       font-family: 'Roboto', sans-serif;
       color: #333;
-      scroll-behavior: smooth; /* Enables smooth scrolling */
+      scroll-behavior: smooth;
       animation: fadeIn 1s ease-in-out;
     }
 
@@ -80,10 +80,6 @@
       transition: background-color 0.3s ease;
     }
 
-    .about-section:hover {
-      background-color: #a8d5b1;
-    }
-
     .about-section h2 {
       font-size: 3rem;
       margin-bottom: 20px;
@@ -95,22 +91,25 @@
       margin: 0 auto;
     }
 
+    .about-section:hover {
+      background-color: #a8d5b1;
+    }
+
     /* Projects Section */
     .projects-section {
       padding: 5rem 2rem;
       text-align: center;
       background: #eaeef3;
       color: #333;
-      transition: background-color 0.3s ease;
-    }
-
-    .projects-section:hover {
-      background-color: #d0d6dd;
     }
 
     .projects-section h2 {
       font-size: 3rem;
       margin-bottom: 20px;
+    }
+
+    .projects-section:hover {
+      background-color: #d0d6dd;
     }
 
     .project-card {
@@ -136,11 +135,6 @@
       background-color: #333;
       background: linear-gradient(135deg, #232526, #414345);
       color: white;
-      transition: background-color 0.3s ease;
-    }
-
-    .contact-section:hover {
-      background-color: #555;
     }
 
     .contact-section h2 {
@@ -201,7 +195,7 @@
   <!-- About Me Section -->
   <section id="about" class="about-section">
     <h2>Skills</h2>
-    <p></p>
+    <p>I specialize in full-stack development, UI/UX design, and web performance optimization. I'm proficient in technologies like React, Next.js, Node.js, MongoDB, and more. I enjoy solving problems through code and creating efficient solutions.</p>
   </section>
 
   <!-- Projects Section -->
@@ -219,13 +213,13 @@
       <a href="https://5oceansimmigration.tech/homepage" target="_blank" style="text-decoration: none; color: inherit;">
         <div class="project-card">
           <h3>5 Oceans Immigration</h3>
-          <p>An immigration consultancy site built with Next JS, Tailwind CSS, and Firebase.</p>
+          <p>An immigration consultancy site built with Next.js, Tailwind CSS, and Firebase.</p>
         </div>
       </a>
       <!-- Project 3 -->
       <div class="project-card">
-        <h3>Project 3</h3>
-        <p></p>
+        <h3>Personal Blog</h3>
+        <p>A simple blog platform I built with Next.js and Markdown, focusing on performance and SEO.</p>
       </div>
     </div>
   </section>
@@ -233,7 +227,7 @@
   <!-- Contact Section -->
   <section id="contact" class="contact-section">
     <h2>Contact</h2>
-    <p>Feel free to reach out if you'd like to work together or just want to say hi!</p>
+    <p>Feel free to reach out if you'd like to collaborate or just want to say hi!</p>
     <a href="mailto:amadouamos@hotmail.com" class="contact-btn">Email</a>
     <a href="https://www.linkedin.com/in/amadou-diallo-7b2326330" class="contact-btn">LinkedIn</a>
   </section>
