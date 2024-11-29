@@ -28,7 +28,7 @@
 
     nav a {
       color: white;
-      margin: 0 15px;
+      margin: 0 20px;
       text-decoration: none;
       font-size: 1.2rem;
       transition: color 0.3s ease;
@@ -71,24 +71,29 @@
       animation: fadeIn 2s ease-in-out forwards;
     }
 
-    /* About Me Section */
-    .about-section {
-      padding: 5rem 2rem;
+    /* Section Styling */
+    section {
+      padding: 6rem 2rem;
       text-align: center;
-      background: linear-gradient(135deg, #f3e7e9, #e3fdf5);
-      color: #333;
-      transition: background-color 0.3s ease;
+      margin: 0 auto;
+      max-width: 1200px;
     }
 
-    .about-section h2 {
+    h2 {
       font-size: 3rem;
       margin-bottom: 20px;
     }
 
-    .about-section p {
+    p {
       font-size: 1.2rem;
-      max-width: 700px;
+      max-width: 800px;
       margin: 0 auto;
+    }
+
+    /* About Section */
+    .about-section {
+      background: linear-gradient(135deg, #f3e7e9, #e3fdf5);
+      color: #333;
     }
 
     .about-section:hover {
@@ -97,15 +102,8 @@
 
     /* Projects Section */
     .projects-section {
-      padding: 5rem 2rem;
-      text-align: center;
       background: #eaeef3;
       color: #333;
-    }
-
-    .projects-section h2 {
-      font-size: 3rem;
-      margin-bottom: 20px;
     }
 
     .projects-section:hover {
@@ -130,20 +128,9 @@
 
     /* Contact Section */
     .contact-section {
-      padding: 5rem 2rem;
-      text-align: center;
       background-color: #333;
       background: linear-gradient(135deg, #232526, #414345);
       color: white;
-    }
-
-    .contact-section h2 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
-
-    .contact-section p {
-      font-size: 1.2rem;
     }
 
     .contact-btn {
@@ -201,7 +188,7 @@
   <!-- Projects Section -->
   <section id="projects" class="projects-section">
     <h2>Projects</h2>
-    <div style="display: flex; justify-content: space-around; flex-wrap: wrap;">
+    <div style="display: flex; justify-content: center; flex-wrap: wrap;">
       <!-- Project 1 -->
       <a href="https://webdev2-final-project-dmnhll18t-amadou-diallos-projects.vercel.app/sign-in" target="_blank" style="text-decoration: none; color: inherit;">
         <div class="project-card">
