@@ -3,9 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Page</title>
+  <title>Bouncing Hex Grid Game</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
+    /* Global Styles */
     body {
       margin: 0;
       padding: 0;
@@ -14,210 +15,199 @@
       color: #333;
       scroll-behavior: smooth;
       animation: fadeIn 1s ease-in-out;
-    }
-
-    /* Sticky Navigation Bar */
-    nav {
-      position: sticky;
-      top: 0;
-      background-color: #333;
-      padding: 15px;
       text-align: center;
-      z-index: 1000;
     }
 
-    nav a {
-      color: white;
-      margin: 0 20px;
-      text-decoration: none;
-      font-size: 1.2rem;
-      transition: color 0.3s ease;
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 20px;
     }
 
-    nav a:hover {
-      color: #ff7e5f;
+    #score, #timer {
+      font-size: 1.5rem;
+      margin: 10px 0;
     }
 
-    /* Hero Section */
-    .hero-section {
-      height: 100vh;
-      display: flex;
+    #game-over {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 8px;
+      text-align: center;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    }
+
+    /* Hex Grid Container */
+    .hex-grid {
+      display: grid;
+      grid-template-columns: repeat(10, 80px);
+      grid-template-rows: repeat(6, 80px);
+      grid-gap: 10px;
       justify-content: center;
-      align-items: center;
-      flex-direction: column;
-      text-align: center;
-      background: linear-gradient(135deg, #1e3c72, #2a5298);
-      color: white;
-      animation: slideIn 1s ease-in-out;
+      margin-top: 50px;
     }
 
-    .hero-text {
-      font-size: 4rem;
-      font-weight: bold;
-      text-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
-      margin: 0;
-      transform: scale(1);
-      transition: transform 0.3s ease-in-out;
+    /* Hexagon Style */
+    .hex {
+      width: 80px;
+      height: 92px;
+      background-color: #3498db;
+      position: relative;
+      display: inline-block;
+      margin: 46px 0;
+      transform: rotate(30deg);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+      cursor: pointer;
+      animation: spawn 0.5s ease-out;
     }
 
-    .hero-text:hover {
+    .hex::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: inherit;
+      clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
+      transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    /* Hover Effects */
+    .hex:hover::before {
       transform: scale(1.1);
     }
 
-    .hero-subtext {
-      font-size: 1.5rem;
-      margin-top: 10px;
-      opacity: 0;
-      animation: fadeIn 2s ease-in-out forwards;
+    .hex:hover {
+      transform: scale(1.2);
     }
 
-    /* Section Styling */
-    section {
-      padding: 6rem 2rem;
-      text-align: center;
-      margin: 0 auto;
-      max-width: 1200px;
+    .target {
+      border: 3px solid gold;
     }
 
-    h2 {
-      font-size: 3rem;
-      margin-bottom: 20px;
-    }
-
-    p {
-      font-size: 1.2rem;
-      max-width: 800px;
-      margin: 0 auto;
-    }
-
-    /* About Section */
-    .about-section {
-      background: linear-gradient(135deg, #f3e7e9, #e3fdf5);
-      color: #333;
-    }
-
-    .about-section:hover {
-      background-color: #a8d5b1;
-    }
-
-    /* Projects Section */
-    .projects-section {
-      background: #eaeef3;
-      color: #333;
-    }
-
-    .projects-section:hover {
-      background-color: #d0d6dd;
-    }
-
-    .project-card {
-      background: rgba(255, 255, 255, 0.8);
-      color: #333;
-      padding: 20px;
-      width: 300px;
-      margin: 20px;
-      border-radius: 10px;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      transition: transform 0.3s ease, background 0.3s ease;
-    }
-
-    .project-card:hover {
-      transform: scale(1.05);
-      background: rgba(255, 255, 255, 0.9);
-    }
-
-    /* Contact Section */
-    .contact-section {
-      background-color: #333;
-      background: linear-gradient(135deg, #232526, #414345);
-      color: white;
-    }
-
-    .contact-btn {
-      display: inline-block;
-      padding: 15px 30px;
-      background-color: #ff7e5f;
-      color: white;
-      font-size: 1.2rem;
-      margin-top: 20px;
-      border-radius: 5px;
-      text-decoration: none;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-      transition: background-color 0.3s ease, transform 0.3s ease;
-    }
-
-    .contact-btn:hover {
-      background-color: #e65c5e;
-      transform: translateY(-3px);
-    }
-
-    /* Animations */
+    /* Animation Effects */
     @keyframes fadeIn {
       from { opacity: 0; }
       to { opacity: 1; }
     }
 
-    @keyframes slideIn {
-      from { transform: translateY(-100%); }
-      to { transform: translateY(0); }
+    @keyframes bounce {
+      0% { transform: translateY(0); }
+      30% { transform: translateY(-20px); }
+      50% { transform: translateY(0); }
+      70% { transform: translateY(-10px); }
+      100% { transform: translateY(0); }
+    }
+
+    @keyframes spawn {
+      from {
+        transform: scale(0);
+        opacity: 0;
+      }
+      to {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
   </style>
 </head>
 <body>
 
-  <!-- Navigation Bar -->
-  <nav>
-    <a href="#hero">Home</a>
-    <a href="#about">Skills</a>
-    <a href="#projects">Projects</a>
-    <a href="#contact">Contact</a>
-  </nav>
+  <h1>Bouncing Hex Grid Game</h1>
+  <p id="score">Score: 0</p>
+  <p id="timer">Time Left: 30s</p>
 
-  <!-- Hero Section -->
-  <section id="hero" class="hero-section">
-    <p class="hero-text">Hello, I'm Amadou</p>
-    <p class="hero-subtext">A passionate developer creating cool things for the web.</p>
+  <!-- Game Over Modal -->
+  <div id="game-over">
+    <h2>Game Over!</h2>
+    <p id="final-score"></p>
+    <button onclick="location.reload()">Play Again</button>
+  </div>
+
+  <!-- Hexagonal Grid -->
+  <section class="hex-grid">
+    <div class="hex"></div>
+    <div class="hex"></div>
+    <div class="hex"></div>
+    <div class="hex"></div>
+    <div class="hex"></div>
+    <div class="hex"></div>
+    <div class="hex"></div>
+    <div class="hex"></div>
+    <div class="hex"></div>
+    <div class="hex"></div>
+    <div class="hex"></div>
+    <div class="hex"></div>
+    <div class="hex"></div>
+    <div class="hex"></div>
+    <div class="hex"></div>
   </section>
 
-  <!-- About Me Section -->
-  <section id="about" class="about-section">
-    <h2>Skills</h2>
-    <p>I specialize in full-stack development, UI/UX design, and web performance optimization. I'm proficient in technologies like React, Next.js, Node.js, MongoDB, and more. I enjoy solving problems through code and creating efficient solutions.</p>
-  </section>
+  <!-- Add the Audio File -->
+  <audio id="click-sound" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
 
-  <!-- Projects Section -->
-  <section id="projects" class="projects-section">
-    <h2>Projects</h2>
-    <div style="display: flex; justify-content: center; flex-wrap: wrap;">
-      <!-- Project 1 -->
-      <a href="https://webdev2-final-project-dmnhll18t-amadou-diallos-projects.vercel.app/sign-in" target="_blank" style="text-decoration: none; color: inherit;">
-        <div class="project-card">
-          <h3>Khazad Tech</h3>
-          <p>An e-commerce site built with React, Node.js, and MongoDB.</p>
-        </div>
-      </a>
-      <!-- Project 2 -->
-      <a href="https://5oceansimmigration.tech/homepage" target="_blank" style="text-decoration: none; color: inherit;">
-        <div class="project-card">
-          <h3>5 Oceans Immigration</h3>
-          <p>An immigration consultancy site built with Next.js, Tailwind CSS, and Firebase.</p>
-        </div>
-      </a>
-      <!-- Project 3 -->
-      <div class="project-card">
-        <h3>Personal Blog</h3>
-        <p>A simple blog platform I built with Next.js and Markdown, focusing on performance and SEO.</p>
-      </div>
-    </div>
-  </section>
+  <script>
+    let score = 0;
+    let timeLeft = 30;
 
-  <!-- Contact Section -->
-  <section id="contact" class="contact-section">
-    <h2>Contact</h2>
-    <p>Feel free to reach out if you'd like to collaborate or just want to say hi!</p>
-    <a href="mailto:amadouamos@hotmail.com" class="contact-btn">Email</a>
-    <a href="https://www.linkedin.com/in/amadou-diallo-7b2326330" class="contact-btn">LinkedIn</a>
-  </section>
+    // Update score when a hexagon is clicked
+    document.querySelectorAll('.hex').forEach((hex) => {
+      hex.addEventListener('click', () => {
+        // Play the sound
+        const clickSound = document.getElementById('click-sound');
+        clickSound.play();
+
+        // Apply bounce animation
+        hex.style.animation = 'bounce 0.5s ease';
+
+        // Increment score
+        if (hex.classList.contains('target')) {
+          score += 10; // Bonus for target hex
+        } else {
+          score++;
+        }
+        document.getElementById('score').textContent = `Score: ${score}`;
+
+        // Randomize hexagon color
+        hex.style.backgroundColor = `#${Math.floor(Math.random() * 16777215).toString(16)}`;
+
+        // Reset animation
+        hex.addEventListener('animationend', () => {
+          hex.style.animation = '';
+        });
+      });
+    });
+
+    // Timer logic
+    const timer = setInterval(() => {
+      if (timeLeft <= 0) {
+        clearInterval(timer);
+        endGame();
+      } else {
+        document.getElementById('timer').textContent = `Time Left: ${timeLeft}s`;
+      }
+      timeLeft--;
+    }, 1000);
+
+    // Highlight a random hexagon every 2 seconds
+    setInterval(() => {
+      const hexagons = document.querySelectorAll('.hex');
+      hexagons.forEach((hex) => hex.classList.remove('target'));
+      const randomHex = hexagons[Math.floor(Math.random() * hexagons.length)];
+      randomHex.classList.add('target');
+    }, 2000);
+
+    // End game logic
+    const endGame = () => {
+      document.getElementById('game-over').style.display = 'block';
+      document.getElementById('final-score').textContent = `Final Score: ${score}`;
+    };
+  </script>
 
 </body>
 </html>
