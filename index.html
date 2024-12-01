@@ -148,9 +148,6 @@
     <div class="hex"></div>
   </section>
 
-  <!-- Add the Audio File -->
-  <audio id="click-sound" src="https://www.soundjay.com/button/beep-07.wav" preload="auto"></audio>
-
   <script>
     let score = 0;
     let timeLeft = 30;
@@ -158,8 +155,8 @@
     // Update score when a hexagon is clicked
     document.querySelectorAll('.hex').forEach((hex) => {
       hex.addEventListener('click', () => {
-        // Play the sound
-        const clickSound = document.getElementById('click-sound');
+        // Play the sound by creating a new Audio object each time
+        const clickSound = new Audio('https://actions.google.com/sounds/v1/cartoon/pop.ogg');
         clickSound.play();
 
         // Apply bounce animation
