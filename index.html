@@ -3,6 +3,204 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Amadou Diallo's Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    /* Global Styles */
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Roboto', sans-serif;
+      background-color: #f4f7fc;
+      color: #333;
+      line-height: 1.6;
+      box-sizing: border-box;
+    }
+
+    h1, h2 {
+      color: #2c3e50;
+      font-weight: 700;
+    }
+
+    h1 {
+      font-size: 2.5rem;
+      margin-top: 40px;
+    }
+
+    h2 {
+      font-size: 1.8rem;
+      margin-top: 30px;
+      border-bottom: 2px solid #3498db;
+      padding-bottom: 10px;
+    }
+
+    p {
+      font-size: 1rem;
+      margin: 10px 0;
+      color: #555;
+    }
+
+    a {
+      color: #3498db;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    section {
+      width: 80%;
+      margin: 0 auto;
+      padding: 20px 0;
+    }
+
+    /* Contact & About Section */
+    .contact-info, .about-me {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .contact-info div, .about-me div {
+      width: 48%;
+    }
+
+    .contact-info h2, .about-me h2 {
+      margin-top: 0;
+    }
+
+    /* Skills Section */
+    .skills-list {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .skills-list li {
+      background-color: #fff;
+      padding: 15px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      font-size: 1rem;
+    }
+
+    /* Experience Section */
+    .experience {
+      margin-top: 40px;
+    }
+
+    .experience .job {
+      padding: 20px;
+      background-color: #fff;
+      margin-bottom: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .experience .job h3 {
+      font-size: 1.5rem;
+      color: #2c3e50;
+    }
+
+    .experience .job p {
+      font-size: 1rem;
+      color: #555;
+    }
+
+    .experience .job span {
+      font-weight: 700;
+      color: #3498db;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #3498db;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+
+    footer a {
+      color: #fff;
+    }
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Amadou Diallo's Portfolio</h1>
+  </header>
+
+  <section class="contact-info">
+    <div>
+      <h2>Contact Information</h2>
+      <p><strong>Phone:</strong> 587-803-5820</p>
+      <p><strong>Email:</strong> <a href="mailto:amadouamosdiallo@outlook.com">amadouamosdiallo@outlook.com</a></p>
+      <p><strong>Portfolio:</strong> <a href="https://amadou-d.github.io/" target="_blank">https://amadou-d.github.io/</a></p>
+    </div>
+    <div>
+      <h2>Address</h2>
+      <p>4301 A Calgary, 70 St NW</p>
+    </div>
+  </section>
+
+  <section class="about-me">
+    <div>
+      <h2>Professional Profile</h2>
+      <p>With a passion for information technology and software development, I am currently studying software development at SAIT. I aim to build innovative solutions by combining strong technical knowledge with effective communication skills, gained through experiences in online consulting and as a live performer. I am confident in my ability to contribute to software development, cybersecurity, and IT projects.</p>
+    </div>
+  </section>
+
+  <section class="skills">
+    <h2>Skills Summary</h2>
+    <ul class="skills-list">
+      <li>Proficient in Python and Java programming</li>
+      <li>Web development (HTML, CSS, JavaScript)</li>
+      <li>Problem-solving and analytical skills</li>
+      <li>Experience with network systems, cloud services, and Windows/Linux operating systems</li>
+      <li>Excellent time management and attention to detail</li>
+      <li>Strong written and verbal communication skills</li>
+    </ul>
+  </section>
+
+  <section class="experience">
+    <h2>Professional Experience</h2>
+
+    <div class="job">
+      <h3>Web Developer - 5 Oceans Immigration</h3>
+      <p><span>May 2024 - Present</span></p>
+      <p>Developed and maintained a full-stack web application using JavaScript, MongoDB, and Next.js. Ensured responsive design and collaborated with cross-functional teams to meet project needs.</p>
+    </div>
+
+    <div class="job">
+      <h3>Live Performer/ Entertainer</h3>
+      <p><span>Dec 2012 - Oct 2023</span></p>
+      <p>Performed as a percussionist in multiple live bands, improving communication skills through collaboration and team dynamics.</p>
+    </div>
+
+    <div class="job">
+      <h3>Self Employed / Online Consultant</h3>
+      <p><span>June 2014 - Sept 2018</span></p>
+      <p>Provided technical consulting services to clients, focusing on computer technologies and gaming-related content. Built strong professional relationships through effective communication.</p>
+    </div>
+  </section>
+
+  <section class="portfolio">
+    <h2>Portfolio</h2>
+    <p>Check out my project <a href="https://5oceansimmigration.tech/" target="_blank">5 Oceans Immigration</a>.</p>
+  </section>
+
+
+</body>
+</html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bouncing Hex Grid Game</title>
   <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
   <style>
@@ -114,43 +312,77 @@
         opacity: 1;
       }
     }
+
+    /* Collapsible Game Section */
+    #game-container {
+      display: none;
+      margin-top: 30px;
+    }
+
+    #toggle-game-btn {
+      background-color: #3498db;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 1rem;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
   </style>
 </head>
 <body>
 
   <h1>Bouncing Hex Grid Game</h1>
-  <p id="score">Score: 0</p>
-  <p id="timer">Time Left: 30s</p>
+  <button id="toggle-game-btn">Show Game</button>
 
-  <!-- Game Over Modal -->
-  <div id="game-over">
-    <h2>Game Over!</h2>
-    <p id="final-score"></p>
-    <button onclick="location.reload()">Play Again</button>
+  <!-- Collapsible Game Container -->
+  <div id="game-container">
+    <p id="score">Score: 0</p>
+    <p id="timer">Time Left: 30s</p>
+
+    <!-- Game Over Modal -->
+    <div id="game-over">
+      <h2>Game Over!</h2>
+      <p id="final-score"></p>
+      <button onclick="location.reload()">Play Again</button>
+    </div>
+
+    <!-- Hexagonal Grid -->
+    <section class="hex-grid">
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+      <div class="hex"></div>
+    </section>
   </div>
-
-  <!-- Hexagonal Grid -->
-  <section class="hex-grid">
-    <div class="hex"></div>
-    <div class="hex"></div>
-    <div class="hex"></div>
-    <div class="hex"></div>
-    <div class="hex"></div>
-    <div class="hex"></div>
-    <div class="hex"></div>
-    <div class="hex"></div>
-    <div class="hex"></div>
-    <div class="hex"></div>
-    <div class="hex"></div>
-    <div class="hex"></div>
-    <div class="hex"></div>
-    <div class="hex"></div>
-    <div class="hex"></div>
-  </section>
 
   <script>
     let score = 0;
     let timeLeft = 30;
+
+    // Toggle the game visibility
+    document.getElementById('toggle-game-btn').addEventListener('click', () => {
+      const gameContainer = document.getElementById('game-container');
+      if (gameContainer.style.display === 'none' || gameContainer.style.display === '') {
+        gameContainer.style.display = 'block';
+        document.getElementById('toggle-game-btn').textContent = 'Hide Game';
+      } else {
+        gameContainer.style.display = 'none';
+        document.getElementById('toggle-game-btn').textContent = 'Show Game';
+      }
+    });
 
     // Update score when a hexagon is clicked
     document.querySelectorAll('.hex').forEach((hex) => {
@@ -205,6 +437,10 @@
       document.getElementById('final-score').textContent = `Final Score: ${score}`;
     };
   </script>
+
+<footer>
+    <p>Thank you for visiting my portfolio. Feel free to <a href="mailto:amadouamosdiallo@outlook.com">contact me</a> for any inquiries!</p>
+  </footer>
 
 </body>
 </html>
