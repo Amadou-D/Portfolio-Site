@@ -12,6 +12,23 @@ const CubePage = () => {
   const rotationAngles = useRef({ x: 0, y: 0 });
   const cubeRef = useRef(null);
 
+  // Function to generate random gradient colors
+  const generateRandomGradient = () => {
+    const randomColor = () => {
+      const letters = '0123456789ABCDEF';
+      let color = '#';
+      for (let i = 0; i < 6; i++) {
+        color += letters[Math.floor(Math.random() * 16)];
+      }
+      return color;
+    };
+
+    return `linear-gradient(45deg, ${randomColor()}, ${randomColor()})`;
+  };
+
+  // State to store the generated random gradient color
+  const [gradientColors, setGradientColors] = useState(generateRandomGradient());
+
   useEffect(() => {
     const handlePointerEnter = (e) => {
       if (e.pointerType === "touch") return;
@@ -50,12 +67,29 @@ const CubePage = () => {
       cubeElement.addEventListener("pointermove", handlePointerMove);
     }
 
+    // Change gradient color every 2 seconds
+    const colorInterval = setInterval(() => {
+      setGradientColors(generateRandomGradient());
+    }, 2000);
+
+    // Auto-rotation logic
+    const rotationInterval = setInterval(() => {
+      rotationAngles.current.x += 0.01;
+      rotationAngles.current.y += 0.01;
+
+      setCubeStyle({
+        transform: `rotateX(${rotationAngles.current.x}rad) rotateY(${rotationAngles.current.y}rad)`,
+      });
+    }, 30); // Adjust the interval time for faster/slower rotation
+
     return () => {
       if (cubeElement) {
         cubeElement.removeEventListener("pointerenter", handlePointerEnter);
         cubeElement.removeEventListener("pointerleave", handlePointerLeave);
         cubeElement.removeEventListener("pointermove", handlePointerMove);
       }
+      clearInterval(rotationInterval); // Cleanup auto-rotation on unmount
+      clearInterval(colorInterval); // Cleanup color change interval
     };
   }, []);
 
@@ -78,58 +112,52 @@ const CubePage = () => {
         >
           {/* Front Face */}
           <div
-            className="absolute w-full h-full bg-gray-800 border-2 border-white flex items-center justify-center text-white"
+            className="absolute w-full h-full"
             style={{
+              background: gradientColors, // Apply gradient color to each face
               transform: "rotateY(0deg) translateZ(96px)", // Front face
             }}
-          >
-            Front
-          </div>
+          />
           {/* Back Face */}
           <div
-            className="absolute w-full h-full bg-gray-800 border-2 border-white flex items-center justify-center text-white"
+            className="absolute w-full h-full"
             style={{
+              background: gradientColors, // Apply gradient color to each face
               transform: "rotateY(180deg) translateZ(96px)", // Back face
             }}
-          >
-            Back
-          </div>
+          />
           {/* Right Face */}
           <div
-            className="absolute w-full h-full bg-gray-800 border-2 border-white flex items-center justify-center text-white"
+            className="absolute w-full h-full"
             style={{
+              background: gradientColors, // Apply gradient color to each face
               transform: "rotateY(90deg) translateZ(96px)", // Right face
             }}
-          >
-            3D
-          </div>
+          />
           {/* Left Face */}
           <div
-            className="absolute w-full h-full bg-gray-800 border-2 border-white flex items-center justify-center text-white"
+            className="absolute w-full h-full"
             style={{
+              background: gradientColors, // Apply gradient color to each face
               transform: "rotateY(-90deg) translateZ(96px)", // Left face
             }}
-          >
-           3D
-          </div>
+          />
           {/* Top Face */}
           <div
-            className="absolute w-full h-full bg-gray-800 border-2 border-white flex items-center justify-center text-white"
+            className="absolute w-full h-full"
             style={{
+              background: gradientColors, // Apply gradient color to each face
               transform: "rotateX(90deg) translateZ(96px)", // Top face
             }}
-          >
-            3D
-          </div>
+          />
           {/* Bottom Face */}
           <div
-            className="absolute w-full h-full bg-gray-800 border-2 border-white flex items-center justify-center text-white"
+            className="absolute w-full h-full"
             style={{
+              background: gradientColors, // Apply gradient color to each face
               transform: "rotateX(-90deg) translateZ(96px)", // Bottom face
             }}
-          >
-            3D
-          </div>
+          />
         </div>
       </div>
     </div>
