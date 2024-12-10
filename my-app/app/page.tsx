@@ -127,13 +127,6 @@ const CubePage = () => {
     >
       {/* Background Animated Grid Pattern */}
       <RetroGrid
-        width={40}
-        height={40}
-        numSquares={50}
-        maxOpacity={0.5}
-        duration={4}
-        repeatDelay={0.5}
-        className="absolute inset-0"
         gridColor="rgba(255, 255, 255, 0.3)" // Set grid lines to white
       />
 
