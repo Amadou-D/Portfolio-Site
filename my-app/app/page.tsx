@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
+import SparklesText from "@/components/ui/sparkles-text";
 
 // Define types for your state and refs
 interface PointerPosition {
@@ -116,10 +117,10 @@ const CubePage = () => {
       {/* Description Text */}
       <div className="absolute top-10 text-center text-white">
         <h1 className="text-8xl font-bold mb-4">
-        Hey I'm <span className="gradient-text">Amadou</span>
+        Hey I&apos;m <span className="gradient-text">Amadou</span>
         </h1>
         <p className="text-6xl">
-         I am a Full  Stack  Developer
+         I&apos;m a Full  Stack  Developer
         </p>
         <p className="text-6xl">
         That builds <span className=" gradient-text">customized</span> Websites and <span className=" gradient-text">Applications</span>
