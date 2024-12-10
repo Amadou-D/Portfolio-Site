@@ -1,16 +1,25 @@
-'use client'
+'use client';
 
-import { useEffect, useRef, useState } from "react";
-import AnimatedGridPattern from "@/components/ui/animated-grid-pattern";
+import { useEffect, useRef, useState } from 'react';
+import RetroGrid from '@/components/ui/retro-grid'; // Assuming RetroGrid is in the specified path
 
 interface PointerPosition {
   x: number;
   y: number;
 }
 
+const vibrantColorPairs = [
+  { color1: '#FF4B2B', color2: '#FF416C' },
+  { color1: '#00C9FF', color2: '#92FE9D' },
+  { color1: '#6A1B9A', color2: '#8E24AA' },
+  { color1: '#FFEB3B', color2: '#FF9800' },
+  { color1: '#3F51B5', color2: '#2196F3' },
+  { color1: '#00BCD4', color2: '#009688' },
+];
+
 const CubePage = () => {
   const [cubeStyle, setCubeStyle] = useState<React.CSSProperties>({
-    transform: "rotateX(0deg) rotateY(0deg)",
+    transform: 'rotateX(0deg) rotateY(0deg)',
   });
 
   const isDragging = useRef<boolean>(false);
@@ -19,25 +28,18 @@ const CubePage = () => {
   const rotationVelocity = useRef<PointerPosition>({ x: 0, y: 0 });
   const cubeRef = useRef<HTMLDivElement | null>(null);
 
-  // Function to generate a random color
-  const generateRandomGradient = (): string => {
-    const randomColor = (): string => {
-      const letters = '0123456789ABCDEF';
-      let color = '#';
-      for (let i = 0; i < 6; i++) {
-        color += letters[Math.floor(Math.random() * 16)];
-      }
-      return color;
-    };
-
-    return `linear-gradient(45deg, ${randomColor()}, ${randomColor()})`;
+  // Declare the function to generate gradients here
+  const generateGradient = (colors: { color1: string, color2: string }): string => {
+    return `linear-gradient(45deg, ${colors.color1}, ${colors.color2})`;
   };
 
-  const [gradientColors, setGradientColors] = useState<string>(generateRandomGradient());
+  const [gradientColors, setGradientColors] = useState<string>(
+    generateGradient(vibrantColorPairs[0])
+  );
 
   useEffect(() => {
     const handlePointerEnter = (e: PointerEvent) => {
-      if (e.pointerType === "touch") return;
+      if (e.pointerType === 'touch') return;
 
       lastPointerPosition.current = { x: e.clientX, y: e.clientY };
       isDragging.current = false; // Not dragging, so we trigger rotation instead
@@ -48,7 +50,7 @@ const CubePage = () => {
     };
 
     const handlePointerMove = (e: PointerEvent) => {
-      if (e.pointerType === "touch" || isDragging.current) return;
+      if (e.pointerType === 'touch' || isDragging.current) return;
 
       const cubeRect = cubeRef.current?.getBoundingClientRect();
       if (cubeRect) {
@@ -75,13 +77,14 @@ const CubePage = () => {
 
     const cubeElement = cubeRef.current;
     if (cubeElement) {
-      cubeElement.addEventListener("pointerenter", handlePointerEnter);
-      cubeElement.addEventListener("pointerleave", handlePointerLeave);
-      cubeElement.addEventListener("pointermove", handlePointerMove);
+      cubeElement.addEventListener('pointerenter', handlePointerEnter);
+      cubeElement.addEventListener('pointerleave', handlePointerLeave);
+      cubeElement.addEventListener('pointermove', handlePointerMove);
     }
 
     const colorInterval = setInterval(() => {
-      setGradientColors(generateRandomGradient());
+      // Change the gradient every 2 seconds, cycling through vibrant color pairs
+      setGradientColors(generateGradient(vibrantColorPairs[Math.floor(Math.random() * vibrantColorPairs.length)]));
     }, 2000);
 
     // Auto-rotation logic
@@ -101,16 +104,16 @@ const CubePage = () => {
 
         setCubeStyle({
           transform: `rotateX(${rotationAngles.current.x}rad) rotateY(${rotationAngles.current.y}rad)`,
-          transition: "transform 0.3s ease-out", // Smooth transition when not dragging
+          transition: 'transform 0.3s ease-out', // Smooth transition when not dragging
         });
       }
     }, 16); // ~60 FPS for auto-rotation
 
     return () => {
       if (cubeElement) {
-        cubeElement.removeEventListener("pointerenter", handlePointerEnter);
-        cubeElement.removeEventListener("pointerleave", handlePointerLeave);
-        cubeElement.removeEventListener("pointermove", handlePointerMove);
+        cubeElement.removeEventListener('pointerenter', handlePointerEnter);
+        cubeElement.removeEventListener('pointerleave', handlePointerLeave);
+        cubeElement.removeEventListener('pointermove', handlePointerMove);
       }
       clearInterval(rotationInterval);
       clearInterval(colorInterval);
@@ -123,7 +126,7 @@ const CubePage = () => {
       style={{ '--gradient': gradientColors } as React.CSSProperties} // Apply gradient to the container
     >
       {/* Background Animated Grid Pattern */}
-      <AnimatedGridPattern
+      <RetroGrid
         width={40}
         height={40}
         numSquares={50}
@@ -131,6 +134,7 @@ const CubePage = () => {
         duration={4}
         repeatDelay={0.5}
         className="absolute inset-0"
+        gridColor="rgba(255, 255, 255, 0.3)" // Set grid lines to white
       />
 
       {/* Description Text */}
@@ -151,23 +155,23 @@ const CubePage = () => {
         ref={cubeRef}
         className="relative w-48 h-48"
         style={{
-          perspective: "1000px",
+          perspective: '1000px',
         }}
       >
         <div
           className="absolute w-full h-full"
           style={{
             ...cubeStyle,
-            transformStyle: "preserve-3d",
+            transformStyle: 'preserve-3d',
           }}
         >
           {/* Cube Faces */}
-          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: "rotateY(0deg) translateZ(96px)" }} />
-          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: "rotateY(180deg) translateZ(96px)" }} />
-          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: "rotateY(90deg) translateZ(96px)" }} />
-          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: "rotateY(-90deg) translateZ(96px)" }} />
-          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: "rotateX(90deg) translateZ(96px)" }} />
-          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: "rotateX(-90deg) translateZ(96px)" }} />
+          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(0deg) translateZ(96px)' }} />
+          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(180deg) translateZ(96px)' }} />
+          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(90deg) translateZ(96px)' }} />
+          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(-90deg) translateZ(96px)' }} />
+          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateX(90deg) translateZ(96px)' }} />
+          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateX(-90deg) translateZ(96px)' }} />
         </div>
       </div>
     </div>
