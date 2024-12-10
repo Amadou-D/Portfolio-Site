@@ -81,6 +81,9 @@ body {
   letter-spacing: 0.5px; /* Slightly space out the characters */
 }
 
+/* styles/globals.css */
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
+
 
 @layer base {
   * {

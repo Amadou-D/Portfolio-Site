@@ -1,4 +1,4 @@
-'use client'
+'use client';
 
 import { useEffect, useRef, useState } from 'react';
 
@@ -6,6 +6,7 @@ interface PointerPosition {
   x: number;
   y: number;
 }
+
 import RetroGrid from '@/components/ui/retro-grid'; // Assuming RetroGrid is in the specified path
 
 const vibrantColorPairs = [
@@ -121,11 +122,11 @@ const CubePage = () => {
         gridColor="rgba(255, 255, 255, 0.3)" // Set grid lines to white
       />
       <div className="absolute top-10 text-center text-gray-200 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-16">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4">
-          Hey I&apos;m <span className="gradient-text">Amadou</span>
+      <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 font-['Montserrat']">
+      Hey I&apos;m <span className="gradient-text">Amadou</span>
         </h1>
-        <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">I&apos;m a Full Stack Developer</p>
-        <p className="text-2xl sm:text-3xl md:text-4xl text-gray-200">
+        <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-['Roboto'] semi">I&apos;m a Full Stack Developer</p>
+        <p className="text-2xl sm:text-3xl md:text-4xl text-gray-200 font-['Roboto']">
           That builds <span className="gradient-text">customized</span> Websites and <span className="gradient-text">Applications</span>
         </p>
       </div>
