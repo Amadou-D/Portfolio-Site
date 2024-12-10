@@ -7,12 +7,12 @@ interface AnimatedGridPatternProps {
   height?: number;
   x?: number;
   y?: number;
-  strokeDasharray?: string | number;  // Explicitly typed as string or number
+  strokeDasharray?: string | number;
   numSquares?: number;
   className?: string;
   maxOpacity?: number;
   duration?: number;
-  repeatDelay?: number;
+  // Removed repeatDelay as it's not used
 }
 
 export default function AnimatedGridPattern({
@@ -25,7 +25,7 @@ export default function AnimatedGridPattern({
   className,
   maxOpacity = 0.5,
   duration = 4,
-  repeatDelay = 0.5,
+  // repeatDelay removed from props
   ...props
 }: AnimatedGridPatternProps) {
   const id = useId();
@@ -79,7 +79,7 @@ export default function AnimatedGridPattern({
     if (dimensions.width && dimensions.height) {
       setSquares(generateSquares(numSquares));
     }
-  }, [dimensions, numSquares]);
+  }, [dimensions, numSquares]);  // Fixed dependency array
 
   // Resize observer to update container dimensions
   useEffect(() => {
