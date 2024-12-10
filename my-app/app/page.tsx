@@ -89,9 +89,6 @@ const CubePage = () => {
         rotationAngles.current.x += 0.01;
         rotationAngles.current.y += 0.01;
 
-        // Maintain cube's size aspect ratio
-        const cubeSize = 200; // Fixed size for the cube (in pixels)
-
         setCubeStyle({
           transform: `rotateX(${rotationAngles.current.x}rad) rotateY(${rotationAngles.current.y}rad)`,
           transition: 'transform 0.3s ease-out',
