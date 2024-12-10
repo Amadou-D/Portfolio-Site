@@ -4,7 +4,6 @@ export default function RetroGrid({
   className,
   angle = 65,
   gridColor = "rgba(0, 0, 0, 0.3)", // Default grid color
-  darkGridColor = "rgba(255, 255, 255, 0.2)", // Default dark mode grid color
 }: {
   className?: string;
   angle?: number;
