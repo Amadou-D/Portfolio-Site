@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { motion } from "framer-motion";
+
 import { cn } from "@/lib/utils";
 
 interface AnimatedGridPatternProps {
@@ -7,15 +8,15 @@ interface AnimatedGridPatternProps {
   height?: number;
   x?: number;
   y?: number;
-  strokeDasharray?: string | number;
+  strokeDasharray?: any;
   numSquares?: number;
   className?: string;
   maxOpacity?: number;
   duration?: number;
-  // Removed repeatDelay as it's not used
+  repeatDelay?: number;
 }
 
-export default function AnimatedGridPattern({
+const AnimatedGridPattern = ({
   width = 40,
   height = 40,
   x = -1,
@@ -25,11 +26,11 @@ export default function AnimatedGridPattern({
   className,
   maxOpacity = 0.5,
   duration = 4,
-  // repeatDelay removed from props
+  repeatDelay = 0.5,
   ...props
-}: AnimatedGridPatternProps) {
+}: AnimatedGridPatternProps) => {
   const id = useId();
-  const containerRef = useRef<SVGSVGElement | null>(null);
+  const containerRef = useRef(null);
   const [dimensions, setDimensions] = useState({ width: 0, height: 0 });
   const [squares, setSquares] = useState(() => generateSquares(numSquares));
 
@@ -40,26 +41,13 @@ export default function AnimatedGridPattern({
     ];
   }
 
-  // Function to generate a random color
-  function getRandomColor() {
-    const letters = "0123456789ABCDEF";
-    let color = "#";
-    for (let i = 0; i < 6; i++) {
-      color += letters[Math.floor(Math.random() * 16)];
-    }
-    return color;
-  }
-
-  // Adjust the generateSquares function to return objects with an id, x, y, and color
   function generateSquares(count: number) {
     return Array.from({ length: count }, (_, i) => ({
       id: i,
       pos: getPos(),
-      color: getRandomColor(),  // Assign random color to each square
     }));
   }
 
-  // Function to update a single square's position and color
   const updateSquarePosition = (id: number) => {
     setSquares((currentSquares) =>
       currentSquares.map((sq) =>
@@ -67,24 +55,21 @@ export default function AnimatedGridPattern({
           ? {
               ...sq,
               pos: getPos(),
-              color: getRandomColor(),  // Change color when the square moves
             }
-          : sq
+          : sq,
       ),
     );
   };
 
-  // Update squares to animate in
   useEffect(() => {
     if (dimensions.width && dimensions.height) {
       setSquares(generateSquares(numSquares));
     }
-  }, [dimensions, numSquares]);  // Fixed dependency array
+  }, [dimensions, numSquares]);
 
-  // Resize observer to update container dimensions
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
-      for (const entry of entries) {  // Use `const` instead of `let`
+      for (let entry of entries) {
         setDimensions({
           width: entry.contentRect.width,
           height: entry.contentRect.height,
@@ -92,15 +77,13 @@ export default function AnimatedGridPattern({
       }
     });
 
-    const container = containerRef.current;  // Avoid referencing `containerRef.current` in cleanup
-
-    if (container) {
-      resizeObserver.observe(container);
+    if (containerRef.current) {
+      resizeObserver.observe(containerRef.current);
     }
 
     return () => {
-      if (container) {
-        resizeObserver.unobserve(container);
+      if (containerRef.current) {
+        resizeObserver.unobserve(containerRef.current);
       }
     };
   }, [containerRef]);
@@ -111,7 +94,7 @@ export default function AnimatedGridPattern({
       aria-hidden="true"
       className={cn(
         "pointer-events-none absolute inset-0 h-full w-full fill-gray-400/30 stroke-gray-400/30",
-        className
+        className,
       )}
       {...props}
     >
@@ -133,7 +116,7 @@ export default function AnimatedGridPattern({
       </defs>
       <rect width="100%" height="100%" fill={`url(#${id})`} />
       <svg x={x} y={y} className="overflow-visible">
-        {squares.map(({ pos: [x, y], id, color }, index) => (
+        {squares.map(({ pos: [x, y], id }, index) => (
           <motion.rect
             initial={{ opacity: 0 }}
             animate={{ opacity: maxOpacity }}
@@ -149,11 +132,13 @@ export default function AnimatedGridPattern({
             height={height - 1}
             x={x * width + 1}
             y={y * height + 1}
-            fill={color}  // Use random color for each square
+            fill="currentColor"
             strokeWidth="0"
           />
         ))}
       </svg>
     </svg>
   );
-}
+};
+
+export default AnimatedGridPattern;
