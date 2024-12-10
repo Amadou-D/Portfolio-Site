@@ -115,14 +115,14 @@ const CubePage = () => {
       />
 
       {/* Description Text */}
-      <div className="absolute top-10 text-center text-white">
+      <div className="absolute top-10 text-center text-gray-200">
         <h1 className="text-8xl font-bold mb-4">
         Hey I&apos;m <span className="gradient-text">Amadou</span>
         </h1>
         <p className="text-6xl">
          I&apos;m a Full  Stack  Developer
         </p>
-        <p className="text-6xl">
+        <p className="text-6xl text-gray-200">
         That builds <span className=" gradient-text">customized</span> Websites and <span className=" gradient-text">Applications</span>
         </p>
       </div>
