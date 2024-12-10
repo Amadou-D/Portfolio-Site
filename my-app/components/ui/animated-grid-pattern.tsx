@@ -7,7 +7,7 @@ interface AnimatedGridPatternProps {
   height?: number;
   x?: number;
   y?: number;
-  strokeDasharray?: any;
+  strokeDasharray?: string | number;  // Explicitly typed as string or number
   numSquares?: number;
   className?: string;
   maxOpacity?: number;
@@ -84,7 +84,7 @@ export default function AnimatedGridPattern({
   // Resize observer to update container dimensions
   useEffect(() => {
     const resizeObserver = new ResizeObserver((entries) => {
-      for (let entry of entries) {
+      for (const entry of entries) {  // Use `const` instead of `let`
         setDimensions({
           width: entry.contentRect.width,
           height: entry.contentRect.height,
@@ -92,13 +92,15 @@ export default function AnimatedGridPattern({
       }
     });
 
-    if (containerRef.current) {
-      resizeObserver.observe(containerRef.current);
+    const container = containerRef.current;  // Avoid referencing `containerRef.current` in cleanup
+
+    if (container) {
+      resizeObserver.observe(container);
     }
 
     return () => {
-      if (containerRef.current) {
-        resizeObserver.unobserve(containerRef.current);
+      if (container) {
+        resizeObserver.unobserve(container);
       }
     };
   }, [containerRef]);
