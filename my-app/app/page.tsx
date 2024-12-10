@@ -1,12 +1,7 @@
-'use client';
+'use client'
 
 import { useEffect, useRef, useState } from 'react';
 import RetroGrid from '@/components/ui/retro-grid'; // Assuming RetroGrid is in the specified path
-
-interface PointerPosition {
-  x: number;
-  y: number;
-}
 
 const vibrantColorPairs = [
   { color1: '#FF4B2B', color2: '#FF416C' },
@@ -28,7 +23,6 @@ const CubePage = () => {
   const rotationVelocity = useRef<PointerPosition>({ x: 0, y: 0 });
   const cubeRef = useRef<HTMLDivElement | null>(null);
 
-  // Declare the function to generate gradients here
   const generateGradient = (colors: { color1: string, color2: string }): string => {
     return `linear-gradient(45deg, ${colors.color1}, ${colors.color2})`;
   };
@@ -42,7 +36,7 @@ const CubePage = () => {
       if (e.pointerType === 'touch') return;
 
       lastPointerPosition.current = { x: e.clientX, y: e.clientY };
-      isDragging.current = false; // Not dragging, so we trigger rotation instead
+      isDragging.current = false;
     };
 
     const handlePointerLeave = () => {
@@ -54,18 +48,16 @@ const CubePage = () => {
 
       const cubeRect = cubeRef.current?.getBoundingClientRect();
       if (cubeRect) {
-        // Detect if the pointer is near the center of the cube
         const centerX = cubeRect.left + cubeRect.width / 2;
         const centerY = cubeRect.top + cubeRect.height / 2;
         const distanceToCenter = Math.sqrt(
           Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2)
         );
 
-        if (distanceToCenter < 100) { // Adjust the range for "center hover" area
+        if (distanceToCenter < 100) {
           const deltaX = (e.clientX - lastPointerPosition.current.x) * (2 * Math.PI) / (cubeRef.current?.offsetWidth || 1);
           const deltaY = (e.clientY - lastPointerPosition.current.y) * (2 * Math.PI) / (cubeRef.current?.offsetWidth || 1);
 
-          // Apply a slowdown factor to the movement (adjust the factor as needed)
           const slowdownFactor = 0.15;
           rotationVelocity.current.x = deltaY * slowdownFactor;
           rotationVelocity.current.y = deltaX * slowdownFactor;
@@ -83,28 +75,26 @@ const CubePage = () => {
     }
 
     const colorInterval = setInterval(() => {
-      // Change the gradient every 2 seconds, cycling through vibrant color pairs
       setGradientColors(generateGradient(vibrantColorPairs[Math.floor(Math.random() * vibrantColorPairs.length)]));
     }, 2000);
 
-    // Auto-rotation logic
     const rotationInterval = setInterval(() => {
       if (!isDragging.current) {
-        // Apply friction to slow down the rotation gradually
-        rotationVelocity.current.x *= 0.97; // Slightly reduced friction for smoother movement
+        rotationVelocity.current.x *= 0.97;
         rotationVelocity.current.y *= 0.97;
 
-        // Update the rotation angles based on the velocity
         rotationAngles.current.x += rotationVelocity.current.x;
         rotationAngles.current.y += rotationVelocity.current.y;
 
-        // Auto rotate
-        rotationAngles.current.x += 0.01; // Incrementally rotate around X axis
-        rotationAngles.current.y += 0.01; // Incrementally rotate around Y axis
+        rotationAngles.current.x += 0.01;
+        rotationAngles.current.y += 0.01;
+
+        // Maintain cube's size aspect ratio
+        const cubeSize = 200; // Fixed size for the cube (in pixels)
 
         setCubeStyle({
           transform: `rotateX(${rotationAngles.current.x}rad) rotateY(${rotationAngles.current.y}rad)`,
-          transition: 'transform 0.3s ease-out', // Smooth transition when not dragging
+          transition: 'transform 0.3s ease-out',
         });
       }
     }, 16); // ~60 FPS for auto-rotation
@@ -123,32 +113,28 @@ const CubePage = () => {
   return (
     <div
       className="relative w-screen h-screen flex flex-col items-center justify-center bg-gray-900 overflow-hidden"
-      style={{ '--gradient': gradientColors } as React.CSSProperties} // Apply gradient to the container
+      style={{ '--gradient': gradientColors } as React.CSSProperties}
     >
-      {/* Background Animated Grid Pattern */}
       <RetroGrid
         gridColor="rgba(255, 255, 255, 0.3)" // Set grid lines to white
       />
-
-      {/* Description Text */}
-      <div className="absolute top-10 text-center text-gray-200">
-        <h1 className="text-8xl font-bold mb-4">
+      <div className="absolute top-10 text-center text-gray-200 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-16">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4">
           Hey I&apos;m <span className="gradient-text">Amadou</span>
         </h1>
-        <p className="text-6xl">
-          I&apos;m a Full Stack Developer
-        </p>
-        <p className="text-6xl text-gray-200">
-          That builds <span className=" gradient-text">customized</span> Websites and <span className=" gradient-text">Applications</span>
+        <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl">I&apos;m a Full Stack Developer</p>
+        <p className="text-2xl sm:text-3xl md:text-4xl text-gray-200">
+          That builds <span className="gradient-text">customized</span> Websites and <span className="gradient-text">Applications</span>
         </p>
       </div>
 
-      {/* Cube Container */}
       <div
         ref={cubeRef}
-        className="relative w-48 h-48"
+        className="relative"
         style={{
-          perspective: '1000px',
+          width: '200px', // Fixed size for the cube
+          height: '200px', // Fixed size for the cube
+          perspective: '1200px',
         }}
       >
         <div
@@ -158,7 +144,6 @@ const CubePage = () => {
             transformStyle: 'preserve-3d',
           }}
         >
-          {/* Cube Faces */}
           <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(0deg) translateZ(96px)' }} />
           <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(180deg) translateZ(96px)' }} />
           <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(90deg) translateZ(96px)' }} />

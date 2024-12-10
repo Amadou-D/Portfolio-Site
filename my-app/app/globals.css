@@ -76,6 +76,11 @@ body {
   background-clip: text;
   color: transparent;
 }
+.text-6xl {
+  line-height: 1.5; /* Makes the lines a bit more readable */
+  letter-spacing: 0.5px; /* Slightly space out the characters */
+}
+
 
 @layer base {
   * {
