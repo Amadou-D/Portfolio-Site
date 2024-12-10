@@ -1,6 +1,11 @@
 'use client'
 
 import { useEffect, useRef, useState } from 'react';
+
+interface PointerPosition {
+  x: number;
+  y: number;
+}
 import RetroGrid from '@/components/ui/retro-grid'; // Assuming RetroGrid is in the specified path
 
 const vibrantColorPairs = [
