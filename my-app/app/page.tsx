@@ -98,7 +98,10 @@ const CubePage = () => {
   }, []);
 
   return (
-    <div className="relative w-screen h-screen flex items-center justify-center bg-gray-900 overflow-hidden">
+    <div
+      className="relative w-screen h-screen flex flex-col items-center justify-center bg-gray-900 overflow-hidden"
+      style={{ '--gradient': gradientColors } as React.CSSProperties} // Apply gradient to the container
+    >
       {/* Background Animated Grid Pattern */}
       <AnimatedGridPattern
         width={40}
@@ -109,6 +112,19 @@ const CubePage = () => {
         repeatDelay={0.5}
         className="absolute inset-0"
       />
+
+      {/* Description Text */}
+      <div className="absolute top-10 text-center text-white">
+        <h1 className="text-8xl font-bold mb-4">
+        Hey I'm <span className="gradient-text">Amadou</span>
+        </h1>
+        <p className="text-6xl">
+         I am a Full  Stack  Developer
+        </p>
+        <p className="text-6xl">
+        That builds <span className=" gradient-text">customized</span> Websites and <span className=" gradient-text">Applications</span>
+        </p>
+      </div>
 
       <div
         ref={cubeRef}

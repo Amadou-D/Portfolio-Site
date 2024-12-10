@@ -40,6 +40,7 @@ body {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+  
   .dark {
     --background: 240 10% 3.9%;
     --foreground: 0 0% 98%;
@@ -66,6 +67,14 @@ body {
     --chart-4: 280 65% 60%;
     --chart-5: 340 75% 55%;
   }
+}
+
+.gradient-text {
+  background: var(--gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
 }
 
 @layer base {
