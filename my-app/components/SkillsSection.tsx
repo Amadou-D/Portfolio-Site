@@ -3,18 +3,13 @@
 import { useEffect, useRef } from 'react';
 import * as THREE from 'three';
 
-const vibrantColorPairs = [
-  { color1: '#FF4B2B', color2: '#FF416C' },
-  { color1: '#00C9FF', color2: '#92FE9D' },
-  { color1: '#6A1B9A', color2: '#8E24AA' },
-  { color1: '#ab5675', color2: '#FF9800' },
-  { color1: '#72dcbb', color2: '#34acba' },
-  { color1: '#ffe07e', color2: '#ee6a7c' },
-];
-
 interface SkillsSectionProps {
   onClose: () => void;
 }
+
+const skills = [
+  'JavaScript', 'React', 'Node.js', 'CSS', 'HTML', 'Three.js', 'C#', 'TypeScript', 'Python', 'Docker', 'Java', 'Next.js', 'SQL', 'MongoDB', 'Firebase'
+];
 
 const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
   const threeRef = useRef<HTMLDivElement | null>(null);
@@ -83,21 +78,40 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
 
     animate();
 
+    const handleResize = () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    };
+
+    window.addEventListener('resize', handleResize);
+
     return () => {
+      window.removeEventListener('resize', handleResize);
       renderer.dispose();
       threeRef.current?.removeChild(renderer.domElement);
     };
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 z-50 flex items-center justify-center">
-      <button
-        className="absolute top-4 right-4 px-4 py-2 bg-gray-500 text-white rounded"
-        onClick={onClose}
-      >
-        Close
-      </button>
-      <div ref={threeRef} className="w-full h-full"></div>
+    <div className="fixed inset-0 w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-70 z-50">
+      <div ref={threeRef} className="absolute inset-0"></div>
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center p-4">
+        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8">My Skills</h2>
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+          {skills.map((skill, index) => (
+            <div key={index} className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold">
+              {skill}
+            </div>
+          ))}
+        </div>
+        <button
+          className="absolute top-4 right-4 px-4 py-2 bg-gray-700 text-white rounded-full shadow-lg hover:bg-gray-600 transition"
+          onClick={onClose}
+        >
+          ✕
+        </button>
+      </div>
     </div>
   );
 };

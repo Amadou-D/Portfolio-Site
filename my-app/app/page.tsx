@@ -3,7 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import Header from '@/components/header';
 import RetroGrid from '@/components/ui/retro-grid';
-import SkillsSection from '@/components/skills';
+import SkillsSection from '@/components/SkillsSection';
 
 interface PointerPosition {
   x: number;
