@@ -1,7 +1,6 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
-import * as THREE from 'three';
 import Header from '@/components/header';
 import RetroGrid from '@/components/ui/retro-grid';
 import SkillsSection from '@/components/skills';

@@ -90,7 +90,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
   }, []);
 
   return (
-    <div className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-70 z-50 flex items-center justify-center">
+    <div className="fixed top-0 left-0 w-full h-full bg-black bg-opacity-70 z-50 flex items-center justify-center">
       <button
         className="absolute top-4 right-4 px-4 py-2 bg-gray-500 text-white rounded"
         onClick={onClose}
