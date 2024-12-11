@@ -1,21 +1,20 @@
-'use client';
-
+'use client'
 import { useEffect, useRef, useState } from 'react';
 
 interface PointerPosition {
   x: number;
   y: number;
 }
-
-import RetroGrid from '@/components/ui/retro-grid'; // Assuming RetroGrid is in the specified path
+import Header from '@/components/header'; 
+import RetroGrid from '@/components/ui/retro-grid'; 
 
 const vibrantColorPairs = [
   { color1: '#FF4B2B', color2: '#FF416C' },
   { color1: '#00C9FF', color2: '#92FE9D' },
   { color1: '#6A1B9A', color2: '#8E24AA' },
-  { color1: '#FFEB3B', color2: '#FF9800' },
-  { color1: '#3F51B5', color2: '#2196F3' },
-  { color1: '#00BCD4', color2: '#009688' },
+  { color1: ' #ab5675 ', color2: '#FF9800' },
+  { color1: '#72dcbb', color2: ' #34acba ' },
+  { color1: '#ffe07e ', color2: '#ee6a7c' },
 ];
 
 const CubePage = () => {
@@ -115,28 +114,34 @@ const CubePage = () => {
 
   return (
     <div
-      className="relative w-screen h-screen flex flex-col items-center justify-center bg-gray-900 overflow-hidden"
+      className="relative w-screen h-screen flex flex-col items-center justify-start bg-gray-900 overflow-hidden"
       style={{ '--gradient': gradientColors } as React.CSSProperties}
     >
       <RetroGrid
         gridColor="rgba(255, 255, 255, 0.3)" // Set grid lines to white
       />
-      <div className="absolute top-10 text-center text-gray-200 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-16">
-      <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 font-['Montserrat']">
-      Hey I&apos;m <span className="gradient-text">Amadou</span>
+      <Header />
+      
+      {/* Text Section */}
+      <div className="absolute top-10 left-1/2 transform -translate-x-1/2 text-center text-gray-200 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-16">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 font-['Montserrat']">
+          Hey I&apos;m <span className="gradient-text">Amadou</span>
         </h1>
-        <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-['Roboto'] semi">I&apos;m a Full Stack Developer</p>
+        <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-['Roboto'] semi">
+          I&apos;m a Full Stack Developer
+        </p>
         <p className="text-2xl sm:text-3xl md:text-4xl text-gray-200 font-['Roboto']">
           That builds <span className="gradient-text">customized</span> Websites and <span className="gradient-text">Applications</span>
         </p>
       </div>
 
+      {/* Cube Section */}
       <div
         ref={cubeRef}
-        className="relative"
+        className="absolute top-1/2 left-20 transform -translate-y-1/2"
         style={{
-          width: '200px', // Fixed size for the cube
-          height: '200px', // Fixed size for the cube
+          width: '150px',
+          height: '150px',
           perspective: '1200px',
         }}
       >
@@ -147,12 +152,12 @@ const CubePage = () => {
             transformStyle: 'preserve-3d',
           }}
         >
-          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(0deg) translateZ(96px)' }} />
-          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(180deg) translateZ(96px)' }} />
-          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(90deg) translateZ(96px)' }} />
-          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(-90deg) translateZ(96px)' }} />
-          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateX(90deg) translateZ(96px)' }} />
-          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateX(-90deg) translateZ(96px)' }} />
+          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(0deg) translateZ(75px)', backfaceVisibility: 'hidden' }} />
+          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(180deg) translateZ(75px)', backfaceVisibility: 'hidden' }} />
+          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(90deg) translateZ(75px)', backfaceVisibility: 'hidden' }} />
+          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(-90deg) translateZ(75px)', backfaceVisibility: 'hidden' }} />
+          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateX(90deg) translateZ(75px)', backfaceVisibility: 'hidden' }} />
+          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateX(-90deg) translateZ(75px)', backfaceVisibility: 'hidden' }} />
         </div>
       </div>
     </div>

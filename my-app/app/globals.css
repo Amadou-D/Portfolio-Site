@@ -69,6 +69,24 @@ body {
   }
 }
 
+@keyframes gradient-animation {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.gradient-animated {
+  background: linear-gradient(45deg, #FF4B2B, #FF416C, #00C9FF, #92FE9D, #6A1B9A, #8E24AA, #FF9800, #34acba, #ffe07e, #ee6a7c);
+  background-size: 200% 200%;
+  animation: gradient-animation 5s ease infinite;
+}
+
 .gradient-text {
   background: var(--gradient);
   -webkit-background-clip: text;
