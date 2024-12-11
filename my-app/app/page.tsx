@@ -126,7 +126,7 @@ const CubePage = () => {
     scene.add(plane);
 
     // Create text for skills
-    skills.forEach((skill, index) => {
+    skills.forEach((skill) => {
       const text = new Text();
       text.text = skill;
       text.fontSize = 0.5;
