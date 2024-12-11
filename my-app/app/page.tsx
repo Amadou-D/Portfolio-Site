@@ -1,12 +1,15 @@
 'use client';
+
 import { useEffect, useRef, useState } from 'react';
+import * as THREE from 'three';
+import { Text } from 'troika-three-text';
+import Header from '@/components/header';
+import RetroGrid from '@/components/ui/retro-grid';
 
 interface PointerPosition {
   x: number;
   y: number;
 }
-import Header from '@/components/header'; 
-import RetroGrid from '@/components/ui/retro-grid'; 
 
 const vibrantColorPairs = [
   { color1: '#FF4B2B', color2: '#FF416C' },
@@ -17,10 +20,16 @@ const vibrantColorPairs = [
   { color1: '#ffe07e ', color2: '#ee6a7c' },
 ];
 
+const skills = [
+  'JavaScript', 'React', 'Node.js', 'CSS', 'HTML', 'Three.js', 'WebGL', 'TypeScript', 'Python', 'Django'
+];
+
 const CubePage = () => {
   const [cubeStyle, setCubeStyle] = useState<React.CSSProperties>({
     transform: 'rotateX(0deg) rotateY(0deg)',
   });
+  const [showSkills, setShowSkills] = useState(false);
+  const threeRef = useRef<HTMLDivElement | null>(null);
 
   const isDragging = useRef<boolean>(false);
   const lastPointerPosition = useRef<PointerPosition>({ x: 0, y: 0 });
@@ -99,23 +108,70 @@ const CubePage = () => {
     };
   }, []);
 
+  useEffect(() => {
+    if (!showSkills || !threeRef.current) return;
+
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+
+    const renderer = new THREE.WebGLRenderer();
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    threeRef.current.appendChild(renderer.domElement);
+
+    // Create a wavy background
+    const planeGeometry = new THREE.PlaneGeometry(20, 20, 32, 32);
+    const planeMaterial = new THREE.MeshBasicMaterial({ color: 0x00ff00, wireframe: true });
+    const plane = new THREE.Mesh(planeGeometry, planeMaterial);
+    scene.add(plane);
+
+    // Create text for skills
+    skills.forEach((skill, index) => {
+      const text = new Text();
+      text.text = skill;
+      text.fontSize = 0.5;
+      text.position.set(Math.random() * 10 - 5, Math.random() * 10 - 5, Math.random() * 10 - 5);
+      text.color = 0xffffff;
+      scene.add(text);
+    });
+
+    const animate = () => {
+      requestAnimationFrame(animate);
+      const position = plane.geometry.attributes.position;
+      const count = position.count;
+      for (let i = 0; i < count; i++) {
+        const x = position.getX(i);
+        const y = position.getY(i);
+        const z = Math.sin(x * 0.5 + Date.now() * 0.001) * Math.cos(y * 0.5 + Date.now() * 0.001);
+        position.setZ(i, z);
+      }
+      position.needsUpdate = true;
+      renderer.render(scene, camera);
+    };
+
+    animate();
+
+    return () => {
+      renderer.dispose();
+      threeRef.current?.removeChild(renderer.domElement);
+    };
+  }, [showSkills]);
+
   return (
     <div
-      className="relative w-screen h-screen flex flex-col items-center justify-start bg-gray-900 overflow-hidden"
+      className="relative w-screen min-h-screen flex flex-col items-center justify-start bg-gray-900 overflow-y-auto"
       style={{ '--gradient': gradientColors } as React.CSSProperties}
     >
-      <RetroGrid
-        gridColor="rgba(255, 255, 255, 0.3)" // Set grid lines to white
-      />
+      <RetroGrid gridColor="rgba(255, 255, 255, 0.3)" />
       <Header />
-      
+
       {/* Interactive Cube Logo */}
       <div
         ref={cubeRef}
         className="absolute top-4 left-4"
         style={{
-          width: '50px', // Smaller size for the cube
-          height: '50px', // Smaller size for the cube
+          width: '50px',
+          height: '50px',
           perspective: '1200px',
         }}
       >
@@ -136,7 +192,7 @@ const CubePage = () => {
       </div>
 
       {/* Text Section */}
-      <div className="absolute top-20 left-1/2 transform -translate-x-1/2 text-center text-gray-200 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-16 min-w-[300px] sm:min-w-[400px] md:min-w-[500px] lg:min-w-[600px] xl:min-w-[700px]">
+      <div className="mt-20 text-center text-gray-200 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-16 min-w-[300px] sm:min-w-[400px] md:min-w-[500px] lg:min-w-[600px] xl:min-w-[700px]">
         <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 font-['Montserrat']">
           Hey I&apos;m <span className="gradient-text">Amadou</span>
         </h1>
@@ -146,7 +202,21 @@ const CubePage = () => {
         <p className="text-2xl sm:text-3xl md:text-4xl text-gray-200 font-['Roboto']">
           That builds <span className="gradient-text">customized</span> Websites and <span className="gradient-text">Applications</span>
         </p>
+        <button
+          className="mt-6 px-6 py-3 text-lg hover:text-gray-400 text-white rounded"
+          onClick={() => setShowSkills((prev) => !prev)}
+        >
+          {showSkills ? 'Hide Skills' : 'My Skills'}
+        </button>
       </div>
+
+      {/* Skills Section */}
+      {showSkills && (
+        <div
+          ref={threeRef}
+          className="absolute top-0 left-0 w-full h-full bg-black bg-opacity-70 z-50"
+        ></div>
+      )}
     </div>
   );
 };
