@@ -25,7 +25,6 @@ const CubePage = () => {
   const isDragging = useRef<boolean>(false);
   const lastPointerPosition = useRef<PointerPosition>({ x: 0, y: 0 });
   const rotationAngles = useRef<PointerPosition>({ x: 0, y: 0 });
-  const rotationVelocity = useRef<PointerPosition>({ x: 0, y: 0 });
   const cubeRef = useRef<HTMLDivElement | null>(null);
 
   const generateGradient = (colors: { color1: string, color2: string }): string => {
