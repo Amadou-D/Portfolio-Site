@@ -1,4 +1,4 @@
-'use client'
+'use client';
 import { useEffect, useRef, useState } from 'react';
 
 interface PointerPosition {
@@ -41,7 +41,7 @@ const CubePage = () => {
       if (e.pointerType === 'touch') return;
 
       lastPointerPosition.current = { x: e.clientX, y: e.clientY };
-      isDragging.current = false;
+      isDragging.current = true;
     };
 
     const handlePointerLeave = () => {
@@ -49,26 +49,21 @@ const CubePage = () => {
     };
 
     const handlePointerMove = (e: PointerEvent) => {
-      if (e.pointerType === 'touch' || isDragging.current) return;
+      if (e.pointerType === 'touch' || !isDragging.current) return;
 
       const cubeRect = cubeRef.current?.getBoundingClientRect();
       if (cubeRect) {
-        const centerX = cubeRect.left + cubeRect.width / 2;
-        const centerY = cubeRect.top + cubeRect.height / 2;
-        const distanceToCenter = Math.sqrt(
-          Math.pow(e.clientX - centerX, 2) + Math.pow(e.clientY - centerY, 2)
-        );
+        const deltaX = (e.clientX - lastPointerPosition.current.x) * (2 * Math.PI) / (cubeRect.width || 1);
+        const deltaY = (e.clientY - lastPointerPosition.current.y) * (2 * Math.PI) / (cubeRect.height || 1);
 
-        if (distanceToCenter < 100) {
-          const deltaX = (e.clientX - lastPointerPosition.current.x) * (2 * Math.PI) / (cubeRef.current?.offsetWidth || 1);
-          const deltaY = (e.clientY - lastPointerPosition.current.y) * (2 * Math.PI) / (cubeRef.current?.offsetWidth || 1);
+        rotationAngles.current.x += deltaY;
+        rotationAngles.current.y += deltaX;
 
-          const slowdownFactor = 0.15;
-          rotationVelocity.current.x = deltaY * slowdownFactor;
-          rotationVelocity.current.y = deltaX * slowdownFactor;
+        setCubeStyle({
+          transform: `rotateX(${rotationAngles.current.x}rad) rotateY(${rotationAngles.current.y}rad)`,
+        });
 
-          lastPointerPosition.current = { x: e.clientX, y: e.clientY };
-        }
+        lastPointerPosition.current = { x: e.clientX, y: e.clientY };
       }
     };
 
@@ -85,21 +80,14 @@ const CubePage = () => {
 
     const rotationInterval = setInterval(() => {
       if (!isDragging.current) {
-        rotationVelocity.current.x *= 0.97;
-        rotationVelocity.current.y *= 0.97;
-
-        rotationAngles.current.x += rotationVelocity.current.x;
-        rotationAngles.current.y += rotationVelocity.current.y;
-
         rotationAngles.current.x += 0.01;
         rotationAngles.current.y += 0.01;
 
         setCubeStyle({
           transform: `rotateX(${rotationAngles.current.x}rad) rotateY(${rotationAngles.current.y}rad)`,
-          transition: 'transform 0.3s ease-out',
         });
       }
-    }, 16); // ~60 FPS for auto-rotation
+    }, 30);
 
     return () => {
       if (cubeElement) {
@@ -122,26 +110,13 @@ const CubePage = () => {
       />
       <Header />
       
-      {/* Text Section */}
-      <div className="absolute top-10 left-1/2 transform -translate-x-1/2 text-center text-gray-200 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-16">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 font-['Montserrat']">
-          Hey I&apos;m <span className="gradient-text">Amadou</span>
-        </h1>
-        <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-['Roboto'] semi">
-          I&apos;m a Full Stack Developer
-        </p>
-        <p className="text-2xl sm:text-3xl md:text-4xl text-gray-200 font-['Roboto']">
-          That builds <span className="gradient-text">customized</span> Websites and <span className="gradient-text">Applications</span>
-        </p>
-      </div>
-
-      {/* Cube Section */}
+      {/* Interactive Cube Logo */}
       <div
         ref={cubeRef}
-        className="absolute top-1/2 left-20 transform -translate-y-1/2"
+        className="absolute top-4 left-4"
         style={{
-          width: '150px',
-          height: '150px',
+          width: '50px', // Smaller size for the cube
+          height: '50px', // Smaller size for the cube
           perspective: '1200px',
         }}
       >
@@ -152,13 +127,26 @@ const CubePage = () => {
             transformStyle: 'preserve-3d',
           }}
         >
-          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(0deg) translateZ(75px)', backfaceVisibility: 'hidden' }} />
-          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(180deg) translateZ(75px)', backfaceVisibility: 'hidden' }} />
-          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(90deg) translateZ(75px)', backfaceVisibility: 'hidden' }} />
-          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(-90deg) translateZ(75px)', backfaceVisibility: 'hidden' }} />
-          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateX(90deg) translateZ(75px)', backfaceVisibility: 'hidden' }} />
-          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateX(-90deg) translateZ(75px)', backfaceVisibility: 'hidden' }} />
+          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(0deg) translateZ(24px)', backfaceVisibility: 'hidden' }} />
+          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(180deg) translateZ(24px)', backfaceVisibility: 'hidden' }} />
+          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(90deg) translateZ(24px)', backfaceVisibility: 'hidden' }} />
+          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateY(-90deg) translateZ(24px)', backfaceVisibility: 'hidden' }} />
+          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateX(90deg) translateZ(24px)', backfaceVisibility: 'hidden' }} />
+          <div className="absolute w-full h-full" style={{ background: gradientColors, transform: 'rotateX(-90deg) translateZ(24px)', backfaceVisibility: 'hidden' }} />
         </div>
+      </div>
+
+      {/* Text Section */}
+      <div className="absolute top-20 left-1/2 transform -translate-x-1/2 text-center text-gray-200 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-16 min-w-[300px] sm:min-w-[400px] md:min-w-[500px] lg:min-w-[600px] xl:min-w-[700px]">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 font-['Montserrat']">
+          Hey I&apos;m <span className="gradient-text">Amadou</span>
+        </h1>
+        <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-['Roboto'] semi">
+          I&apos;m a Full Stack Developer
+        </p>
+        <p className="text-2xl sm:text-3xl md:text-4xl text-gray-200 font-['Roboto']">
+          That builds <span className="gradient-text">customized</span> Websites and <span className="gradient-text">Applications</span>
+        </p>
       </div>
     </div>
   );
