@@ -6,7 +6,6 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ onNavigateToSkills }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);

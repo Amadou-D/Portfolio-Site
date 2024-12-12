@@ -12,6 +12,38 @@ body {
   }
 }
 
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 1s ease-in-out;
+}
+
+.fade-in-section {
+  opacity: 0;
+  transform: translateY(50px);
+  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+}
+
+.fade-in-section.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+body {
+  font-family: 'Press Start 2P', cursive;
+}
+
 @layer base {
   :root {
     --background: 0 0% 100%;

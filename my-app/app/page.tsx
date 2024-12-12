@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Header from '@/components/header';
 import RetroGrid from '@/components/ui/retro-grid';
 import SkillsSection from '@/components/SkillsSection';
-import AboutMe from '@/components/About';
+import Contact from '@/components/contact';
 
 interface PointerPosition {
   x: number;
@@ -200,7 +200,7 @@ const CubePage = () => {
             className="mt-6 px-20 py-3 text-2xl font-extrabold hover:text-gray-400 text-white rounded gradient-button"
             onClick={handleNavigateToAbout}
           >
-            About Me
+            Contact
           </button>
         </div>
       </div>
@@ -209,7 +209,7 @@ const CubePage = () => {
       {showSkills && <SkillsSection onClose={() => setShowSkills(false)} />}
 
       {/* About Section */}
-      {showAbout && <AboutMe onClose={() => setShowAbout(false)} />}
+      {showAbout && <Contact onClose={() => setShowAbout(false)} />}
     </div>
   );
 };
