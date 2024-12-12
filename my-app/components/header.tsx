@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-const Header = () => {
+const Header = ({ onNavigateToSkills }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -28,12 +28,18 @@ const Header = () => {
               </svg>
               Home
             </a>
-            <a href="#services" className="flex items-center text-lg hover:text-gray-300 transition duration-300">
+            <button
+              onClick={() => {
+                onNavigateToSkills();
+                toggleMenu();
+              }}
+              className="flex items-center text-lg hover:text-gray-300 transition duration-300"
+            >
               <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path d="M14 2H6v12h8V2zm-1 11H7V3h6v10zm4 1h-3v5h3v2h-4v1h5v-8h-1v5z" />
               </svg>
-              Services
-            </a>
+              Skills
+            </button>
             <a href="#about" className="flex items-center text-lg hover:text-gray-300 transition duration-300">
               <svg className="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                 <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.41 0-7 1.29-7 3.88V20h14v-2.12c0-2.59-4.59-3.88-7-3.88z" />

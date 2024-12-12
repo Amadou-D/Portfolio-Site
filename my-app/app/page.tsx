@@ -111,6 +111,11 @@ const CubePage = () => {
     }, 3000); // Adjust the duration as needed
   };
 
+  const handleNavigateToSkills = () => {
+    setShowSkills(true);
+    document.getElementById('skills-section')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div
       className={`relative w-screen min-h-screen flex flex-col items-center justify-center bg-gray-900 overflow-hidden ${startAnimation ? 'zoom-animation' : ''}`}
@@ -120,7 +125,7 @@ const CubePage = () => {
       
       {/* Move Header to top right */}
       <div className="absolute top-4 right-4">
-        <Header />
+        <Header onNavigateToSkills={handleNavigateToSkills} />
       </div>
 
       {/* Interactive Cube Logo */}
@@ -169,7 +174,7 @@ const CubePage = () => {
       </div>
 
       {/* Skills Section */}
-      {showSkills && <SkillsSection onClose={() => setShowSkills(false)} />}
+      {showSkills && <SkillsSection id="skills-section" onClose={() => setShowSkills(false)} />}
     </div>
   );
 };
