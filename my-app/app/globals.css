@@ -82,7 +82,7 @@ body {
 }
 
 .gradient-animated {
-  background: linear-gradient(45deg, #FF4B2B, #FF416C, #00C9FF, #92FE9D, #6A1B9A, #8E24AA, #FF9800, #34acba, #ffe07e, #ee6a7c);
+  background: linear-gradient(45deg, #FF4B2B, #34acba);
   background-size: 200% 200%;
   animation: gradient-animation 5s ease infinite;
 }
@@ -119,6 +119,10 @@ body {
 .fade-in {
   opacity: 0;
   animation: fadeIn 0.5s forwards;
+}
+
+.text-shadow {
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
 .text-6xl {

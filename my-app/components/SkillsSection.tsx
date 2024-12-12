@@ -13,12 +13,12 @@ const skills = [
 
 const themes = {
   vibrant: [
-    { color1: '#FF4B2B', color2: '#FF416C' },
-    { color1: '#00C9FF', color2: '#92FE9D' },
-    { color1: '#6A1B9A', color2: '#8E24AA' },
-    { color1: '#ab5675', color2: '#FF9800' },
-    { color1: '#72dcbb', color2: '#34acba' },
-    { color1: '#ffe07e', color2: '#ee6a7c' },
+    { color1: '#FF4B2B', color2: '#8E24AA' }, // Pink and Purple
+    { color1: '#FF4B2B', color2: '#8E24AA' }, // Pink and Purple
+    { color1: '#FF4B2B', color2: '#8E24AA' }, // Pink and Purple
+    { color1: '#FF4B2B', color2: '#8E24AA' }, // Pink and Purple
+    { color1: '#FF4B2B', color2: '#8E24AA' }, // Pink and Purple
+    { color1: '#FF4B2B', color2: '#8E24AA' }, // Pink and Purple
   ],
   warm: [
     { color1: '#FF7E5F', color2: '#FEB47B' },
