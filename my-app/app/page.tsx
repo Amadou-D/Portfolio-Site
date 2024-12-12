@@ -12,11 +12,8 @@ interface PointerPosition {
 
 const vibrantColorPairs = [
   { color1: '#FF4B2B', color2: '#FF416C' },
-  { color1: '#00C9FF', color2: '#92FE9D' },
-  { color1: '#6A1B9A', color2: '#8E24AA' },
-  { color1: '#ab5675', color2: '#FF9800' },
-  { color1: '#72dcbb', color2: '#34acba' },
-  { color1: '#ffe07e', color2: '#ee6a7c' },
+  { color1: '#1fd0bd', color2: '#00ab84' },
+  { color1: '#cc1696', color2: '#ff529a' },
 ];
 
 const CubePage = () => {
@@ -25,6 +22,7 @@ const CubePage = () => {
   });
   const [showSkills, setShowSkills] = useState(false);
   const [startAnimation, setStartAnimation] = useState(false);
+  const [textColor, setTextColor] = useState<string>('#FFFFFF');
   const cubeRef = useRef<HTMLDivElement | null>(null);
 
   const isDragging = useRef<boolean>(false);
@@ -33,6 +31,21 @@ const CubePage = () => {
 
   const generateGradient = (colors: { color1: string, color2: string }): string => {
     return `linear-gradient(45deg, ${colors.color1}, ${colors.color2})`;
+  };
+
+  const calculateLuminance = (color: string): number => {
+    const rgb = parseInt(color.slice(1), 16); // Convert hex to RGB
+    const r = (rgb >> 16) & 0xff;
+    const g = (rgb >> 8) & 0xff;
+    const b = (rgb >> 0) & 0xff;
+    return 0.2126 * r + 0.7152 * g + 0.0722 * b; // Calculate luminance
+  };
+
+  const updateTextColor = (color1: string, color2: string) => {
+    const luminance1 = calculateLuminance(color1);
+    const luminance2 = calculateLuminance(color2);
+    const averageLuminance = (luminance1 + luminance2) / 2;
+    setTextColor(averageLuminance > 128 ? '#000000' : '#FFFFFF'); // Set text color based on luminance
   };
 
   const [gradientColors, setGradientColors] = useState<string>(
@@ -78,7 +91,9 @@ const CubePage = () => {
     }
 
     const colorInterval = setInterval(() => {
-      setGradientColors(generateGradient(vibrantColorPairs[Math.floor(Math.random() * vibrantColorPairs.length)]));
+      const randomColors = vibrantColorPairs[Math.floor(Math.random() * vibrantColorPairs.length)];
+      setGradientColors(generateGradient(randomColors));
+      updateTextColor(randomColors.color1, randomColors.color2);
     }, 2000);
 
     const rotationInterval = setInterval(() => {
@@ -119,7 +134,7 @@ const CubePage = () => {
   return (
     <div
       className={`relative w-screen min-h-screen flex flex-col items-center justify-center bg-gray-900 overflow-hidden ${startAnimation ? 'zoom-animation' : ''}`}
-      style={{ '--gradient': gradientColors } as React.CSSProperties}
+      style={{ '--gradient': gradientColors, color: textColor } as React.CSSProperties}
     >
       <RetroGrid gridColor="rgba(255, 255, 255, 0.3)" />
       
@@ -166,10 +181,11 @@ const CubePage = () => {
           That builds <span className="gradient-text">customized</span> Websites and <span className="gradient-text">Applications</span>
         </p>
         <button
-          className="mt-6 px-6 py-3 text-lg hover:text-gray-400 text-white rounded retro-button"
+          className="mt-6 px-6 py-3 text-2xl font-extrabold hover:text-gray-400 text-white rounded retro-button"
+          style={{ background: gradientColors }}
           onClick={handleStartClick}
         >
-          Start
+          Skills
         </button>
       </div>
 

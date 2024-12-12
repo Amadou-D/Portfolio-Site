@@ -159,11 +159,11 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
         <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 gradient-text" style={{ '--gradient': `linear-gradient(45deg, ${themes[theme][0].color1}, ${themes[theme][0].color2})` } as React.CSSProperties}>
           My Skills
         </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
           {skills.map((skill, index) => (
             <div
               key={index}
-              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold gradient-text text-center fade-in"
+              className={`text-lg sm:text-xl md:text-2xl lg:text-3xl font-['Press Start 2P'] gradient-text text-center fade-in ${skill === 'Firebase' ? 'col-span-2 sm:col-span-1' : ''}`}
               style={{ '--gradient': `linear-gradient(45deg, ${themes[theme][0].color1}, ${themes[theme][0].color2})`, animationDelay: `${index * 0.1}s` } as React.CSSProperties}
             >
               {skill}
@@ -177,19 +177,11 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
           ✕
         </button>
         <div className="absolute top-4 right-20 flex items-center">
-          <div className="flex items-center mr-2">
-            <svg width="10" height="10" viewBox="0 0 10 10" fill={themes[theme][0].color1} xmlns="http://www.w3.org/2000/svg">
-              <circle cx="5" cy="5" r="5" />
-            </svg>
-            <svg width="14" height="14" viewBox="0 0 14 14" fill={themes[theme][1].color1} xmlns="http://www.w3.org/2000/svg">
-              <circle cx="7" cy="7" r="7" />
-            </svg>
-            <svg width="18" height="18" viewBox="0 0 18 18" fill={themes[theme][2].color1} xmlns="http://www.w3.org/2000/svg">
-              <circle cx="9" cy="9" r="9" />
-            </svg>
-            <svg width="22" height="22" viewBox="0 0 22 22" fill={themes[theme][3].color1} xmlns="http://www.w3.org/2000/svg">
-              <circle cx="11" cy="11" r="11" />
-            </svg>
+          <div className="flex items-center mr-2 space-x-2">
+            <div className="dot" style={{ '--color1': themes[theme][0].color1, '--color2': themes[theme][0].color2, width: '10px', height: '10px' } as React.CSSProperties}></div>
+            <div className="dot" style={{ '--color1': themes[theme][1].color1, '--color2': themes[theme][1].color2, width: '15px', height: '15px' } as React.CSSProperties}></div>
+            <div className="dot" style={{ '--color1': themes[theme][2].color1, '--color2': themes[theme][2].color2, width: '20px', height: '20px' } as React.CSSProperties}></div>
+            <div className="dot" style={{ '--color1': themes[theme][3].color1, '--color2': themes[theme][3].color2, width: '25px', height: '25px' } as React.CSSProperties}></div>
           </div>
           <select
             className="px-4 py-2 bg-gray-700 text-white rounded-full shadow-lg hover:bg-gray-600 transition"

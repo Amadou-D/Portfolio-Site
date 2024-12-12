@@ -96,6 +96,26 @@ body {
   }
 }
 
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: linear-gradient(45deg, var(--color1), var(--color2));
+  animation: colorShift 3s infinite alternate;
+}
+
+@keyframes colorShift {
+  0% {
+    background: linear-gradient(45deg, var(--color1), var(--color2));
+  }
+  50% {
+    background: linear-gradient(45deg, var(--color2), var(--color1));
+  }
+  100% {
+    background: linear-gradient(45deg, var(--color1), var(--color2));
+  }
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -107,13 +127,23 @@ body {
   }
 }
 
+@keyframes gradient-flow {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+
 .gradient-text {
   background: var(--gradient);
+  background-size: 200% 200%;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
-  animation: pulse 2s infinite;
+  animation: gradient-flow 5s linear infinite;
 }
 
 @keyframes zoom-animation {
@@ -123,6 +153,7 @@ body {
   100% {
     transform: scale(1.5) translateY(-15%);
   }
+ 
   32.5% {
     transform: scale(1) translateY(0%);
   }
@@ -143,7 +174,7 @@ body {
 }
 
 .zoom-animation {
-  animation: zoom-animation 3s ease-in-out forwards;
+  animation: zoom-animation 3s infinite;
 }
 
 .fade-in {
