@@ -156,10 +156,16 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
     <div className="fixed inset-0 w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-70 z-50">
       <div ref={threeRef} className="absolute inset-0"></div>
       <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center p-4">
-        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8">My Skills</h2>
+        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 gradient-text" style={{ '--gradient': `linear-gradient(45deg, ${themes[theme][0].color1}, ${themes[theme][0].color2})` } as React.CSSProperties}>
+          My Skills
+        </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-4">
           {skills.map((skill, index) => (
-            <div key={index} className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold">
+            <div
+              key={index}
+              className="text-lg sm:text-xl md:text-2xl lg:text-3xl font-semibold gradient-text text-center fade-in"
+              style={{ '--gradient': `linear-gradient(45deg, ${themes[theme][0].color1}, ${themes[theme][0].color2})`, animationDelay: `${index * 0.1}s` } as React.CSSProperties}
+            >
               {skill}
             </div>
           ))}

@@ -87,13 +87,40 @@ body {
   animation: gradient-animation 5s ease infinite;
 }
 
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .gradient-text {
   background: var(--gradient);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   color: transparent;
+  animation: pulse 2s infinite;
 }
+
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
+}
+
 .text-6xl {
   line-height: 1.5; /* Makes the lines a bit more readable */
   letter-spacing: 0.5px; /* Slightly space out the characters */
@@ -101,7 +128,6 @@ body {
 
 /* styles/globals.css */
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
-
 
 @layer base {
   * {
