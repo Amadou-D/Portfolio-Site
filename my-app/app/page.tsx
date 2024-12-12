@@ -5,6 +5,7 @@ import Header from '@/components/header';
 import RetroGrid from '@/components/ui/retro-grid';
 import SkillsSection from '@/components/SkillsSection';
 import Contact from '@/components/contact';
+import { About } from '@/components/About';
 
 interface PointerPosition {
   x: number;
@@ -140,12 +141,16 @@ const CubePage = () => {
     }, 1250); // Adjust the duration as needed
   };
 
+  const handleNavigateToAbout = () => {
+    document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div
       className={`relative w-screen min-h-screen flex flex-col items-center justify-center bg-gray-900 overflow-hidden ${startAnimation ? 'zoom-animation' : ''}`}
       style={{ '--gradient': gradientColors, color: textColor } as React.CSSProperties}
     >
-      <RetroGrid gridColor="rgba(255, 255, 255, 0.3)" />
+      <RetroGrid gridColor="rgba(255, 255, 255, 1)" />
       
       {/* Move Header to top right */}
       <div className="absolute top-4 right-4">
@@ -202,6 +207,12 @@ const CubePage = () => {
           >
             Contact
           </button>
+          <button
+            className="mt-6 px-20 py-3 text-2xl font-extrabold hover:text-gray-400 text-white rounded gradient-button"
+            onClick={handleNavigateToAbout}
+          >
+            About
+          </button>
         </div>
       </div>
 
@@ -210,6 +221,9 @@ const CubePage = () => {
 
       {/* Contact Section */}
       {showContact && <Contact onClose={() => setShowContact(false)} />}
+
+      {showContact && <About/>}
+
     </div>
   );
 };
