@@ -123,7 +123,7 @@ const CubePage = () => {
     setTimeout(() => {
       setShowSkills(true);
       setStartAnimation(false);
-    }, 3000); // Adjust the duration as needed
+    }, 1250); // Adjust the duration as needed
   };
 
   const handleNavigateToSkills = () => {

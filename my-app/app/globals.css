@@ -174,7 +174,7 @@ body {
 }
 
 .zoom-animation {
-  animation: zoom-animation 3s infinite;
+  animation: zoom-animation 1s forwards;
 }
 
 .fade-in {
