@@ -223,7 +223,7 @@ const CubePage = () => {
       {/* Contact Section */}
       {showContact && <Contact onClose={() => setShowContact(false)} />}
 
-      {showAbout && <About/>}
+      {showAbout && <About onClose={()=>setShowAbout(false)}/>}
 
     </div>
   );

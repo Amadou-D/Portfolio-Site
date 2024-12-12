@@ -5,11 +5,11 @@ import Image from 'next/image';
 import Link from 'next/link';
 import * as THREE from 'three';
 
-interface AboutMeProps {
+interface ContactMeProps {
   onClose: () => void;
 }
 
-const Contact: React.FC<AboutMeProps> = ({ onClose }) => {
+const Contact: React.FC<ContactMeProps> = ({ onClose }) => {
   const threeRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
