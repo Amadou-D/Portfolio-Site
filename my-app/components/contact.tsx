@@ -1,7 +1,10 @@
 'use client';
 
 import { useEffect, useRef } from 'react';
+import Image from 'next/image';
+import Link from 'next/link';
 import * as THREE from 'three';
+
 interface AboutMeProps {
   onClose: () => void;
 }
@@ -72,16 +75,16 @@ const Contact: React.FC<AboutMeProps> = ({ onClose }) => {
           <p>Name: Amadou Diallo</p>
           <p>Phone: 587-803-5820</p>
           <p>Email: amadouamosdiallo@outlook.com</p>
-          <p>
-            Github:{' '}
-            <a
-              href="https://github.com/Amadou-D"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-blue-400 underline"
-            >
-              amadou-d.github.io
-            </a>
+          <p className="flex items-center">
+            <span className="mr-2">Connect with me on:</span>
+            <Link href="https://github.com/Amadou-D" target="_blank" rel="noopener noreferrer" className="underline flex items-center">
+              <Image src="/github.png" alt="GitHub" width={24} height={24} className="w-6 h-6 mr-2" />
+              GitHub
+            </Link>
+            <Link href="https://qr.me-qr.com/rx78tODH" target="_blank" rel="noopener noreferrer" className="underline flex items-center ml-4">
+              <Image src="/linkedin.png" alt="LinkedIn" width={24} height={24} className="w-6 h-6 mr-2" />
+              LinkedIn
+            </Link>
           </p>
         </div>
       </div>
