@@ -3,17 +3,16 @@ import { cn } from "@/lib/utils";
 export default function RetroGrid({
   className,
   angle = 65,
-  gridColor = "rgba(0, 0, 0, 0.3)", // Default grid color
+  gridColor = "rgba(255, 255, 255, 0.3)", // Default grid color
 }: {
   className?: string;
   angle?: number;
   gridColor?: string;
-  darkGridColor?: string;
 }) {
   return (
     <div
       className={cn(
-        "pointer-events-none absolute inset-0 overflow-hidden opacity-50 [perspective:200px]",
+        "pointer-events-none fixed inset-0 overflow-hidden opacity-50 [perspective:200px]",
         className,
       )}
       style={{ "--grid-angle": `${angle}deg` } as React.CSSProperties}
