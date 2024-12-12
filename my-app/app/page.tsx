@@ -21,6 +21,7 @@ const CubePage = () => {
     transform: 'rotateX(0deg) rotateY(0deg)',
   });
   const [showSkills, setShowSkills] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
   const [startAnimation, setStartAnimation] = useState(false);
   const [textColor, setTextColor] = useState<string>('#FFFFFF');
   const cubeRef = useRef<HTMLDivElement | null>(null);
@@ -131,6 +132,14 @@ const CubePage = () => {
     document.getElementById('skills-section')?.scrollIntoView({ behavior: 'smooth' });
   };
 
+  const handleNavigateToAbout = () => {
+    setStartAnimation(true);
+    setTimeout(() => {
+      setShowAbout(true);
+      setStartAnimation(false);
+    }, 1250); // Adjust the duration as needed
+  };
+
   return (
     <div
       className={`relative w-screen min-h-screen flex flex-col items-center justify-center bg-gray-900 overflow-hidden ${startAnimation ? 'zoom-animation' : ''}`}
@@ -180,16 +189,27 @@ const CubePage = () => {
         <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-gray-200 font-['Roboto'] gradient-text">
           That builds <span className="gradient-text">customized</span> Websites and <span className="gradient-text">Applications</span>
         </p>
-        <button
-          className="mt-6 px-20 py-3 text-2xl font-extrabold hover:text-gray-400 text-white rounded gradient-button"
-          onClick={handleStartClick}
-        >
-          Skills
-        </button>
+        <div className="flex flex-col space-y-4">
+          <button
+            className="mt-6 px-20 py-3 text-2xl font-extrabold hover:text-gray-400 text-white rounded gradient-button"
+            onClick={handleStartClick}
+          >
+            Skills
+          </button>
+          <button
+            className="mt-6 px-20 py-3 text-2xl font-extrabold hover:text-gray-400 text-white rounded gradient-button"
+            onClick={handleNavigateToAbout}
+          >
+            About Me
+          </button>
+        </div>
       </div>
 
       {/* Skills Section */}
       {showSkills && <SkillsSection onClose={() => setShowSkills(false)} />}
+
+      {/* About Section */}
+      {showAbout && <AboutMe onClose={() => setShowAbout(false)} />}
     </div>
   );
 };
