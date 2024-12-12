@@ -8,7 +8,7 @@ interface SkillsSectionProps {
 }
 
 const skills = [
-  'JavaScript', 'React', 'Node.js', 'CSS', 'HTML', 'Three.js', 'C#', 'TypeScript', 'Python', 'Docker', 'Java', 'Next.js', 'SQL', 'MongoDB', 'Firebase'
+  'JavaScript', 'React', 'Nodejs', 'CSS', 'HTML', 'Threejs', 'C#', 'TypeScript', 'Python', 'Docker', 'Java', 'Next.js', 'SQL', 'MongoDB', 'Firebase'
 ];
 
 const themes = {

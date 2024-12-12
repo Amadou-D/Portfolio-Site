@@ -21,7 +21,7 @@ const CubePage = () => {
     transform: 'rotateX(0deg) rotateY(0deg)',
   });
   const [showSkills, setShowSkills] = useState(false);
-  const [showAbout, setShowAbout] = useState(false);
+  const [showContact, setShowContact] = useState(false);
   const [startAnimation, setStartAnimation] = useState(false);
   const [textColor, setTextColor] = useState<string>('#FFFFFF');
   const cubeRef = useRef<HTMLDivElement | null>(null);
@@ -132,10 +132,10 @@ const CubePage = () => {
     document.getElementById('skills-section')?.scrollIntoView({ behavior: 'smooth' });
   };
 
-  const handleNavigateToAbout = () => {
+  const handleNavigateToContact = () => {
     setStartAnimation(true);
     setTimeout(() => {
-      setShowAbout(true);
+      setShowContact(true);
       setStartAnimation(false);
     }, 1250); // Adjust the duration as needed
   };
@@ -149,7 +149,7 @@ const CubePage = () => {
       
       {/* Move Header to top right */}
       <div className="absolute top-4 right-4">
-        <Header onNavigateToSkills={handleNavigateToSkills} />
+        <Header onNavigateToSkills={handleNavigateToSkills} onNavigateToContact={handleNavigateToContact} />
       </div>
 
       {/* Interactive Cube Logo */}
@@ -198,7 +198,7 @@ const CubePage = () => {
           </button>
           <button
             className="mt-6 px-20 py-3 text-2xl font-extrabold hover:text-gray-400 text-white rounded gradient-button"
-            onClick={handleNavigateToAbout}
+            onClick={handleNavigateToContact}
           >
             Contact
           </button>
@@ -208,8 +208,8 @@ const CubePage = () => {
       {/* Skills Section */}
       {showSkills && <SkillsSection onClose={() => setShowSkills(false)} />}
 
-      {/* About Section */}
-      {showAbout && <Contact onClose={() => setShowAbout(false)} />}
+      {/* Contact Section */}
+      {showContact && <Contact onClose={() => setShowContact(false)} />}
     </div>
   );
 };
