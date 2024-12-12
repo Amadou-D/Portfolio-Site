@@ -1,6 +1,10 @@
 import { useState } from 'react';
 
-const Header = ({ onNavigateToSkills }) => {
+interface HeaderProps {
+  onNavigateToSkills: () => void;
+}
+
+const Header: React.FC<HeaderProps> = ({ onNavigateToSkills }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const toggleMenu = () => {

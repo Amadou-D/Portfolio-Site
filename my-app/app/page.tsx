@@ -174,7 +174,7 @@ const CubePage = () => {
       </div>
 
       {/* Skills Section */}
-      {showSkills && <SkillsSection id="skills-section" onClose={() => setShowSkills(false)} />}
+      {showSkills && <SkillsSection onClose={() => setShowSkills(false)} />}
     </div>
   );
 };
