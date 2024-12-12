@@ -143,6 +143,7 @@ const CubePage = () => {
   };
 
   const handleNavigateToAbout = () => {
+    setShowAbout(true);
     document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' });
   };
 
@@ -155,7 +156,7 @@ const CubePage = () => {
       
       {/* Move Header to top right */}
       <div className="absolute top-4 right-4">
-        <Header onNavigateToSkills={handleNavigateToSkills} onNavigateToContact={handleNavigateToContact} />
+        <Header onNavigateToSkills={handleNavigateToSkills} onNavigateToContact={handleNavigateToContact} onNavigateToAbout={handleNavigateToAbout} />
       </div>
 
       {/* Interactive Cube Logo */}
@@ -223,8 +224,8 @@ const CubePage = () => {
       {/* Contact Section */}
       {showContact && <Contact onClose={() => setShowContact(false)} />}
 
-      {showAbout && <About onClose={()=>setShowAbout(false)}/>}
-
+      {/* About Section */}
+      {showAbout && <About onClose={() => setShowAbout(false)} />}
     </div>
   );
 };

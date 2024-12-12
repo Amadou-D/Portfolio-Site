@@ -14,8 +14,9 @@ interface AboutProps {
   
       <div>
   
-        {/* About content */}
-  
+    <p>
+        About
+    </p>  
         <button onClick={onClose}>Close</button>
   
       </div>
