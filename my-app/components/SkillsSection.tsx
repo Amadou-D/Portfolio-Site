@@ -64,9 +64,11 @@ const themes = {
   ],
 };
 
+type ThemeKey = keyof typeof themes;
+
 const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
   const threeRef = useRef<HTMLDivElement | null>(null);
-  const [theme, setTheme] = useState('vibrant');
+  const [theme, setTheme] = useState<ThemeKey>('vibrant');
 
   useEffect(() => {
     if (!threeRef.current) return;
@@ -147,7 +149,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
   }, [theme]);
 
   const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    setTheme(event.target.value);
+    setTheme(event.target.value as ThemeKey);
   };
 
   return (
