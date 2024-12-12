@@ -169,16 +169,20 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
           ✕
         </button>
         <div className="absolute top-4 right-20 flex items-center">
-          <svg
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            fill={themes[theme][0].color1}
-            xmlns="http://www.w3.org/2000/svg"
-            className="mr-2"
-          >
-            <circle cx="12" cy="12" r="10" />
-          </svg>
+          <div className="flex items-center mr-2">
+            <svg width="10" height="10" viewBox="0 0 10 10" fill={themes[theme][0].color1} xmlns="http://www.w3.org/2000/svg">
+              <circle cx="5" cy="5" r="5" />
+            </svg>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill={themes[theme][1].color1} xmlns="http://www.w3.org/2000/svg">
+              <circle cx="7" cy="7" r="7" />
+            </svg>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill={themes[theme][2].color1} xmlns="http://www.w3.org/2000/svg">
+              <circle cx="9" cy="9" r="9" />
+            </svg>
+            <svg width="22" height="22" viewBox="0 0 22 22" fill={themes[theme][3].color1} xmlns="http://www.w3.org/2000/svg">
+              <circle cx="11" cy="11" r="11" />
+            </svg>
+          </div>
           <select
             className="px-4 py-2 bg-gray-700 text-white rounded-full shadow-lg hover:bg-gray-600 transition"
             value={theme}
