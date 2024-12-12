@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import Header from '@/components/header';
 import RetroGrid from '@/components/ui/retro-grid';
 import SkillsSection from '@/components/SkillsSection';
+import AboutMe from '@/components/About';
 
 interface PointerPosition {
   x: number;
@@ -180,7 +181,7 @@ const CubePage = () => {
           That builds <span className="gradient-text">customized</span> Websites and <span className="gradient-text">Applications</span>
         </p>
         <button
-          className="mt-6 px-6 py-3 text-2xl font-extrabold hover:text-gray-400 text-white rounded gradient-button"
+          className="mt-6 px-20 py-3 text-2xl font-extrabold hover:text-gray-400 text-white rounded gradient-button"
           onClick={handleStartClick}
         >
           Skills

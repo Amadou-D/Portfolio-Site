@@ -6,6 +6,7 @@ interface HeaderProps {
 
 const Header: React.FC<HeaderProps> = ({ onNavigateToSkills }) => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  
 
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
@@ -13,6 +14,7 @@ const Header: React.FC<HeaderProps> = ({ onNavigateToSkills }) => {
 
   return (
     <header className="relative w-full bg-transparent z-10">
+        
       {/* Menu Icon */}
       <div className="absolute top-4 right-4">
         <div className="bg-black rounded-full p-2 flex items-center justify-center">

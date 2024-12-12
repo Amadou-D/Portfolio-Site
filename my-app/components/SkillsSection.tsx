@@ -170,12 +170,12 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
             onChange={handleThemeChange}
           >
             <option value="vibrant">Vibrant</option>
-            <option value="warm">Warm Sunset</option>
-            <option value="cold">Cool Breeze</option>
-            <option value="purple">Purple Haze</option>
-            <option value="yellow">Sunny Day</option>
-            <option value="forest">Forest Walk</option>
-            <option value="ocean">Ocean Wave</option>
+            <option value="warm">Warm</option>
+            <option value="cold">Cool</option>
+            <option value="purple">Purple</option>
+            <option value="yellow">Sunny</option>
+            <option value="forest">Forest</option>
+            <option value="ocean">Ocean</option>
           </select>
         </div>
       </div>
