@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 
 interface SkillsSectionProps {
@@ -11,8 +11,62 @@ const skills = [
   'JavaScript', 'React', 'Node.js', 'CSS', 'HTML', 'Three.js', 'C#', 'TypeScript', 'Python', 'Docker', 'Java', 'Next.js', 'SQL', 'MongoDB', 'Firebase'
 ];
 
+const themes = {
+  vibrant: [
+    { color1: '#FF4B2B', color2: '#FF416C' },
+    { color1: '#00C9FF', color2: '#92FE9D' },
+    { color1: '#6A1B9A', color2: '#8E24AA' },
+    { color1: '#ab5675', color2: '#FF9800' },
+    { color1: '#72dcbb', color2: '#34acba' },
+    { color1: '#ffe07e', color2: '#ee6a7c' },
+  ],
+  warm: [
+    { color1: '#FF7E5F', color2: '#FEB47B' },
+    { color1: '#FF6F61', color2: '#DE4313' },
+    { color1: '#FF512F', color2: '#DD2476' },
+    { color1: '#FF4B2B', color2: '#FF416C' },
+    { color1: '#FF9A8B', color2: '#FF6A88' },
+  ],
+  cold: [
+    { color1: '#00C9FF', color2: '#92FE9D' },
+    { color1: '#4CA1AF', color2: '#C4E0E5' },
+    { color1: '#00B4DB', color2: '#0083B0' },
+    { color1: '#1FA2FF', color2: '#12D8FA' },
+    { color1: '#2BC0E4', color2: '#EAECC6' },
+  ],
+  purple: [
+    { color1: '#9D50BB', color2: '#6E48AA' },
+    { color1: '#8E2DE2', color2: '#4A00E0' },
+    { color1: '#7F00FF', color2: '#E100FF' },
+    { color1: '#6A1B9A', color2: '#8E24AA' },
+    { color1: '#9C27B0', color2: '#E040FB' },
+  ],
+  yellow: [
+    { color1: '#FFF700', color2: '#FFDD00' },
+    { color1: '#FFEA00', color2: '#FFD700' },
+    { color1: '#FFF200', color2: '#FFCC00' },
+    { color1: '#FFFB00', color2: '#FFC300' },
+    { color1: '#FFF500', color2: '#FFB900' },
+  ],
+  forest: [
+    { color1: '#228B22', color2: '#32CD32' },
+    { color1: '#006400', color2: '#8FBC8F' },
+    { color1: '#2E8B57', color2: '#3CB371' },
+    { color1: '#556B2F', color2: '#6B8E23' },
+    { color1: '#66CDAA', color2: '#8FBC8F' },
+  ],
+  ocean: [
+    { color1: '#1E90FF', color2: '#00BFFF' },
+    { color1: '#4682B4', color2: '#5F9EA0' },
+    { color1: '#00CED1', color2: '#20B2AA' },
+    { color1: '#87CEEB', color2: '#87CEFA' },
+    { color1: '#B0E0E6', color2: '#ADD8E6' },
+  ],
+};
+
 const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
   const threeRef = useRef<HTMLDivElement | null>(null);
+  const [theme, setTheme] = useState('vibrant');
 
   useEffect(() => {
     if (!threeRef.current) return;
@@ -25,15 +79,14 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     threeRef.current.appendChild(renderer.domElement);
 
-    // Create a wavy background with gradient
     const planeGeometry = new THREE.PlaneGeometry(40, 40, 32, 32);
     const planeMaterial = new THREE.ShaderMaterial({
       uniforms: {
         time: { value: 0 },
-        color1: { value: new THREE.Color('#FF4B2B') },
-        color2: { value: new THREE.Color('#FF416C') },
-        color3: { value: new THREE.Color('#00C9FF') },
-        color4: { value: new THREE.Color('#92FE9D') },
+        color1: { value: new THREE.Color(themes[theme][0].color1) },
+        color2: { value: new THREE.Color(themes[theme][0].color2) },
+        color3: { value: new THREE.Color(themes[theme][1].color1) },
+        color4: { value: new THREE.Color(themes[theme][1].color2) },
       },
       vertexShader: `
         varying vec2 vUv;
@@ -91,7 +144,11 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
       renderer.dispose();
       threeRef.current?.removeChild(renderer.domElement);
     };
-  }, []);
+  }, [theme]);
+
+  const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    setTheme(event.target.value);
+  };
 
   return (
     <div className="fixed inset-0 w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-70 z-50">
@@ -111,6 +168,31 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
         >
           ✕
         </button>
+        <div className="absolute top-4 right-20 flex items-center">
+          <svg
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            fill={themes[theme][0].color1}
+            xmlns="http://www.w3.org/2000/svg"
+            className="mr-2"
+          >
+            <circle cx="12" cy="12" r="10" />
+          </svg>
+          <select
+            className="px-4 py-2 bg-gray-700 text-white rounded-full shadow-lg hover:bg-gray-600 transition"
+            value={theme}
+            onChange={handleThemeChange}
+          >
+            <option value="vibrant">Vibrant</option>
+            <option value="warm">Warm Sunset</option>
+            <option value="cold">Cool Breeze</option>
+            <option value="purple">Purple Haze</option>
+            <option value="yellow">Sunny Day</option>
+            <option value="forest">Forest Walk</option>
+            <option value="ocean">Ocean Wave</option>
+          </select>
+        </div>
       </div>
     </div>
   );
