@@ -79,11 +79,15 @@ const Contact: React.FC<AboutMeProps> = ({ onClose }) => {
             <span className="mr-2">Connect with me on:</span>
             <Link href="https://github.com/Amadou-D" target="_blank" rel="noopener noreferrer" className="underline flex items-center">
               <Image src="/github.png" alt="GitHub" width={24} height={24} className="w-6 h-6 mr-2" />
-              GitHub
+              <p className='hover:text-stone-300'>
+              Github
+              </p>
             </Link>
             <Link href="https://qr.me-qr.com/rx78tODH" target="_blank" rel="noopener noreferrer" className="underline flex items-center ml-4">
               <Image src="/linkedin.png" alt="LinkedIn" width={24} height={24} className="w-6 h-6 mr-2" />
+              <p className='hover:text-stone-300'>
               LinkedIn
+              </p>
             </Link>
           </p>
         </div>

@@ -26,6 +26,7 @@ const CubePage = () => {
   const [startAnimation, setStartAnimation] = useState(false);
   const [textColor, setTextColor] = useState<string>('#FFFFFF');
   const cubeRef = useRef<HTMLDivElement | null>(null);
+  const [showAbout, setShowAbout] = useState(false);
 
   const isDragging = useRef<boolean>(false);
   const lastPointerPosition = useRef<PointerPosition>({ x: 0, y: 0 });
@@ -185,30 +186,30 @@ const CubePage = () => {
 
       {/* Text Section */}
       <div className="mt-20 text-center text-gray-200 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-16 min-w-[300px] sm:min-w-[400px] md:min-w-[500px] lg:min-w-[600px] xl:min-w-[700px]">
-        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold mb-4 font-['Montserrat'] gradient-text">
-          Hey I&apos;m <span className="gradient-text">Amadou</span>
+        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold mb-4 font-['Montserrat'] gradient-text delay-0">
+          Hey I&apos;m <span className="gradient-text delay-1">Amadou</span>
         </h1>
-        <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-['Roboto'] semi gradient-text">
+        <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-['Roboto'] semi gradient-text delay-2">
           I&apos;m a Full Stack Developer
         </p>
-        <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-gray-200 font-['Roboto'] gradient-text">
-          That builds <span className="gradient-text">customized</span> Websites and <span className="gradient-text">Applications</span>
+        <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-gray-200 font-['Roboto'] gradient-text delay-3">
+          That builds <span className="gradient-text delay-4">customized</span> Websites and <span className="gradient-text delay-5">Applications</span>
         </p>
         <div className="flex flex-col space-y-4">
           <button
-            className="mt-6 px-20 py-3 text-2xl font-extrabold hover:text-gray-400 text-white rounded gradient-button"
+            className="mt-6 px-20 py-3 text-2xl font-extrabold hover:text-gray-400 text-white rounded gradient-button delay-6"
             onClick={handleStartClick}
           >
             Skills
           </button>
           <button
-            className="mt-6 px-20 py-3 text-2xl font-extrabold hover:text-gray-400 text-white rounded gradient-button"
+            className="mt-6 px-20 py-3 text-2xl font-extrabold hover:text-gray-400 text-white rounded gradient-button delay-7"
             onClick={handleNavigateToContact}
           >
             Contact
           </button>
           <button
-            className="mt-6 px-20 py-3 text-2xl font-extrabold hover:text-gray-400 text-white rounded gradient-button"
+            className="mt-6 px-20 py-3 text-2xl font-extrabold hover:text-gray-400 text-white rounded gradient-button delay-8"
             onClick={handleNavigateToAbout}
           >
             About
@@ -222,7 +223,7 @@ const CubePage = () => {
       {/* Contact Section */}
       {showContact && <Contact onClose={() => setShowContact(false)} />}
 
-      {showContact && <About/>}
+      {showAbout && <About/>}
 
     </div>
   );
