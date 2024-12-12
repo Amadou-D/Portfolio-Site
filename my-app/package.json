@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@react-spring/web": "^9.7.5",
     "@react-three/cannon": "^6.6.0",
     "aos": "^2.3.4",
     "class-variance-authority": "^0.7.1",

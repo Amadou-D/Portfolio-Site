@@ -13,7 +13,6 @@ interface PointerPosition {
 const vibrantColorPairs = [
   { color1: '#FF4B2B', color2: '#FF416C' },
   { color1: '#1fd0bd', color2: '#00ab84' },
-  { color1: '#cc1696', color2: '#ff529a' },
 ];
 
 const CubePage = () => {
@@ -171,18 +170,17 @@ const CubePage = () => {
 
       {/* Text Section */}
       <div className="mt-20 text-center text-gray-200 px-4 sm:px-6 md:px-8 lg:px-10 xl:px-16 min-w-[300px] sm:min-w-[400px] md:min-w-[500px] lg:min-w-[600px] xl:min-w-[700px]">
-        <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold mb-4 font-['Montserrat']">
+        <h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl xl:text-9xl font-bold mb-4 font-['Montserrat'] gradient-text">
           Hey I&apos;m <span className="gradient-text">Amadou</span>
         </h1>
-        <p className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-['Roboto'] semi">
+        <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl font-['Roboto'] semi gradient-text">
           I&apos;m a Full Stack Developer
         </p>
-        <p className="text-2xl sm:text-3xl md:text-4xl text-gray-200 font-['Roboto']">
+        <p className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl xl:text-7xl text-gray-200 font-['Roboto'] gradient-text">
           That builds <span className="gradient-text">customized</span> Websites and <span className="gradient-text">Applications</span>
         </p>
         <button
-          className="mt-6 px-6 py-3 text-2xl font-extrabold hover:text-gray-400 text-white rounded retro-button"
-          style={{ background: gradientColors }}
+          className="mt-6 px-6 py-3 text-2xl font-extrabold hover:text-gray-400 text-white rounded gradient-button"
           onClick={handleStartClick}
         >
           Skills

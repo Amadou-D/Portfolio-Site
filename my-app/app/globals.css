@@ -39,6 +39,7 @@ body {
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
+    --gradient-colors: linear-gradient(45deg, #FF4B2B, #FF416C, #1fd0bd, #00ab84);
   }
   
   .dark {
@@ -69,51 +70,41 @@ body {
   }
 }
 
-@keyframes gradient-animation {
+@keyframes gradient-flow {
   0% {
     background-position: 0% 50%;
   }
-  50% {
-    background-position: 100% 50%;
-  }
   100% {
-    background-position: 0% 50%;
+    background-position: 200% 50%;
   }
 }
 
-.gradient-animated {
-  background: linear-gradient(45deg, #FF4B2B, #34acba);
+.gradient-text {
+  background: var(--gradient-colors);
   background-size: 200% 200%;
-  animation: gradient-animation 5s ease infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  color: transparent;
+  animation: gradient-flow 5s linear infinite;
 }
 
-@keyframes pulse {
-  0%, 100% {
-    transform: scale(1);
-  }
-  50% {
-    transform: scale(1.1);
-  }
+.gradient-button {
+  background: var(--gradient-colors);
+  background-size: 200% 200%;
+  animation: gradient-flow 5s linear infinite;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1.25rem;
+  font-weight: bold;
+  border-radius: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.dot {
-  width: 10px;
-  height: 10px;
-  border-radius: 50%;
-  background: linear-gradient(45deg, var(--color1), var(--color2));
-  animation: colorShift 3s infinite alternate;
-}
-
-@keyframes colorShift {
-  0% {
-    background: linear-gradient(45deg, var(--color1), var(--color2));
-  }
-  50% {
-    background: linear-gradient(45deg, var(--color2), var(--color1));
-  }
-  100% {
-    background: linear-gradient(45deg, var(--color1), var(--color2));
-  }
+.gradient-button:hover {
+  background-position: 100% 50%;
 }
 
 @keyframes fadeIn {
@@ -127,23 +118,9 @@ body {
   }
 }
 
-@keyframes gradient-flow {
-  0% {
-    background-position: 0% 50%;
-  }
-  100% {
-    background-position: 100% 50%;
-  }
-}
-
-.gradient-text {
-  background: var(--gradient);
-  background-size: 200% 200%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  animation: gradient-flow 5s linear infinite;
+.fade-in {
+  opacity: 0;
+  animation: fadeIn 0.5s forwards;
 }
 
 @keyframes zoom-animation {
@@ -159,27 +136,8 @@ body {
   }
 }
 
-.retro-button {
-  background: linear-gradient(45deg, #ff4b2b, #ff416c);
-  border: 2px solid #ff416c;
-  box-shadow: 0 0 10px rgba(255, 65, 108, 0.5), 0 0 20px rgba(255, 65, 108, 0.5), 0 0 30px rgba(255, 65, 108, 0.5);
-  font-family: 'Press Start 2P', cursive;
-  text-transform: uppercase;
-  transition: all 0.3s ease;
-}
-
-.retro-button:hover {
-  background: linear-gradient(45deg, #ff416c, #ff4b2b);
-  box-shadow: 0 0 20px rgba(255, 65, 108, 0.7), 0 0 40px rgba(255, 65, 108, 0.7), 0 0 60px rgba(255, 65, 108, 0.7);
-}
-
 .zoom-animation {
-  animation: zoom-animation 1s forwards;
-}
-
-.fade-in {
-  opacity: 0;
-  animation: fadeIn 0.5s forwards;
+  animation: zoom-animation 1.25s forwards;
 }
 
 .text-shadow {

@@ -15,52 +15,30 @@ const themes = {
   vibrant: [
     { color1: '#FF4B2B', color2: '#8E24AA' }, // Pink and Purple
     { color1: '#FF4B2B', color2: '#8E24AA' }, // Pink and Purple
-    { color1: '#FF4B2B', color2: '#8E24AA' }, // Pink and Purple
-    { color1: '#FF4B2B', color2: '#8E24AA' }, // Pink and Purple
-    { color1: '#FF4B2B', color2: '#8E24AA' }, // Pink and Purple
-    { color1: '#FF4B2B', color2: '#8E24AA' }, // Pink and Purple
   ],
   warm: [
     { color1: '#FF7E5F', color2: '#FEB47B' },
     { color1: '#FF6F61', color2: '#DE4313' },
-    { color1: '#FF512F', color2: '#DD2476' },
-    { color1: '#FF4B2B', color2: '#FF416C' },
-    { color1: '#FF9A8B', color2: '#FF6A88' },
   ],
   cold: [
     { color1: '#00C9FF', color2: '#92FE9D' },
     { color1: '#4CA1AF', color2: '#C4E0E5' },
-    { color1: '#00B4DB', color2: '#0083B0' },
-    { color1: '#1FA2FF', color2: '#12D8FA' },
-    { color1: '#2BC0E4', color2: '#EAECC6' },
   ],
   purple: [
     { color1: '#9D50BB', color2: '#6E48AA' },
     { color1: '#8E2DE2', color2: '#4A00E0' },
-    { color1: '#7F00FF', color2: '#E100FF' },
-    { color1: '#6A1B9A', color2: '#8E24AA' },
-    { color1: '#9C27B0', color2: '#E040FB' },
   ],
   yellow: [
     { color1: '#FFF700', color2: '#FFDD00' },
     { color1: '#FFEA00', color2: '#FFD700' },
-    { color1: '#FFF200', color2: '#FFCC00' },
-    { color1: '#FFFB00', color2: '#FFC300' },
-    { color1: '#FFF500', color2: '#FFB900' },
   ],
   forest: [
     { color1: '#228B22', color2: '#32CD32' },
     { color1: '#006400', color2: '#8FBC8F' },
-    { color1: '#2E8B57', color2: '#3CB371' },
-    { color1: '#556B2F', color2: '#6B8E23' },
-    { color1: '#66CDAA', color2: '#8FBC8F' },
   ],
   ocean: [
     { color1: '#1E90FF', color2: '#00BFFF' },
     { color1: '#4682B4', color2: '#5F9EA0' },
-    { color1: '#00CED1', color2: '#20B2AA' },
-    { color1: '#87CEEB', color2: '#87CEFA' },
-    { color1: '#B0E0E6', color2: '#ADD8E6' },
   ],
 };
 
@@ -148,6 +126,11 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
     };
   }, [theme]);
 
+  useEffect(() => {
+    const randomColors = themes[theme][Math.floor(Math.random() * themes[theme].length)];
+    document.documentElement.style.setProperty('--gradient-colors', `linear-gradient(45deg, ${randomColors.color1}, ${randomColors.color2})`);
+  }, [theme]);
+
   const handleThemeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setTheme(event.target.value as ThemeKey);
   };
@@ -156,7 +139,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
     <div className="fixed inset-0 w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-70 z-50">
       <div ref={threeRef} className="absolute inset-0"></div>
       <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center p-4">
-        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 gradient-text" style={{ '--gradient': `linear-gradient(45deg, ${themes[theme][0].color1}, ${themes[theme][0].color2})` } as React.CSSProperties}>
+        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 gradient-text">
           My Skills
         </h2>
         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
@@ -164,7 +147,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
             <div
               key={index}
               className={`text-lg sm:text-xl md:text-2xl lg:text-3xl font-['Press Start 2P'] gradient-text text-center fade-in ${skill === 'Firebase' ? 'col-span-2 sm:col-span-1' : ''}`}
-              style={{ '--gradient': `linear-gradient(45deg, ${themes[theme][0].color1}, ${themes[theme][0].color2})`, animationDelay: `${index * 0.1}s` } as React.CSSProperties}
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
               {skill}
             </div>
@@ -180,8 +163,6 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
           <div className="flex items-center mr-2 space-x-2">
             <div className="dot" style={{ '--color1': themes[theme][0].color1, '--color2': themes[theme][0].color2, width: '10px', height: '10px' } as React.CSSProperties}></div>
             <div className="dot" style={{ '--color1': themes[theme][1].color1, '--color2': themes[theme][1].color2, width: '15px', height: '15px' } as React.CSSProperties}></div>
-            <div className="dot" style={{ '--color1': themes[theme][2].color1, '--color2': themes[theme][2].color2, width: '20px', height: '20px' } as React.CSSProperties}></div>
-            <div className="dot" style={{ '--color1': themes[theme][3].color1, '--color2': themes[theme][3].color2, width: '25px', height: '25px' } as React.CSSProperties}></div>
           </div>
           <select
             className="px-4 py-2 bg-gray-700 text-white rounded-full shadow-lg hover:bg-gray-600 transition"
