@@ -1,8 +1,13 @@
 import { useState } from 'react';
 
 interface HeaderProps {
-  onNavigateToSkills: () => void;
-  onNavigateToContact: () => void;
+
+    onNavigateToSkills: () => void;
+  
+    onNavigateToContact: () => void;
+  
+    onNavigateToAbout: () => void;
+
 }
 
 const Header: React.FC<HeaderProps> = ({ onNavigateToSkills, onNavigateToContact }) => {
