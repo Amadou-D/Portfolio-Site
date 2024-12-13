@@ -83,7 +83,7 @@ const Contact: React.FC<ContactMeProps> = ({ onClose }) => {
               Github
               </p>
             </Link>
-            <Link href="https://qr.me-qr.com/rx78tODH" target="_blank" rel="noopener noreferrer" className="underline flex items-center ml-4">
+            <Link href="https://www.linkedin.com/in/amadou-diallo-7b2326330?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" target="_blank" rel="noopener noreferrer" className="underline flex items-center ml-4">
               <Image src="/linkedin.png" alt="LinkedIn" width={24} height={24} className="w-6 h-6 mr-2" />
               <p className='hover:text-stone-300'>
               LinkedIn
