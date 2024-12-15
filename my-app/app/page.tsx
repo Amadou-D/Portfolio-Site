@@ -39,10 +39,6 @@ const CubePage = () => {
     }, 1250);
   };
 
-  const handleNavigateToSkills = () => {
-    setShowSkills(true);
-    document.getElementById('skills-section')?.scrollIntoView({ behavior: 'smooth' });
-  };
 
   const handleNavigateToContact = () => {
     setStartAnimation(true);
