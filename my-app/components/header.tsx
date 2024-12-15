@@ -1,13 +1,9 @@
 import { useState } from 'react';
 
 interface HeaderProps {
-
-    onNavigateToSkills: () => void;
-  
-    onNavigateToContact: () => void;
-  
-    onNavigateToAbout: () => void;
-
+  onNavigateToSkills: () => void;
+  onNavigateToContact: () => void;
+  onNavigateToAbout: () => void;
 }
 
 const Header: React.FC<HeaderProps> = ({ onNavigateToSkills, onNavigateToContact }) => {
@@ -27,11 +23,10 @@ const Header: React.FC<HeaderProps> = ({ onNavigateToSkills, onNavigateToContact
 
   return (
     <header className="relative w-full bg-transparent z-10">
-        
       {/* Menu Icon */}
       <div className="absolute top-4 right-4">
-        <div className="bg-black rounded-full p-2 flex items-center justify-center">
-          <button onClick={toggleMenu} className="text-3xl text-white">
+        <div className="bg-stone-700 rounded-full p-2 sm:p-3 flex items-center justify-center">
+          <button onClick={toggleMenu} className="text-white text-xl sm:text-2xl">
             {isMenuOpen ? 'X' : '☰'}
           </button>
         </div>

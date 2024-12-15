@@ -12,17 +12,17 @@ export default function RetroGrid({
   return (
     <div
       className={cn(
-        "pointer-events-none fixed inset-0 overflow-hidden opacity-50 [perspective:200px]",
+        "pointer-events-none fixed inset-0 overflow-hidden opacity-50",
         className,
       )}
-      style={{ "--grid-angle": `${angle}deg` } as React.CSSProperties}
+      style={{ perspective: "200px", "--grid-angle": `${angle}deg` } as React.CSSProperties}
     >
       {/* Grid */}
-      <div className="absolute inset-0 [transform:rotateX(var(--grid-angle))]">
+      <div className="absolute inset-0" style={{ transform: "rotateX(var(--grid-angle))" }}>
         <div
           className={cn(
             "animate-grid",
-            "[background-repeat:repeat] [background-size:60px_60px] [height:300vh] [inset:0%_0px] [margin-left:-50%] [transform-origin:100%_0_0] [width:600vw]",
+            "bg-repeat bg-[length:60px_60px] h-[300vh] inset-0 ml-[-50%] origin-[100%_0_0] w-[600vw]",
           )}
           style={{
             backgroundImage: `
@@ -34,7 +34,7 @@ export default function RetroGrid({
       </div>
 
       {/* Background Gradient */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent to-90% dark:from-black" />
+      <div className="absolute inset-0 bg-gradient-to-t from-black to-transparent dark:from-black" />
     </div>
   );
 }

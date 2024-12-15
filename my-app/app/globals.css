@@ -12,12 +12,12 @@ body {
   }
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600&display=swap');
 
 @keyframes fade-in {
   from {
     opacity: 0;
-    transform: translateY(50px);
+    transform: translateY(10px);
   }
   to {
     opacity: 1;
@@ -25,23 +25,27 @@ body {
   }
 }
 
-.animate-fade-in {
-  animation: fade-in 1s ease-in-out;
+@keyframes fade-out {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(10px);
+  }
 }
 
-.fade-in-section {
-  opacity: 0;
-  transform: translateY(50px);
-  transition: opacity 1s ease-in-out, transform 1s ease-in-out;
+.fade-in {
+  animation: fade-in 1.5s ease-in-out forwards;
 }
 
-.fade-in-section.is-visible {
-  opacity: 1;
-  transform: translateY(0);
+.fade-out {
+  animation: fade-out 1.5s ease-in-out forwards;
 }
 
 body {
-  font-family: 'Press Start 2P', cursive;
+  font-family: 'Montserrat', sans-serif;
 }
 
 @layer base {
@@ -115,13 +119,9 @@ body {
 }
 
 .gradient-text {
-  background: var(--gradient-colors);
-  background-size: 200% 200%;
+  background: linear-gradient(90deg, #FF4B2B, #FF416C);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
-  background-clip: text;
-  color: transparent;
-  animation: gradient-flow 5s linear infinite;
 }
 
 .gradient-button {
@@ -208,56 +208,6 @@ body {
   }
 }
 
-.delay-0 {
-  animation: gradient-flow-delay 5s linear infinite 0s;
-}
-
-.delay-1 {
-  animation: gradient-flow-delay 5s linear infinite 0.5s;
-}
-
-.delay-2 {
-  animation: gradient-flow-delay 5s linear infinite 1s;
-}
-
-.delay-3 {
-  animation: gradient-flow-delay 5s linear infinite 1.5s;
-}
-
-.delay-4 {
-  animation: gradient-flow-delay 5s linear infinite 2s;
-}
-
-.delay-5 {
-  animation: gradient-flow-delay 5s linear infinite 2.5s;
-}
-
-.delay-6 {
-  animation: gradient-flow-delay 5s linear infinite 3s;
-}
-
-.delay-7 {
-  animation: gradient-flow-delay 5s linear infinite 3.5s;
-}
-
-.delay-8 {
-  animation: gradient-flow-delay 5s linear infinite 4s;
-}
-
-.hover\:glow {
-  transition: box-shadow 0.3s ease;
-}
-.hover\:glow:hover {
-  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.7), 0 0 10px rgba(0, 0, 0, 0.5);
-}
-/* Add hover effect for skill items */
-.skill-item {
-  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, text-shadow 0.3s ease;
-  background-color: rgba(255, 255, 255, 0.1); /* Initial background color */
-  border-radius: 0.5rem; /* Add rounded corners */
-  padding: 0.5rem; /* Add padding for better spacing */
-}
-
 @keyframes popout {
   0% {
     transform: scale(1) rotate(0deg);
@@ -282,4 +232,17 @@ body {
 .skill-item:hover,
 .skill-item:active {
   animation: popout 0.3s forwards;
+} 
+
+/* Rotating text styles */
+.rotating-text {
+  color: rgba(255, 255, 255, 0.6);
+  font-weight: bold;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+}
+
+/* Name text styles */
+.name-text {
+  color: white;
+  font-weight: bold;
 }
