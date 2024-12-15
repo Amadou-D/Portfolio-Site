@@ -243,3 +243,43 @@ body {
 .delay-8 {
   animation: gradient-flow-delay 5s linear infinite 4s;
 }
+
+.hover\:glow {
+  transition: box-shadow 0.3s ease;
+}
+.hover\:glow:hover {
+  box-shadow: 0 4px 20px rgba(255, 255, 255, 0.7), 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
+/* Add hover effect for skill items */
+.skill-item {
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, text-shadow 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1); /* Initial background color */
+  border-radius: 0.5rem; /* Add rounded corners */
+  padding: 0.5rem; /* Add padding for better spacing */
+}
+
+@keyframes popout {
+  0% {
+    transform: scale(1) rotate(0deg);
+    box-shadow: 0 0 0 rgba(255, 255, 255, 0), 0 0 0 rgba(0, 0, 0, 0);
+    background-color: rgba(255, 255, 255, 0.1);
+    text-shadow: none;
+  }
+  50% {
+    transform: scale(1.1) rotate(1deg);
+    box-shadow: 0 6px 12px rgba(255, 255, 255, 0.3), 0 0 10px rgba(0, 0, 0, 0.2);
+    background-color: rgba(255, 255, 255, 0.15);
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    transform: scale(1.15) rotate(2deg);
+    box-shadow: 0 12px 24px rgba(255, 255, 255, 0.6), 0 0 20px rgba(0, 0, 0, 0.4);
+    background-color: rgba(255, 255, 255, 0.2);
+    text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
+  }
+}
+
+.skill-item:hover {
+  animation: popout 0.3s forwards;
+}

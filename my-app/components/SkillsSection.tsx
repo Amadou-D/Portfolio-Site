@@ -146,7 +146,7 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
           {skills.map((skill, index) => (
             <div
               key={index}
-              className={`text-lg sm:text-xl md:text-2xl lg:text-3xl font-['Roboto'] gradient-text text-center fade-in `}
+              className="skill-item text-lg sm:text-xl md:text-2xl lg:text-3xl font-['Roboto'] gradient-text text-center fade-in"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {skill}
