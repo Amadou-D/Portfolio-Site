@@ -8,7 +8,7 @@ interface SkillsSectionProps {
 }
 
 const skills = [
-  'JavaScript', 'React', 'Nodejs', 'CSS', 'HTML', 'Threejs', 'C#', 'TypeScript', 'Python', 'Docker', 'Java', 'Next.js', 'SQL', 'MongoDB', 'Firebase'
+  'JavaScript', 'React', 'Nodejs', 'CSS', 'HTML', 'Threejs', 'C#', 'TypeScript', 'Python', 'Docker', 'Java', 'Next.js', 'SQL', 'MongoDB', 'Firebase', 'AWS'
 ];
 
 const themes = {
@@ -136,17 +136,17 @@ const SkillsSection: React.FC<SkillsSectionProps> = ({ onClose }) => {
   };
 
   return (
-    <div className="fixed inset-0 w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-70 z-50">
+    <div className="fixed inset-0 w-full h-full flex flex-col items-center justify-center bg-black bg-opacity-70 z-50 p-4 overflow-y-auto">
       <div ref={threeRef} className="absolute inset-0"></div>
       <div className="absolute inset-0 flex flex-col items-center justify-center text-white text-center p-4">
-        <h2 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-8 gradient-text">
+        <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-8 gradient-text">
           My Skills
         </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6">
+        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 sm:gap-6 md:grid-cols-4 lg:grid-cols-5">
           {skills.map((skill, index) => (
             <div
               key={index}
-              className={`text-lg sm:text-xl md:text-2xl lg:text-3xl font-['Press Start 2P'] gradient-text text-center fade-in ${skill === 'Firebase' ? 'col-span-2 sm:col-span-1' : ''}`}
+              className={`text-lg sm:text-xl md:text-2xl lg:text-3xl font-['Roboto'] gradient-text text-center fade-in `}
               style={{ animationDelay: `${index * 0.1}s` }}
             >
               {skill}
