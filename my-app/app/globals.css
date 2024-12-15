@@ -250,7 +250,6 @@ body {
 .hover\:glow:hover {
   box-shadow: 0 4px 20px rgba(255, 255, 255, 0.7), 0 0 10px rgba(0, 0, 0, 0.5);
 }
-
 /* Add hover effect for skill items */
 .skill-item {
   transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease, text-shadow 0.3s ease;
@@ -280,6 +279,7 @@ body {
   }
 }
 
-.skill-item:hover {
+.skill-item:hover,
+.skill-item:active {
   animation: popout 0.3s forwards;
 }
