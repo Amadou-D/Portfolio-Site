@@ -1,8 +1,9 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTools, faEnvelope, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
+import * as THREE from 'three';
 import RetroGrid from '@/components/ui/retro-grid';
 import SkillsSection from '@/components/SkillsSection';
 import Contact from '@/components/contact';
@@ -13,6 +14,7 @@ const CubePage = () => {
   const [startAnimation, setStartAnimation] = useState(false);
   const [textToShow, setTextToShow] = useState('designed');
   const [fadeClass, setFadeClass] = useState('fade-in');
+  const threeRef = useRef<HTMLDivElement | null>(null);
 
   const textOptions = ['designed', 'created', 'solved', 'coded', 'developed', 'crafted'];
 
@@ -29,6 +31,83 @@ const CubePage = () => {
       }, 1500); // Match the duration of the fade-out animation
     }, 3000); // Change text every 3 seconds
     return () => clearInterval(interval);
+  }, []);
+
+  useEffect(() => {
+    if (!threeRef.current) return;
+
+    // Set up Three.js scene
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 5;
+
+    const renderer = new THREE.WebGLRenderer({ alpha: true });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    threeRef.current.appendChild(renderer.domElement);
+
+    // Create particles
+    const particlesGeometry = new THREE.BufferGeometry();
+    const particlesCount = 1000;
+    const positions = new Float32Array(particlesCount * 3);
+    const velocities = new Float32Array(particlesCount * 3);
+
+    for (let i = 0; i < particlesCount; i++) {
+      positions[i * 3] = (Math.random() - 0.5) * 10;
+      positions[i * 3 + 1] = (Math.random() - 0.5) * 10;
+      positions[i * 3 + 2] = (Math.random() - 0.5) * 10;
+
+      velocities[i * 3] = (Math.random() - 0.5) * 0.01;
+      velocities[i * 3 + 1] = (Math.random() - 0.5) * 0.01;
+      velocities[i * 3 + 2] = (Math.random() - 0.5) * 0.01;
+    }
+
+    particlesGeometry.setAttribute('position', new THREE.BufferAttribute(positions, 3));
+    particlesGeometry.setAttribute('velocity', new THREE.BufferAttribute(velocities, 3));
+
+    const particlesMaterial = new THREE.PointsMaterial({
+      color: 0xffffff,
+      size: 0.02,
+    });
+
+    const particles = new THREE.Points(particlesGeometry, particlesMaterial);
+    scene.add(particles);
+
+    // Animate particles
+    const animate = () => {
+      requestAnimationFrame(animate);
+
+      const positions = particlesGeometry.attributes.position.array;
+      const velocities = particlesGeometry.attributes.velocity.array;
+
+      for (let i = 0; i < particlesCount; i++) {
+        positions[i * 3] += velocities[i * 3];
+        positions[i * 3 + 1] += velocities[i * 3 + 1];
+        positions[i * 3 + 2] += velocities[i * 3 + 2];
+
+        if (positions[i * 3] > 5 || positions[i * 3] < -5) velocities[i * 3] *= -1;
+        if (positions[i * 3 + 1] > 5 || positions[i * 3 + 1] < -5) velocities[i * 3 + 1] *= -1;
+        if (positions[i * 3 + 2] > 5 || positions[i * 3 + 2] < -5) velocities[i * 3 + 2] *= -1;
+      }
+
+      particlesGeometry.attributes.position.needsUpdate = true;
+      renderer.render(scene, camera);
+    };
+
+    animate();
+
+    const handleResize = () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      renderer.dispose();
+      threeRef.current?.removeChild(renderer.domElement);
+    };
   }, []);
 
   const handleStartClick = () => {
@@ -66,6 +145,9 @@ const CubePage = () => {
           by Amadou
         </p>
       </div>
+
+      {/* Three.js Animation */}
+      <div ref={threeRef} className="absolute inset-0 pointer-events-none"></div>
 
       <div className="mt-16 sm:mt-20 text-center text-white px-4 sm:px-6 md:px-8 lg:px-10 xl:px-16 min-w-[250px] sm:min-w-[300px] md:min-w-[400px] lg:min-w-[500px] xl:min-w-[600px]">
         <div className="flex flex-col space-y-4 sm:space-y-6">
