@@ -25,7 +25,84 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onClose }) => {
 
     const renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
+    renderer.setPixelRatio(window.devicePixelRatio); // Ensure crisp rendering on high-DPI displays
     threeRef.current.appendChild(renderer.domElement);
+
+    const fragmentShader = `
+      uniform float time;
+      uniform vec2 resolution;
+
+      float random(vec2 st) {
+        return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
+      }
+
+      // Improved noise function with more turbulence
+      float noise(vec2 st) {
+        vec2 i = floor(st);
+        vec2 f = fract(st);
+
+        float a = random(i);
+        float b = random(i + vec2(1.0, 0.0));
+        float c = random(i + vec2(0.0, 1.0));
+        float d = random(i + vec2(1.0, 1.0));
+
+        vec2 u = f * f * (3.0 - 2.0 * f);
+
+        return mix(a, b, u.x) +
+               (c - a) * u.y * (1.0 - u.x) +
+               (d - b) * u.x * u.y;
+      }
+
+      // Fractal Brownian Motion for more natural smoke movement
+      float fbm(vec2 st) {
+        float value = 0.0;
+        float amplitude = 0.5;
+        float frequency = 1.0;
+        // Add multiple layers of noise
+        for(int i = 0; i < 5; i++) {
+          value += amplitude * noise(st * frequency);
+          frequency *= 2.0;
+          amplitude *= 0.5;
+        }
+        return value;
+      }
+
+      void main() {
+        vec2 uv = gl_FragCoord.xy / resolution.xy;
+        vec3 color = vec3(0.1); // Darker base color
+
+        // Create turbulent smoke effect
+        float n = fbm(uv * 3.0 + time * 0.1);
+        n += 0.5 * fbm(uv * 6.0 + time * 0.15);
+        
+        // Add swirling motion
+        float swirl = fbm(uv * 2.0 + vec2(cos(time * 0.1), sin(time * 0.1)));
+        n += swirl * 0.3;
+
+        // Color variation
+        vec3 smokeColor = mix(
+          vec3(0.2, 0.2, 0.25), // Dark blue-grey
+          vec3(0.4, 0.4, 0.45), // Light grey
+          n
+        );
+
+        // Add slight color variation based on position
+        smokeColor += vec3(0.05) * fbm(uv * 4.0 - time * 0.05);
+
+        color += smokeColor;
+
+        // Fade edges
+        float edge = smoothstep(0.0, 0.7, 1.0 - length(uv - 0.5) * 1.2);
+        
+        gl_FragColor = vec4(color, edge * 0.9); // Adjust transparency
+      }
+    `;
+
+    const vertexShader = `
+      void main() {
+        gl_Position = vec4(position, 1.0);
+      }
+    `;
 
     const uniforms = {
       time: { value: 1.0 },
@@ -34,47 +111,8 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onClose }) => {
 
     const material = new THREE.ShaderMaterial({
       uniforms,
-      vertexShader: `
-        void main() {
-          gl_Position = vec4(position, 1.0);
-        }
-      `,
-      fragmentShader: `
-        uniform float time;
-        uniform vec2 resolution;
-
-        float random(vec2 st) {
-          return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
-        }
-
-        float noise(vec2 st) {
-          vec2 i = floor(st);
-          vec2 f = fract(st);
-
-          float a = random(i);
-          float b = random(i + vec2(1.0, 0.0));
-          float c = random(i + vec2(0.0, 1.0));
-          float d = random(i + vec2(1.0, 1.0));
-
-          vec2 u = f * f * (3.0 - 2.0 * f);
-
-          return mix(a, b, u.x) +
-                 (c - a) * u.y * (1.0 - u.x) +
-                 (d - b) * u.x * u.y;
-        }
-
-        void main() {
-          vec2 uv = gl_FragCoord.xy / resolution.xy;
-          vec3 color = vec3(0.1);
-
-          float n = noise(uv * 4.0 + time * 0.1);
-          n += 0.5 * noise(uv * 8.0 + time * 0.15);
-
-          color += vec3(n * 0.3, n * 0.3, n * 0.3);
-
-          gl_FragColor = vec4(color, 1.0);
-        }
-      `,
+      vertexShader,
+      fragmentShader,
     });
 
     const planeGeometry = new THREE.PlaneGeometry(2, 2);
