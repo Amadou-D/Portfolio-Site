@@ -246,3 +246,9 @@ body {
   color: white;
   font-weight: bold;
 }
+
+.text-container {
+  width: 100px; /* Adjust the width as needed */
+  text-align: center;
+  overflow: hidden;
+}

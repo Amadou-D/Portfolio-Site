@@ -8,8 +8,8 @@ interface ProjectsSectionProps {
 }
 
 const projects = [
-  { title: 'Project 1', videoSrc: '/path/to/project1.mp4' },
-  { title: 'Project 2', videoSrc: '/path/to/project2.mp4' },
+  { title: 'Project 1', videoSrc: '/5oceans.mp4' },
+  { title: 'Project 2', videoSrc: '/tech.mp4' },
 ];
 
 const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onClose }) => {
