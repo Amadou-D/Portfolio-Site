@@ -8,7 +8,7 @@ interface AboutProps {
   navigateToMain: () => void;
 }
 
-const About: React.FC<AboutProps> = ({ onClose, navigateToMain }) => {
+const About: React.FC<AboutProps> = ({ onClose }) => {
   const threeRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
