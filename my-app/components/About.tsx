@@ -5,7 +5,6 @@ import * as THREE from 'three';
 
 interface AboutProps {
   onClose: () => void;
-  navigateToMain: () => void;
 }
 
 const About: React.FC<AboutProps> = ({ onClose }) => {
@@ -20,7 +19,7 @@ const About: React.FC<AboutProps> = ({ onClose }) => {
 
     const renderer = new THREE.WebGLRenderer({ alpha: true });
     renderer.setSize(window.innerWidth, window.innerHeight);
-    renderer.setPixelRatio(window.devicePixelRatio); // Ensure crisp rendering on high-DPI displays
+    renderer.setPixelRatio(window.devicePixelRatio); 
     threeRef.current.appendChild(renderer.domElement);
 
     const fragmentShader = `
