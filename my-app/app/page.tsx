@@ -7,10 +7,12 @@ import * as THREE from 'three';
 import RetroGrid from '@/components/ui/retro-grid';
 import SkillsSection from '@/components/SkillsSection';
 import Contact from '@/components/contact';
+import About from '@/components/About';
 
 const CubePage = () => {
   const [showSkills, setShowSkills] = useState(false);
   const [showContact, setShowContact] = useState(false);
+  const [showAbout, setShowAbout] = useState(false);
   const [startAnimation, setStartAnimation] = useState(false);
   const [textToShow, setTextToShow] = useState('designed');
   const [fadeClass, setFadeClass] = useState('fade-in');
@@ -127,7 +129,11 @@ const CubePage = () => {
   };
 
   const handleNavigateToAbout = () => {
-    document.getElementById('about-section')?.scrollIntoView({ behavior: 'smooth' });
+    setStartAnimation(true);
+    setTimeout(() => {
+      setShowAbout(true);
+      setStartAnimation(false);
+    }, 1250);
   };
 
   return (
@@ -177,6 +183,7 @@ const CubePage = () => {
 
       {showSkills && <SkillsSection onClose={() => setShowSkills(false)} />}
       {showContact && <Contact onClose={() => setShowContact(false)} />}
+      {showAbout && <About onClose={() => setShowAbout(false)} />}
     </div>
   );
 };

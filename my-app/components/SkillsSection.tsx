@@ -9,8 +9,8 @@ interface ProjectsSectionProps {
 }
 
 const projects = [
-  { title: '5 Oceans Immigration - Full stack web app for a client', videoSrc: '/5oceans.mp4', url: 'https://5oceansimmigration.tech' },
-  { title: 'Khazad Tech - an example e-commerce Site', videoSrc: '/tech.mp4', url: 'https://webdev2-final-project-sooty.vercel.app' },
+  { title: '5 Oceans Immigration -  A Full stack web application for a client', videoSrc: '/5oceans.mp4', url: 'https://5oceansimmigration.tech' },
+  { title: 'Khazad Tech - an example e-commerce Site I made', videoSrc: '/tech.mp4', url: 'https://webdev2-final-project-sooty.vercel.app' },
 ];
 
 const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onClose }) => {
@@ -149,7 +149,9 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onClose }) => {
       videos.forEach((video) => {
         const rect = video.getBoundingClientRect();
         if (rect.top >= 0 && rect.bottom <= window.innerHeight) {
-          video.play();
+          setTimeout(() => {
+            video.play();
+          }, 100); // Add a slight delay before playing the video
         } else {
           video.pause();
         }
@@ -162,14 +164,27 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onClose }) => {
       video.play();
     };
 
+    const handleVideoLoaded = (event: Event) => {
+      const video = event.target as HTMLVideoElement;
+      setTimeout(() => {
+        video.play();
+      }, 100); // Add a slight delay before playing the video
+    };
+
     const videos = document.querySelectorAll('video');
-    videos.forEach((video) => video.addEventListener('ended', handleVideoEnd));
+    videos.forEach((video) => {
+      video.addEventListener('ended', handleVideoEnd);
+      video.addEventListener('loadeddata', handleVideoLoaded);
+    });
 
     window.addEventListener('scroll', handleScroll);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      videos.forEach((video) => video.removeEventListener('ended', handleVideoEnd));
+      videos.forEach((video) => {
+        video.removeEventListener('ended', handleVideoEnd);
+        video.removeEventListener('loadeddata', handleVideoLoaded);
+      });
     };
   }, []);
 
@@ -222,11 +237,16 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onClose }) => {
                 <video
                   className="w-full h-full rounded-lg"
                   src={project.videoSrc}
-                  autoPlay
                   muted
                   loop
                   playsInline
                   aria-label={`${project.title} video`}
+                  onLoadedData={(event) => {
+                    const video = event.target as HTMLVideoElement;
+                    setTimeout(() => {
+                      video.play();
+                    }, 100); // Add a slight delay before playing the video
+                  }}
                 />
               </div>
             </div>

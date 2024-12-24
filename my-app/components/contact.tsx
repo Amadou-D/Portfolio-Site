@@ -160,7 +160,7 @@ const Contact: React.FC<ContactMeProps> = ({ onClose }) => {
               href="https://github.com/Amadou-D"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline flex items-center"
+              className="underline flex items-center hover:text-gray-300"
             >
               <Image src="/github.png" alt="GitHub" width={24} height={24} className="w-6 h-6 mr-2" />
               GitHub
@@ -169,9 +169,9 @@ const Contact: React.FC<ContactMeProps> = ({ onClose }) => {
               href="https://www.linkedin.com/in/amadou-diallo-7b2326330"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline flex items-center ml-4"
+              className="underline flex items-center ml-4 hover:text-gray-300"
             >
-              <Image src="/linkedin.png" alt="LinkedIn" width={24} height={24} className="w-6 h-6 mr-2" />
+              <Image src="/linkedin.png" alt="LinkedIn" width={24} height={24} className="w-6 h-6 mr-2 " />
               LinkedIn
             </Link>
           </p>
