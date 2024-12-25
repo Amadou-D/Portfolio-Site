@@ -153,17 +153,10 @@ const About: React.FC<AboutProps> = ({ onClose }) => {
         >
           <img src="https://img.icons8.com/ios-filled/50/000000/back.png" alt="Back" className="w-6 h-6" />
         </button>
-        <h2 className="text-4xl font-bold mb-6 text-center text-gray-700">About Me</h2>
+        <h2 className="text-6xl font-bold mb-6 text-center text-gray-700">About Me</h2>
         <div className="text-center mb-6">
-          <p className="text-xl font-semibold">Amadou Diallo</p>
-          <p>4301 A Calgary, 70 st Nw</p>
-          <p>587-803-5820</p>
-          <p>
-            Email: <a href="mailto:amadouamosdiallo@outlook.com" className="underline text-blue-600 hover:text-green-500">amadouamosdiallo@outlook.com</a>
-          </p>
-          <p>
-            Portfolio: <a href="https://amadou-d-github-io.vercel.app" target="_blank" rel="noopener noreferrer" className="underline text-blue-600 hover:text-green-500">amadou-d-github-io.vercel.app</a>
-          </p>
+          <p className="text-4xl font-semibold">Amadou Diallo</p>
+          <p className="text-3xl">Software Developer</p>
         </div>
 
         <h3 className="text-3xl font-bold mt-6">Professional Profile</h3>
