@@ -209,7 +209,7 @@ const About: React.FC<AboutProps> = ({ onClose }) => {
         </ul>
 
         <h3 className="text-3xl font-bold mt-6">Hobbies</h3>
-        <p className="mb-6">In my free time, I enjoy exploring new technologies, solving coding challenges, and playing soccer with friends.</p>
+        <p className="mb-6">In my free time, I enjoy making music, problem solving, and playing video games with friends.</p>
 
         <h3 className="text-3xl font-bold mt-6">References</h3>
         <p>Available upon request.</p>
