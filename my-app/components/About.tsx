@@ -228,7 +228,7 @@ const About: React.FC<AboutProps> = ({ onClose }) => {
           </ul>
         </div>
 
-        <div ref={(el) => (sectionsRef.current[3] = el)} className="opacity-0 transition-opacity duration-1000">
+        <div ref={(el) => { if (el) sectionsRef.current[3] = el; }} className="opacity-0 transition-opacity duration-1000">
           <h3 className="text-3xl font-bold mt-6">Education</h3>
           <ul className="list-disc list-inside mb-6">
             <li><span className="font-bold">Southern Alberta Institute of Technology (SAIT), Calgary, AB:</span> Information Technology Diploma (Software Development major) - 4.0 GPA (May 2023 - Dec 2024)</li>
@@ -236,7 +236,7 @@ const About: React.FC<AboutProps> = ({ onClose }) => {
           </ul>
         </div>
 
-        <div ref={(el) => (sectionsRef.current[4] = el)} className="opacity-0 transition-opacity duration-1000">
+        <div ref={(el) => { if (el) sectionsRef.current[4] = el; }} className="opacity-0 transition-opacity duration-1000">
           <h3 className="text-3xl font-bold mt-6">Hobbies</h3>
           <p className="mb-6">In my free time, I enjoy making music, problem solving, and playing video games with friends.</p>
         </div>
