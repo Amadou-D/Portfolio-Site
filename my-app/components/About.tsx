@@ -182,7 +182,7 @@ const About: React.FC<AboutProps> = ({ onClose }) => {
         <div ref={(el) => { if (el) sectionsRef.current[0] = el; }} className="opacity-0 transition-opacity duration-1000">
           <h3 className="text-3xl font-bold mt-6">Professional Profile</h3>
           <p className="mt-4 mb-6">
-            Graduating with a 4.0 GPA from SAIT&aposs Software Development program, I have built a strong foundation in information technology and software development. My passion for IT drove me to further my education after high school, expanding my expertise in programming, web development, and cybersecurity. My professional experience as an online consultant and live performer has equipped me with strong communication skills and the ability to analyze and convey complex technical concepts effectively. I am dedicated to contributing to the evolving fields of software development, IT, and cybersecurity, leveraging my technical skills, creativity, and commitment to continuous learning.
+            Graduating with a 4.0 GPA from SAIT&apos;s Software Development program, I have built a strong foundation in information technology and software development. My passion for IT drove me to further my education after high school, expanding my expertise in programming, web development, and cybersecurity. My professional experience as an online consultant and live performer has equipped me with strong communication skills and the ability to analyze and convey complex technical concepts effectively. I am dedicated to contributing to the evolving fields of software development, IT, and cybersecurity, leveraging my technical skills, creativity, and commitment to continuous learning.
           </p>
         </div>
 
