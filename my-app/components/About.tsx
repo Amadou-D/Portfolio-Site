@@ -181,14 +181,14 @@ const About: React.FC<AboutProps> = ({ onClose }) => {
 
         <div ref={(el) => { if (el) sectionsRef.current[0] = el; }} className="opacity-0 transition-opacity duration-1000">
           <h3 className="text-3xl font-bold mt-6">Professional Profile</h3>
-          <p className="mt-4 mb-6">
+          <p className="mt-4 mb-6 text-lg">
             Graduating with a 4.0 GPA from SAIT&apos;s Software Development program, I have built a strong foundation in information technology and software development. My passion for IT drove me to further my education after high school, expanding my expertise in programming, web development, and cybersecurity. My professional experience as an online consultant and live performer has equipped me with strong communication skills and the ability to analyze and convey complex technical concepts effectively. I am dedicated to contributing to the evolving fields of software development, IT, and cybersecurity, leveraging my technical skills, creativity, and commitment to continuous learning.
           </p>
         </div>
 
         <div ref={(el) => { if (el) sectionsRef.current[1] = el; }} className="opacity-0 transition-opacity duration-1000">
           <h3 className="text-3xl font-bold mt-6">Skills Summary</h3>
-          <ul className="list-disc list-inside mb-6">
+          <ul className="list-disc list-inside mb-6 text-lg">
             <li>Intermediate-level IT skills in computer programming, problem-solving, network systems, cloud services, and Windows/Linux operating systems</li>
             <li><span className="font-bold">Programming languages:</span> Python, Java, and C#</li>
             <li><span className="font-bold">Web development:</span> HTML, CSS, JavaScript, Next.js, SQL</li>
@@ -202,7 +202,7 @@ const About: React.FC<AboutProps> = ({ onClose }) => {
 
         <div ref={(el) => { if (el) sectionsRef.current[2] = el; }} className="opacity-0 transition-opacity duration-1000">
           <h3 className="text-3xl font-bold mt-6">Professional Experience</h3>
-          <ul className="list-disc list-inside mb-6">
+          <ul className="list-disc list-inside mb-6 text-lg">
             <li><span className="font-bold">Web Developer</span> at 5 Oceans Immigration (May 2024 - Present)
               <ul className="list-disc list-inside ml-4 mt-2">
                 <li>Developed and maintained a full-stack web application using JavaScript, MongoDB, and Next.js, enhancing user experience and functionality</li>
@@ -230,7 +230,7 @@ const About: React.FC<AboutProps> = ({ onClose }) => {
 
         <div ref={(el) => { if (el) sectionsRef.current[3] = el; }} className="opacity-0 transition-opacity duration-1000">
           <h3 className="text-3xl font-bold mt-6">Education</h3>
-          <ul className="list-disc list-inside mb-6">
+          <ul className="list-disc list-inside mb-6 text-lg">
             <li><span className="font-bold">Southern Alberta Institute of Technology (SAIT), Calgary, AB:</span> Information Technology Diploma (Software Development major) - 4.0 GPA (May 2023 - Dec 2024)</li>
             <li><span className="font-bold">Bowness Outreach High School:</span> High School Diploma (Sept 2018 - June 2022)</li>
           </ul>
@@ -238,12 +238,12 @@ const About: React.FC<AboutProps> = ({ onClose }) => {
 
         <div ref={(el) => { if (el) sectionsRef.current[4] = el; }} className="opacity-0 transition-opacity duration-1000">
           <h3 className="text-3xl font-bold mt-6">Hobbies</h3>
-          <p className="mb-6">In my free time, I enjoy making music, problem solving, and playing video games with friends.</p>
+          <p className="mb-6 text-lg">In my free time, I enjoy making music, problem solving, and playing video games with friends.</p>
         </div>
 
         <div ref={(el) => { if (el) sectionsRef.current[5] = el; }} className="opacity-0 transition-opacity duration-1000">
           <h3 className="text-3xl font-bold mt-6">References</h3>
-          <p>Available upon request.</p>
+          <p className='text-lg'>Available upon request.</p>
         </div>
       </div>
     </div>
