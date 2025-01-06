@@ -264,3 +264,25 @@ body {
   }
 }
 
+body {
+  font-family: 'Press Start 2P', cursive;
+}
+
+.font-press-start {
+  font-family: 'Press Start 2P', cursive;
+}
+
+@keyframes fadeInUp {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in-up {
+  animation: fadeInUp 1s ease-out forwards;
+}
