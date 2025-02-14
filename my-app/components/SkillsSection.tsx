@@ -9,9 +9,9 @@ interface ProjectsSectionProps {
 }
 
 const projects = [
-  { title: '5 Oceans Immigration -  A Full stack web application for a client', videoSrc: '/5oceans.mp4', url: 'https://5oceansimmigration.tech' },
+  { title: '5 Oceans Immigration -  A Full stack Web Application I made for a Client', videoSrc: '/5oceans.mp4', url: 'https://5oceansimmigration.tech' },
   { title: 'Khazad Tech - an example e-commerce Site I made', videoSrc: '/tech.mp4', url: 'https://webdev2-final-project-sooty.vercel.app' },
-  { title: 'Music Visualizer', videoSrc: '/music_visualizer.mp4', url: 'https://music-visualizeer.vercel.app' },
+  { title: 'Music Visualizer - An Audio to Visual Tool That Uses Three Js', videoSrc: '/music_visualizer.mp4', url: 'https://music-visualizeer.vercel.app' },
 ];
 
 const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onClose }) => {
