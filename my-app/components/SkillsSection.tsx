@@ -234,22 +234,24 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onClose }) => {
               <Link href={project.url} target="_blank" rel="noopener noreferrer">
                 <h3 className="text-2xl font-bold cursor-pointer hover:text-white hover:underline">{project.title}</h3>
               </Link>
-              <div className="video-container w-full max-w-3xl rounded-lg shadow-lg border-2 border-gray-200">
-                <video
-                  className="w-full h-full rounded-lg"
-                  src={project.videoSrc}
-                  muted
-                  loop
-                  playsInline
-                  aria-label={`${project.title} video`}
-                  onLoadedData={(event) => {
-                    const video = event.target as HTMLVideoElement;
-                    setTimeout(() => {
-                      video.play();
-                    }, 100); // Add a slight delay before playing the video
-                  }}
-                />
-              </div>
+              <Link href={project.url} target="_blank" rel="noopener noreferrer">
+                <div className="video-container w-full max-w-3xl rounded-lg shadow-lg border-2 border-gray-200">
+                  <video
+                    className="w-full h-full rounded-lg"
+                    src={project.videoSrc}
+                    muted
+                    loop
+                    playsInline
+                    aria-label={`${project.title} video`}
+                    onLoadedData={(event) => {
+                      const video = event.target as HTMLVideoElement;
+                      setTimeout(() => {
+                        video.play();
+                      }, 100); // Add a slight delay before playing the video
+                    }}
+                  />
+                </div>
+              </Link>
             </div>
           ))}
         </div>
