@@ -220,11 +220,15 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onClose }) => {
   }, []);
 
   return (
-    <div className="fixed inset-0 w-full h-full flex flex-col items-center justify-center z-50 p-4 overflow-y-auto">
-      <div ref={threeRef} className="absolute inset-0 z-0"></div>
-      <div className="absolute inset-0 flex flex-col items-center justify-center text-gray-200 text-center p-4 z-10">
+    <div className="fixed inset-0 w-full h-full flex flex-col items-center justify-center z-[100] overflow-hidden">
+      {/* Add a semi-opaque backdrop that covers the entire screen */}
+      <div className="absolute inset-0 bg-gray-900 bg-opacity-90 z-0"></div>
+      
+      <div ref={threeRef} className="absolute inset-0 z-10"></div>
+      
+      <div className="absolute inset-0 flex flex-col items-center justify-start pt-16 text-gray-200 text-center p-4 z-20 overflow-y-auto">
         <h2 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-8">My Projects</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 overflow-y-scroll h-[70vh]">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 overflow-y-auto max-h-[70vh] w-full max-w-7xl px-4">
           {projects.map((project, index) => (
             <div
               key={index}
@@ -237,7 +241,7 @@ const ProjectsSection: React.FC<ProjectsSectionProps> = ({ onClose }) => {
               <Link href={project.url} target="_blank" rel="noopener noreferrer">
                 <div className="video-container w-full max-w-3xl rounded-lg shadow-lg border-2 border-gray-200">
                   <video
-                    className="w-full h-full rounded-lg"
+                    className="w-full h-full rounded-lg cursor-pointer"
                     src={project.videoSrc}
                     muted
                     loop
