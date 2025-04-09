@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { motion } from 'framer-motion';
+import * as THREE from 'three';
 
 const tabItems = [
   { id: 'profile', label: 'Profile' },
@@ -16,10 +17,156 @@ export default function AboutPage() {
   const router = useRouter();
   const contentRef = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState('profile');
+  const threeRef = useRef<HTMLDivElement | null>(null);
+  
+  // Add THREE.js smokey background effect
+  useEffect(() => {
+    if (!threeRef.current) return;
+    
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+    camera.position.z = 1;
+
+    const renderer = new THREE.WebGLRenderer({ 
+      alpha: true,
+      antialias: false 
+    });
+    renderer.setSize(window.innerWidth, window.innerHeight);
+    
+    // Lower quality for better performance
+    const isMobile = window.innerWidth < 768;
+    renderer.setPixelRatio(isMobile ? 0.75 : 1);
+    
+    threeRef.current.appendChild(renderer.domElement);
+
+    // Smokey effect shader
+    const fragmentShader = `
+      uniform float time;
+      uniform vec2 resolution;
+
+      float random(vec2 st) {
+        return fract(sin(dot(st.xy, vec2(12.9898, 78.233))) * 43758.5453123);
+      }
+
+      float noise(vec2 st) {
+        vec2 i = floor(st);
+        vec2 f = fract(st);
+
+        float a = random(i);
+        float b = random(i + vec2(1.0, 0.0));
+        float c = random(i + vec2(0.0, 1.0));
+        float d = random(i + vec2(1.0, 1.0));
+
+        vec2 u = f * f * (3.0 - 2.0 * f);
+
+        return mix(a, b, u.x) +
+               (c - a) * u.y * (1.0 - u.x) +
+               (d - b) * u.x * u.y;
+      }
+
+      float fbm(vec2 st) {
+        float value = 0.0;
+        float amplitude = 0.5;
+        float frequency = 1.0;
+        for(int i = 0; i < 5; i++) {
+          value += amplitude * noise(st * frequency);
+          frequency *= 2.0;
+          amplitude *= 0.5;
+        }
+        return value;
+      }
+
+      void main() {
+        vec2 uv = gl_FragCoord.xy / resolution.xy;
+        vec3 color = vec3(0.1);
+
+        float n = fbm(uv * 3.0 + time * 0.1);
+        n += 0.5 * fbm(uv * 6.0 + time * 0.15);
+        
+        float swirl = fbm(uv * 2.0 + vec2(cos(time * 0.1), sin(time * 0.1)));
+        n += swirl * 0.3;
+
+        vec3 smokeColor = mix(
+          vec3(0.2, 0.2, 0.25),
+          vec3(0.4, 0.4, 0.45),
+          n
+        );
+
+        smokeColor += vec3(0.05) * fbm(uv * 4.0 - time * 0.05);
+
+        color += smokeColor;
+
+        float edge = smoothstep(0.0, 0.7, 1.0 - length(uv - 0.5) * 1.2);
+        
+        gl_FragColor = vec4(color, edge * 0.9);
+      }
+    `;
+
+    const vertexShader = `
+      void main() {
+        gl_Position = vec4(position, 1.0);
+      }
+    `;
+
+    const uniforms = {
+      time: { value: 1.0 },
+      resolution: { value: new THREE.Vector2(window.innerWidth, window.innerHeight) },
+    };
+
+    const material = new THREE.ShaderMaterial({
+      uniforms,
+      vertexShader,
+      fragmentShader,
+    });
+
+    const planeGeometry = new THREE.PlaneGeometry(2, 2);
+    const plane = new THREE.Mesh(planeGeometry, material);
+    scene.add(plane);
+
+    // Frame rate limiting for better performance
+    let lastTime = 0;
+    const fps = isMobile ? 20 : 30;
+    const fpsInterval = 1000 / fps;
+    
+    const animate = (timestamp) => {
+      requestAnimationFrame(animate);
+      
+      const elapsed = timestamp - lastTime;
+      if (elapsed < fpsInterval) return;
+      lastTime = timestamp - (elapsed % fpsInterval);
+      
+      uniforms.time.value += 0.05;
+      renderer.render(scene, camera);
+    };
+
+    requestAnimationFrame(animate);
+
+    // Resize handler
+    const handleResize = () => {
+      camera.aspect = window.innerWidth / window.innerHeight;
+      camera.updateProjectionMatrix();
+      renderer.setSize(window.innerWidth, window.innerHeight);
+      uniforms.resolution.value.set(window.innerWidth, window.innerHeight);
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      renderer.dispose();
+      if (threeRef.current?.contains(renderer.domElement)) {
+        threeRef.current.removeChild(renderer.domElement);
+      }
+    };
+  }, []);
   
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-blue-900/20 to-gray-800">
-      <div className="max-w-5xl mx-auto px-4 py-16">
+    <div className="min-h-screen relative text-white overflow-hidden">
+      {/* Background overlay */}
+      <div className="absolute inset-0 bg-gray-900 bg-opacity-80 z-0"></div>
+      <div ref={threeRef} className="absolute inset-0 z-10"></div>
+      
+      <div className="relative z-20 max-w-5xl mx-auto px-4 py-16">
         <div className="bg-white/80 backdrop-blur-lg rounded-xl shadow-2xl overflow-hidden flex flex-col">
           <div className="bg-gradient-to-r from-blue-600 to-indigo-700 p-4 sm:p-6 relative">
             <div className="flex flex-col sm:flex-row items-center">
