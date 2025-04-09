@@ -13,10 +13,10 @@ const CubePage = () => {
   const [showSkills, setShowSkills] = useState(false);
   const [showContact, setShowContact] = useState(false);
   const [showAbout, setShowAbout] = useState(false);
-  const [startAnimation, setStartAnimation] = useState(false);
   const [textToShow, setTextToShow] = useState('designed');
   const [fadeClass, setFadeClass] = useState('fade-in');
   const threeRef = useRef<HTMLDivElement | null>(null);
+  const animationFrameId = useRef<number | null>(null);
 
   const textOptions = ['designed', 'created', 'solved', 'coded', 'developed', 'crafted'];
 
@@ -76,7 +76,11 @@ const CubePage = () => {
 
     // Animate particles
     const animate = () => {
-      requestAnimationFrame(animate);
+      if (showAbout || showSkills || showContact) {
+        return;
+      }
+
+      animationFrameId.current = requestAnimationFrame(animate);
 
       const positions = particlesGeometry.attributes.position.array;
       const velocities = particlesGeometry.attributes.velocity.array;
@@ -95,6 +99,7 @@ const CubePage = () => {
       renderer.render(scene, camera);
     };
 
+    // Start animation
     animate();
 
     const handleResize = () => {
@@ -106,40 +111,78 @@ const CubePage = () => {
     window.addEventListener('resize', handleResize);
 
     return () => {
+      if (animationFrameId.current !== null) {
+        cancelAnimationFrame(animationFrameId.current);
+        animationFrameId.current = null;
+      }
       window.removeEventListener('resize', handleResize);
       renderer.dispose();
       threeRef.current?.removeChild(renderer.domElement);
     };
-  }, []);
+  }, [showAbout, showSkills, showContact]);
 
   const handleStartClick = () => {
-    setStartAnimation(true);
-    setTimeout(() => {
-      setShowSkills(true);
-      setStartAnimation(false);
-    }, 1250);
+    setShowSkills(true);
+    if (animationFrameId.current !== null) {
+      cancelAnimationFrame(animationFrameId.current);
+      animationFrameId.current = null;
+    }
   };
 
   const handleNavigateToContact = () => {
-    setStartAnimation(true);
-    setTimeout(() => {
-      setShowContact(true);
-      setStartAnimation(false);
-    }, 1250);
+    setShowContact(true);
+    if (animationFrameId.current !== null) {
+      cancelAnimationFrame(animationFrameId.current);
+      animationFrameId.current = null;
+    }
   };
 
   const handleNavigateToAbout = () => {
-    setStartAnimation(true);
-    setTimeout(() => {
-      setShowAbout(true);
-      setStartAnimation(false);
-    }, 1250);
+    setShowAbout(true);
+    if (animationFrameId.current !== null) {
+      cancelAnimationFrame(animationFrameId.current);
+      animationFrameId.current = null;
+    }
+  };
+
+  const handleCloseSkills = () => {
+    setShowSkills(false);
+    if (!showAbout && !showContact) {
+      const animate = () => {
+        if (animationFrameId.current === null && threeRef.current) {
+          animationFrameId.current = requestAnimationFrame(animate);
+        }
+      };
+      animate();
+    }
+  };
+
+  const handleCloseContact = () => {
+    setShowContact(false);
+    if (!showAbout && !showSkills) {
+      const animate = () => {
+        if (animationFrameId.current === null && threeRef.current) {
+          animationFrameId.current = requestAnimationFrame(animate);
+        }
+      };
+      animate();
+    }
+  };
+
+  const handleCloseAbout = () => {
+    setShowAbout(false);
+    if (!showSkills && !showContact) {
+      const animate = () => {
+        if (animationFrameId.current === null && threeRef.current) {
+          animationFrameId.current = requestAnimationFrame(animate);
+        }
+      };
+      animate();
+    }
   };
 
   return (
-    <div
-      className={`relative w-screen min-h-screen flex flex-col items-center justify-center bg-gray-900 overflow-hidden ${startAnimation ? 'zoom-animation' : ''}`}
-    >
+    <div className="relative w-screen min-h-screen flex flex-col items-center justify-center bg-gray-900 overflow-hidden">
       <RetroGrid gridColor="rgba(255, 255, 255, 1)" />
 
       {/* Rotating Text and Name */}
@@ -181,9 +224,9 @@ const CubePage = () => {
         </div>
       </div>
 
-      {showSkills && <SkillsSection onClose={() => setShowSkills(false)} />}
-      {showContact && <Contact onClose={() => setShowContact(false)} />}
-      {showAbout && <About onClose={() => setShowAbout(false)} />}
+      {showSkills && <SkillsSection onClose={handleCloseSkills} />}
+      {showContact && <Contact onClose={handleCloseContact} />}
+      {showAbout && <About onClose={handleCloseAbout} />}
     </div>
   );
 };
