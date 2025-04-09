@@ -4,15 +4,11 @@ import { useEffect, useState, useRef } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTools, faEnvelope, faInfoCircle } from '@fortawesome/free-solid-svg-icons';
 import * as THREE from 'three';
+import { useRouter } from 'next/navigation';
 import RetroGrid from '@/components/ui/retro-grid';
-import SkillsSection from '@/components/SkillsSection';
-import Contact from '@/components/contact';
-import About from '@/components/About';
 
-const CubePage = () => {
-  const [showSkills, setShowSkills] = useState(false);
-  const [showContact, setShowContact] = useState(false);
-  const [showAbout, setShowAbout] = useState(false);
+const HomePage = () => {
+  const router = useRouter();
   const [textToShow, setTextToShow] = useState('designed');
   const [fadeClass, setFadeClass] = useState('fade-in');
   const threeRef = useRef<HTMLDivElement | null>(null);
@@ -30,15 +26,15 @@ const CubePage = () => {
           return textOptions[(currentIndex + 1) % textOptions.length];
         });
         setFadeClass('fade-in');
-      }, 1500); // Match the duration of the fade-out animation
-    }, 3000); // Change text every 3 seconds
+      }, 1500);
+    }, 3000);
     return () => clearInterval(interval);
   }, []);
 
+  // Setup Three.js animation
   useEffect(() => {
     if (!threeRef.current) return;
 
-    // Set up Three.js scene
     const scene = new THREE.Scene();
     const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
     camera.position.z = 5;
@@ -47,7 +43,6 @@ const CubePage = () => {
     renderer.setSize(window.innerWidth, window.innerHeight);
     threeRef.current.appendChild(renderer.domElement);
 
-    // Create particles
     const particlesGeometry = new THREE.BufferGeometry();
     const particlesCount = 1000;
     const positions = new Float32Array(particlesCount * 3);
@@ -74,12 +69,7 @@ const CubePage = () => {
     const particles = new THREE.Points(particlesGeometry, particlesMaterial);
     scene.add(particles);
 
-    // Animate particles
     const animate = () => {
-      if (showAbout || showSkills || showContact) {
-        return;
-      }
-
       animationFrameId.current = requestAnimationFrame(animate);
 
       const positions = particlesGeometry.attributes.position.array;
@@ -99,7 +89,6 @@ const CubePage = () => {
       renderer.render(scene, camera);
     };
 
-    // Start animation
     animate();
 
     const handleResize = () => {
@@ -119,66 +108,19 @@ const CubePage = () => {
       renderer.dispose();
       threeRef.current?.removeChild(renderer.domElement);
     };
-  }, [showAbout, showSkills, showContact]);
+  }, []);
 
-  const handleStartClick = () => {
-    setShowSkills(true);
-    if (animationFrameId.current !== null) {
-      cancelAnimationFrame(animationFrameId.current);
-      animationFrameId.current = null;
-    }
+  // Navigation handlers now using Next.js router
+  const navigateToProjects = () => {
+    router.push('/projects');
   };
 
-  const handleNavigateToContact = () => {
-    setShowContact(true);
-    if (animationFrameId.current !== null) {
-      cancelAnimationFrame(animationFrameId.current);
-      animationFrameId.current = null;
-    }
+  const navigateToContact = () => {
+    router.push('/contact');
   };
 
-  const handleNavigateToAbout = () => {
-    setShowAbout(true);
-    if (animationFrameId.current !== null) {
-      cancelAnimationFrame(animationFrameId.current);
-      animationFrameId.current = null;
-    }
-  };
-
-  const handleCloseSkills = () => {
-    setShowSkills(false);
-    if (!showAbout && !showContact) {
-      const animate = () => {
-        if (animationFrameId.current === null && threeRef.current) {
-          animationFrameId.current = requestAnimationFrame(animate);
-        }
-      };
-      animate();
-    }
-  };
-
-  const handleCloseContact = () => {
-    setShowContact(false);
-    if (!showAbout && !showSkills) {
-      const animate = () => {
-        if (animationFrameId.current === null && threeRef.current) {
-          animationFrameId.current = requestAnimationFrame(animate);
-        }
-      };
-      animate();
-    }
-  };
-
-  const handleCloseAbout = () => {
-    setShowAbout(false);
-    if (!showSkills && !showContact) {
-      const animate = () => {
-        if (animationFrameId.current === null && threeRef.current) {
-          animationFrameId.current = requestAnimationFrame(animate);
-        }
-      };
-      animate();
-    }
+  const navigateToAbout = () => {
+    router.push('/about');
   };
 
   return (
@@ -202,33 +144,29 @@ const CubePage = () => {
         <div className="flex flex-col space-y-4 sm:space-y-6">
           <button
             className="mt-4 sm:mt-6 px-12 sm:px-24 py-4 sm:py-6 text-sm sm:text-lg md:text-xl lg:text-2xl font-extrabold text-white rounded-lg hover:text-gray-400 transition-all duration-300 flex items-center justify-center space-x-4"
-            onClick={handleStartClick}
+            onClick={navigateToProjects}
           >
             <FontAwesomeIcon icon={faTools} />
             <span>Projects</span>
           </button>
           <button
             className="mt-4 sm:mt-6 px-12 sm:px-24 py-4 sm:py-6 text-sm sm:text-lg md:text-xl lg:text-2xl font-extrabold text-white rounded-lg hover:text-gray-400 transition-all duration-300 flex items-center justify-center space-x-4"
-            onClick={handleNavigateToContact}
+            onClick={navigateToContact}
           >
             <FontAwesomeIcon icon={faEnvelope} />
             <span>Contact</span>
           </button>
           <button
             className="mt-4 sm:mt-6 px-12 sm:px-24 py-4 sm:py-6 text-sm sm:text-lg md:text-xl lg:text-2xl font-extrabold text-white rounded-lg hover:text-gray-400 transition-all duration-300 flex items-center justify-center space-x-4"
-            onClick={handleNavigateToAbout}
+            onClick={navigateToAbout}
           >
             <FontAwesomeIcon icon={faInfoCircle} />
             <span>About</span>
           </button>
         </div>
       </div>
-
-      {showSkills && <SkillsSection onClose={handleCloseSkills} />}
-      {showContact && <Contact onClose={handleCloseContact} />}
-      {showAbout && <About onClose={handleCloseAbout} />}
     </div>
   );
 };
 
-export default CubePage;
+export default HomePage;

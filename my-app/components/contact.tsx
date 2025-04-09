@@ -141,40 +141,83 @@ const Contact: React.FC<ContactMeProps> = ({ onClose }) => {
 
   return (
     <div className="fixed inset-0 w-full h-full flex items-center justify-center z-50 overflow-y-auto">
-      <div ref={threeRef} className="absolute inset-0 z-0"></div>
-      <div className="relative z-10 max-w-3xl mx-auto p-8 border-2 backdrop-blur-sm rounded-lg shadow-lg text-white text-left mt-20">
+      <div className="absolute inset-0 bg-black/50 backdrop-blur-sm z-0"></div>
+      <div ref={threeRef} className="absolute inset-0 z-10"></div>
+      
+      <div className="relative z-20 max-w-3xl mx-auto p-8 bg-gray-900/80 backdrop-blur-md border border-white/20 rounded-xl shadow-2xl text-white text-left mt-20">
         <button
-          className="absolute top-4 right-4 px-4 py-2 bg-gray-300 text-gray-800 rounded-full shadow-lg hover:bg-gray-400 transition"
+          className="absolute top-4 right-4 px-4 py-2 bg-blue-600 hover:bg-blue-700 text-white rounded-full shadow-lg transition-colors"
           onClick={onClose}
         >
           ✕
         </button>
-        <h2 className="text-3xl font-bold mb-6">Contact</h2>
-        <div className="space-y-4">
-          <p>Name: Amadou Diallo</p>
-          <p>Phone: 587-803-5820</p>
-          <p>Email: amadouamosdiallo@outlook.com</p>
-          <p className="flex items-center">
-            <span className="mr-2">Connect with me on:</span>
+        
+        <h2 className="text-3xl font-bold mb-6 text-white">Get in Touch</h2>
+        
+        <div className="space-y-6">
+          <div className="flex items-center space-x-3 p-3 bg-white/10 rounded-lg">
+            <div className="w-10 h-10 flex items-center justify-center bg-blue-600 rounded-full text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </svg>
+            </div>
+            <div>
+              <h4 className="text-sm text-blue-300 font-medium">Name</h4>
+              <p className="text-white text-lg">Amadou Diallo</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-3 p-3 bg-white/10 rounded-lg">
+            <div className="w-10 h-10 flex items-center justify-center bg-blue-600 rounded-full text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path>
+              </svg>
+            </div>
+            <div>
+              <h4 className="text-sm text-blue-300 font-medium">Phone</h4>
+              <p className="text-white text-lg">587-803-5820</p>
+            </div>
+          </div>
+          
+          <div className="flex items-center space-x-3 p-3 bg-white/10 rounded-lg">
+            <div className="w-10 h-10 flex items-center justify-center bg-blue-600 rounded-full text-white">
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
+                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+            <div>
+              <h4 className="text-sm text-blue-300 font-medium">Email</h4>
+              <p className="text-white text-lg">amadouamosdiallo@outlook.com</p>
+            </div>
+          </div>
+        </div>
+        
+        <div className="mt-8 pt-6 border-t border-white/20">
+          <h3 className="text-xl font-semibold mb-4 text-white">Connect with me</h3>
+          
+          <div className="flex space-x-4">
             <Link
               href="https://github.com/Amadou-D"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline flex items-center hover:text-gray-300"
+              className="flex items-center px-4 py-2 bg-gray-800 hover:bg-gray-700 rounded-lg transition-colors"
             >
               <Image src="/github.png" alt="GitHub" width={24} height={24} className="w-6 h-6 mr-2" />
-              GitHub
+              <span className="text-white">GitHub</span>
             </Link>
+            
             <Link
               href="https://www.linkedin.com/in/amadou-diallo-7b2326330"
               target="_blank"
               rel="noopener noreferrer"
-              className="underline flex items-center ml-4 hover:text-gray-300"
+              className="flex items-center px-4 py-2 bg-blue-700 hover:bg-blue-600 rounded-lg transition-colors"
             >
-              <Image src="/linkedin.png" alt="LinkedIn" width={24} height={24} className="w-6 h-6 mr-2 " />
-              LinkedIn
+              <Image src="/linkedin.png" alt="LinkedIn" width={24} height={24} className="w-6 h-6 mr-2" />
+              <span className="text-white">LinkedIn</span>
             </Link>
-          </p>
+          </div>
         </div>
       </div>
     </div>
