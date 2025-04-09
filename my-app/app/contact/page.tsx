@@ -121,7 +121,7 @@ export default function ContactPage() {
     const fps = isMobile ? 20 : 30;
     const fpsInterval = 1000 / fps;
     
-    const animate = (timestamp) => {
+    const animate = (timestamp: number) => {
       requestAnimationFrame(animate);
       
       const elapsed = timestamp - lastTime;
@@ -208,7 +208,7 @@ export default function ContactPage() {
             <div className="text-center py-12">
               <div className="text-green-300 text-5xl mb-4 drop-shadow-md">✓</div>
               <h2 className="text-2xl font-bold mb-2 text-white">Message Sent!</h2>
-              <p className="mb-8 text-white">Thank you for reaching out. I'll get back to you as soon as possible.</p>
+              <p className="mb-8 text-white">Thank you for reaching out. I&apos;ll get back to you as soon as possible.</p>
               <button
                 onClick={() => {
                   setSubmitStatus('idle');

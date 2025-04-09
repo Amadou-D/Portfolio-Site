@@ -164,7 +164,7 @@ export default function ProjectsPage() {
     const fps = isMobile ? 20 : 30;
     const fpsInterval = 1000 / fps;
     
-    const animate = (timestamp) => {
+    const animate = (timestamp: number) => {
       requestAnimationFrame(animate);
       
       // Throttle FPS
@@ -275,7 +275,7 @@ export default function ProjectsPage() {
                     playsInline
                     poster={`${project.videoSrc.replace('.mp4', '-thumbnail.jpg')}`}
                     aria-label={`${project.title} video`}
-                    loading="lazy"
+                    preload="none"
                     onLoadedData={(event) => {
                       const video = event.target as HTMLVideoElement;
                       if (video.getBoundingClientRect().top < window.innerHeight) {
