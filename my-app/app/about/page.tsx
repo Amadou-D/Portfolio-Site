@@ -128,7 +128,7 @@ export default function AboutPage() {
     const fps = isMobile ? 20 : 30;
     const fpsInterval = 1000 / fps;
     
-    const animate = (timestamp) => {
+    const animate = (timestamp: number) => {
       requestAnimationFrame(animate);
       
       const elapsed = timestamp - lastTime;
