@@ -13,23 +13,38 @@ const HomePage = () => {
   const [fadeClass, setFadeClass] = useState('fade-in');
   const threeRef = useRef<HTMLDivElement | null>(null);
   const animationFrameId = useRef<number | null>(null);
+  const [currentTextIndex, setCurrentTextIndex] = useState(0);
 
-  const textOptions = ['designed', 'created', 'solved', 'coded', 'developed', 'crafted'];
+  // Expanded text options with more developer-related terms
+  const textOptions = [
+    'designed', 
+    'created', 
+    'developed',
+    'built',
+    'engineered',
+    'coded',
+    'programmed',
+    'crafted',
+    'architected',
+    'constructed',
+    'implemented',
+    'assembled',
+    'devised',
+    'solved'
+  ];
 
-  // Cycle through text options
+  // Cycle through text options in sequential order
   useEffect(() => {
     const interval = setInterval(() => {
       setFadeClass('fade-out');
       setTimeout(() => {
-        setTextToShow((prev) => {
-          const currentIndex = textOptions.indexOf(prev);
-          return textOptions[(currentIndex + 1) % textOptions.length];
-        });
+        setCurrentTextIndex((prevIndex) => (prevIndex + 1) % textOptions.length);
+        setTextToShow(textOptions[(currentTextIndex + 1) % textOptions.length]);
         setFadeClass('fade-in');
       }, 1500);
     }, 3000);
     return () => clearInterval(interval);
-  }, []);
+  }, [currentTextIndex, textOptions]);
 
   // Setup Three.js animation
   useEffect(() => {
