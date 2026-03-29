@@ -44,7 +44,7 @@ const HomePage = () => {
       }, 1500);
     }, 3000);
     return () => clearInterval(interval);
-  }, [currentTextIndex, textOptions]);
+  }, [currentTextIndex, textOptions]);  
 
   // Setup Three.js animation
   useEffect(() => {
